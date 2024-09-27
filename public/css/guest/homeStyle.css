@@ -1,0 +1,208 @@
+/* Hero Section responsive */
+.container {
+    background: linear-gradient(180deg, #f0f4ff, #ffffff);
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+.hero-content {
+    text-align: center; /* Asegura que el texto esté centrado */
+    max-width: 600px;
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+    flex-direction: column; /* Alinea los elementos verticalmente */
+}
+
+.hero-title {
+    color: #000;
+    font-family: "Poppins", sans-serif;
+    font-size: 4rem;
+    line-height: 5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero-title span{
+    color: #1678F2;
+    font-family: sans-serif;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.subtext {
+    color: #8A8585;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.7rem; /* 134.375% */
+    margin-bottom: 1rem;
+}
+
+.register-button {
+    margin-top: 20px; /* Ajusta el espacio entre el párrafo y el botón */
+    font-size: 1.2rem;
+    background-color: #cd4738;
+    color: white;
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 10rem;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.register-button:hover {
+    background-color: #d67064;
+}
+
+.hero img {
+    max-width: 100%;
+    height: 27rem;
+}
+
+/* Servicios responsive */
+.services {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.services h2 {
+    color: #000;
+    font-family: sans-serif;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 1000;
+    line-height: 6.5625rem;
+    margin-bottom: 30px;
+}
+
+.service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.service-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}   
+
+.service-card h3 {
+    font-weight: bold;
+}
+
+.service-card p {
+    font-weight: normal;
+    color: #8A8585;
+}
+
+.service-card img {
+    width: 50px;
+    height: auto;
+}
+
+/* FAQ responsive */
+.faq {
+    background-color: #f0f4ff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.faq h2 {
+    color: #011632;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%; /* 5.46875rem */
+    text-transform: capitalize;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Banner responsive */
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #001f3f;
+    color: rgb(225, 208, 208);
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.banner img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.text-content {
+    max-width: 600px;
+}
+
+.banner button {
+    background-color: #ff4136;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .service-card {
+        width: 100%;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 769px) {
+    .hero {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .hero-content {
+        text-align: left;
+        margin-right: 30px;
+    }
+
+    .banner {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .banner img {
+        margin-bottom: 0;
+        margin-left: 30px;
+    }
+}
