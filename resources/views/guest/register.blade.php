@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label class="blue_label" for="DNIApoderado">DNI</label>
-                        <input type="number" id="DNIApoderado" name="idApoderado" value="11111111"
+                        <input type="number" id="DNIApoderado" name="idApoderado" value="10000000"
                         placeholder="Ingresa tu DNI" required />
                     </div>
                     <div class="form-group">

@@ -7,6 +7,7 @@
         <title>Anemia Care | @yield('title')</title>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="{{ asset('css/mainStyle.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
         <link rel="stylesheet" href="{{ asset('css/modals/modals.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tooltips_others/tooltip.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +27,9 @@
 
         @yield('footer')
         
+        <script src="{{ asset('js/datatable/jquery.min.js') }}"> </script>
+        <script src="{{ asset('js/datatable/datatables.js') }}"> </script>
+        <script src="{{ asset('js/datatable/datatableConfig.js') }}"> </script>
         <script src="{{ asset('js/modals/modals.js') }}"></script>
         <script src="{{ asset('js/tooltips_others/tooltip.js') }}"> </script>
         @stack('scripts')

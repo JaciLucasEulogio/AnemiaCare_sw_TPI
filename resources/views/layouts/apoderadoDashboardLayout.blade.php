@@ -30,7 +30,7 @@
 				<a href="{{ route('apoderados.prediction') }}" 
                     class="{{ Request::routeIs('apoderados.prediction') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">blood_pressure</span>
-                    <h5>Predicciones</h5>
+                    <h5>Dosajes/<br>predicciones</h5>
                 </a>
                 
                 <!-- Formulario de Logout -->
