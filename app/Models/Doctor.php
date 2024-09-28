@@ -15,6 +15,8 @@ class Doctor extends Model
 
     protected $primaryKey = 'idDoctor'; 
     
+    public $incrementing = false;
+    
     protected $fillable = [
         'idDoctor', 'nombre_Doctor', 'apellido_Doctor', 'celular_Doctor',
     ];

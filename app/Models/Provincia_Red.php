@@ -13,8 +13,9 @@ class Provincia_Red extends Model
     // Definimos la tabla asociada
     protected $table = 'Provincias_Redes';
 
-    // Habilitar timestamps si es necesario
-    public $timestamps = true;
+    protected $primaryKey = 'idProvinciaRed';
+
+    public $incrementing = false;
 
     // Definimos los campos que se pueden asignar masivamente
     protected $fillable = [

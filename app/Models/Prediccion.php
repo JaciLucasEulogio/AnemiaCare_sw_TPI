@@ -14,6 +14,8 @@ class Prediccion extends Model
 
     protected $primaryKey = 'idProvincia'; 
 
+    public $incrementing = false;
+
     protected $fillable = [
         'idPrediccion', 'idDosaje', 'fecha_Prediccion', 
         'valorHemoglobinaEstimado_Prediccion', 'fechaRecuperacionEstimada_Prediccion',

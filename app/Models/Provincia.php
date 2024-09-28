@@ -10,14 +10,11 @@ class Provincia extends Model
 {
     use HasFactory;
 
-    // Definimos la tabla asociada
     protected $table = 'Provincias';
 
-    // Definimos la clave primaria
     protected $primaryKey = 'idProvincia';
 
-    // Habilitar timestamps
-    public $timestamps = true;
+    public $incrementing = false;
 
     // Definimos los campos que se pueden asignar masivamente
     protected $fillable = [

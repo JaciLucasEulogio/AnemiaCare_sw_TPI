@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('sexo_Hijo', 1); // M ó F
             $table->string('nombreSeguro_Hijo', 30)->nullable(); // Rimac, Seguro Integral de Salud, 
                                                                 // Seguro Social del Perú, NULL
-            $table->string('idEstablecimiento', 10); 
             $table->timestamps();
         });
     }

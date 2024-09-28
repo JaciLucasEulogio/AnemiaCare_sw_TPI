@@ -13,6 +13,8 @@ class PeriodoTratamiento extends Model
 
     protected $primaryKey = 'idPeriodoTratamiento'; 
 
+    public $incrementing = false;
+
     protected $fillable = [
         'idPeriodoTratamiento', 'DNI_Hijo', 'fechaDiagnosticoAnemia_PeriodoTratamiento',
         'fechaFin_PeriodoTratamiento',

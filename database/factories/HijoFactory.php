@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Hijo;
 use App\Models\Apoderado;
-use App\Models\Establecimiento;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HijoFactory extends Factory
@@ -30,7 +29,6 @@ class HijoFactory extends Factory
             'fechaNacimiento_Hijo' => $this->faker->date('Y-m-d', '2023-12-31'), // Fecha aleatoria hasta 2023
             'sexo_Hijo' => $this->faker->randomElement(['M', 'F']),
             'nombreSeguro_Hijo' => $this->faker->randomElement(['Seguro Integral de Salud', 'Seguro Social del Perú', NULL]),
-            'idEstablecimiento' => Establecimiento::inRandomOrder()->first()->idEstablecimiento, // Obtener idEstablecimiento aleatorio
         ];
     }
 }

@@ -14,6 +14,8 @@ class Distrito extends Model
 
     protected $primaryKey = 'idDistrito'; 
 
+    public $incrementing = false;
+
     protected $fillable = ['idDistrito', 'nombreDistrito', 'idMicroRed'];
 
     public function Establecimiento() {

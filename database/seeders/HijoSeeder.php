@@ -20,17 +20,15 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2020-02-07', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
-                'idEstablecimiento' => 'ESTAB049',
             ],
             [
                 'idHijo' => '11111112',
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo2_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimiento_Hijo' => '2021-05-12', 
+                'fechaNacimienñto_Hijo' => '2021-05-12', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
-                'idEstablecimiento' => 'ESTAB049',
             ],
             [
                 'idHijo' => '11111113',
@@ -40,7 +38,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2022-09-23', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
-                'idEstablecimiento' => 'ESTAB049',
             ],
             [
                 'idHijo' => '11111114',
@@ -50,7 +47,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2023-01-07', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
-                'idEstablecimiento' => 'ESTAB049',
             ],
 
             // Hijos Milagros
@@ -62,7 +58,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2019-09-29', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
-                'idEstablecimiento' => 'ESTAB047',
             ],
             [
                 'idHijo' => '22222222',
@@ -72,7 +67,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2020-11-15', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
-                'idEstablecimiento' => 'ESTAB047',
             ],
             [
                 'idHijo' => '22222223',
@@ -82,7 +76,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2021-09-29', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
-                'idEstablecimiento' => 'ESTAB047',
             ],
             [
                 'idHijo' => '22222224',
@@ -92,7 +85,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2022-12-05', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
-                'idEstablecimiento' => 'ESTAB047',
             ],
 
             // Hijos Jaci
@@ -104,7 +96,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2018-08-06', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => NULL,
-                'idEstablecimiento' => 'ESTAB027',
             ],
             [
                 'idHijo' => '33333332',
@@ -114,7 +105,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2019-05-12', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => NULL,
-                'idEstablecimiento' => 'ESTAB027',
             ],
             [
                 'idHijo' => '33333333',
@@ -124,7 +114,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2020-11-23', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => NULL,
-                'idEstablecimiento' => 'ESTAB027',
             ],
             [
                 'idHijo' => '33333334',
@@ -134,7 +123,6 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2021-07-19', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => NULL,
-                'idEstablecimiento' => 'ESTAB027',
             ],
         ];
 

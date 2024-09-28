@@ -335,7 +335,7 @@ table.dataTable tbody td.dt-body-nowrap {
 table.dataTable {
   width: 100% !important;
   border-spacing: 0;
-  font-size: 0.85rem; /*0.88rem tabla*/
+  font-size: 0.88rem; /*0.88rem tabla*/
   /*
    * Header and footer styles
    */
@@ -1620,3 +1620,21 @@ div.dt-container select.dt-input {
   border: 1px solid #333;
   cursor: pointer;
 }
+
+/*font-size*/
+.ownTable th, td{
+  font-size: 0.73rem;
+  padding: 0.3rem 0.2rem;
+  width: auto;
+  height: auto;
+}
+
+.celda-centered {
+  text-align: center !important;
+}
+
+.celda-centered.word-wrap {
+  word-wrap: break-word;
+}
+
+

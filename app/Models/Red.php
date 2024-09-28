@@ -14,6 +14,8 @@ class Red extends Model
 
     protected $primaryKey = 'idRed'; 
 
+    public $incrementing = false;
+
     protected $fillable = ['idRed', 'nombreRed', 'idProvincia'];
 
     public function Provincia_Red() {

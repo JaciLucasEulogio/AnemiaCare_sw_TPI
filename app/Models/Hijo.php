@@ -13,9 +13,11 @@ class Hijo extends Model
 
     protected $primaryKey = 'idHijo'; 
 
+    public $incrementing = false;
+
     protected $fillable = [
         'idHijo', 'idApoderado', 'nombre_Hijo', 'apellido_Hijo', 'fechaNacimiento_Hijo',
-        'sexo_Hijo', 'nombreSeguro_Hijo', 'idEstablecimiento',
+        'sexo_Hijo', 'nombreSeguro_Hijo',
     ];
 
     public function Apoderado() {

@@ -10,8 +10,10 @@ class Dosaje extends Model
     use HasFactory;
 
     protected $table = 'Dosajes'; 
+    
+    protected $primaryKey = 'idDosaje';
 
-    protected $primaryKey = 'idDosaje'; 
+    public $incrementing = false;
 
     protected $fillable = [
         'idDosaje', 'idHijo', 'idDoctor', 'fecha_Dosaje', 'valorHemoglobina_Dosaje',

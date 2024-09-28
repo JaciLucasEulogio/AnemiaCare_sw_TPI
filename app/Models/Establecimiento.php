@@ -14,6 +14,8 @@ class Establecimiento extends Model
 
     protected $primaryKey = 'idEstablecimiento'; 
 
+    public $incrementing = false;
+
     protected $fillable = ['idEstablecimiento', 'nombreEstablecimiento', 'idMicroRed'];
 
     public function Dosaje() {
