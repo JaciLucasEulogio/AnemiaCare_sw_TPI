@@ -1,0 +1,31 @@
+#registrarDosajeModal-dialog {
+	max-width: 600px; 
+	max-height: 550px; /* Ajusta la altura máxima del contenido del modal */
+    overflow-y: auto;  /* Activa la barra de desplazamiento vertical */
+    transform: translateY(-10px);
+}
+
+#registrarDosajeModal .modal-dialog.open {
+    transform: translateY(-90px); 
+}
+
+#tecnicoEditInput {
+	width: 20rem;
+}
+
+#idModalBodyEditarTecnico {
+	padding: 0;
+}
+
+#historicoPuntosInputEdit, #puntosActualesInputEdit {
+	max-width: 5rem;
+}
+
+#rangoInputEdit {
+	max-width: 9rem;
+}
+
+#idH5EditTecnicoModalContainer > h5{
+	font-size: 0.9rem;
+	color: #555;
+}

@@ -1612,7 +1612,7 @@ div.dt-container .dt-info,
 div.dt-container .dt-processing,
 div.dt-container .dt-paging {
   color: #555;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   margin: 0.5rem 0;
 }
 
@@ -1623,7 +1623,7 @@ div.dt-container select.dt-input {
 
 /*font-size*/
 .ownTable th, td{
-  font-size: 0.73rem;
+  font-size: 0.65rem;
   padding: 0.3rem 0.2rem;
   width: auto;
   height: auto;

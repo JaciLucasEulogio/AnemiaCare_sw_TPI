@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApoderadoController;
 use App\Http\Controllers\ApoderadoLoginController;
 use App\Http\Controllers\DoctorController;
-
+use App\Http\Controllers\DosajeController;
 
 // Guests 
 Route::get('', [GuestController::class, 'home'])->name('guest.home');
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:apoderados')->group(function () {
     Route::get('apoderados-inicio', [ApoderadoController::class, 'home'])->name('apoderados.home');
     Route::get('apoderados-predicciones', [ApoderadoController::class, 'prediction'])->name('apoderados.prediction');
-
+    Route::get('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
 });
 
 // Rutas de autenticación

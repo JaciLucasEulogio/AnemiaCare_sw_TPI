@@ -60,3 +60,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+function toggleOptions(idInput, idOptions) {
+    var input = document.getElementById(idInput);
+    var options = document.getElementById(idOptions);
+
+    if (options) {
+        if (input.value && !input.classList.contains("onlySelectInput")) {
+            filterOptions(idInput, idOptions);
+        } else {
+            if (options.classList.contains('show')) {
+                options.classList.remove('show');
+            } else {
+                options.classList.add('show');
+            }
+        }
+    }
+}
+

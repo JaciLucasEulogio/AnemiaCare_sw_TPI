@@ -4,27 +4,30 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/apoderado/prediccionesApoderado.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/modals/registrarDosajeModal.css') }}">
 @endpush
 
 @section('sectionContent')
 	<div class="prediccionesContainer">
 		 <!-- Variables globales -->
-		 @php
+		@php
 			$resultadosDB = $resultados;
 		@endphp
 
-		<div class="firstCanjesRow">
+		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>
-			<div class="fechaContainer">
-				<label class="secondary-label"> Fecha: </label>
-				<input class="input-item" id ="idFechaCanjeInput" type="date" disabled>
-			</div>
+		</div>
+
+		<div class="secondDosajesRow">
+			<x-btn-create-item onclick="openModal('registrarDosajeModal')"> 
+				Registrar nueva recompensa
+			</x-btn-create-item>
+
+			@include('modals.apoderados.registrarDosajeModal')
 		</div>
 		
-		<button> + Nuevo Dosaje </button>
-		
-		<!--Tabla de dosajes-->
-        <div class="fithCanjesRow">
+		<!--Tabla de Dosajes-->
+        <div class="tableRow">
             <table class="ownTable" id="tblDosajes">
                 <thead>
                     <tr>
@@ -78,4 +81,5 @@
 @endsection
 
 @push('scripts')
+	<script src="{{ asset('js/modals/registrarDosajeModal.js') }}"></script>
 @endpush

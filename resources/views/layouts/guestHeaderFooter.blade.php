@@ -19,7 +19,7 @@
 			<button class="ingresar-btn" onclick="openModal('apoderadoLoginModal')">Ingresar</button>
 		</nav>
 		<!--Modal para login-->
-        @include('modals.apoderadoLoginModal')
+        @include('modals.apoderados.apoderadoLoginModal')
 	</header>
 @endsection
 

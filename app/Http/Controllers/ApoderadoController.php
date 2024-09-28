@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hijo;
+use App\Models\Doctor;
 use App\Models\Dosaje;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth; 
 
 class ApoderadoController extends Controller
 {
@@ -175,8 +176,10 @@ class ApoderadoController extends Controller
         // Registrar el tiempo de ejecución
         Log::info("Tiempo de ejecución de la consulta usando la vista de la BD: {$executionTime} segundos");
 
+        $doctores = Doctor::all();
+
         // Retornar la vista con los resultados obtenidos
-        return view('apoderados.apoderadosPrediction', compact('resultados'));
+        return view('apoderados.apoderadosPrediction', compact('resultados', 'doctores'));
     }
     //*/
 }

@@ -12,7 +12,7 @@ h3 {
 	color: var(--clr-primary-variant3);
 }
 
-.firstCanjesRow{
+.firstDosajesRow{
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -25,19 +25,11 @@ h3 {
 	padding-bottom: 1rem;
 }
 
-.fechaContainer {
-	display: flex;
-	flex-direction: row;
-	gap: 1em;
-	align-items: center;
-}
-
-.secondCanjesRow{
+.secondDosajesRow{
     display: flex;
 	flex-direction: row;
     width: 100%;
 	height: auto;
-	margin-top: 1rem;
 	gap: 2rem;
 	padding-bottom: 1rem;
 	border-bottom: 1.5px solid #ccc;
@@ -69,15 +61,10 @@ h3 {
 	border-bottom: 1.5px solid #ccc;
 }
 
-.fithCanjesRow{
-    display: flex;
-	flex-direction: row;
+.tableRow{
     width: 100%;
 	height: auto;
-	justify-content: start;
-	align-items: start;
 	margin-top: 1rem;
-	gap: 2rem;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }

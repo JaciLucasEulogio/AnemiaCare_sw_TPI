@@ -2,8 +2,8 @@ $(document).ready(function() {
 	$('#tblDosajes').DataTable({
 
 		// Configuración inicial
-		lengthMenu: [5, 10, 20], 
-		pageLength: 5, 
+		lengthMenu: [10, 20, 30], 
+		pageLength: 20, 
 		dom: "Blifrtp", //B:buttons f:filter r:processing t:table
 						//i:info l:length ("Mostrar n registros") p:paging
 		buttons: [
@@ -29,12 +29,12 @@ $(document).ready(function() {
 		language: {
 			"processing": "Procesando...",
 			"lengthMenu": "Mostrar _MENU_ registros",
-			"zeroRecords": "No se encontraron resultados",
-			"emptyTable": "Ningún dato disponible en esta tabla",
+			"zeroRecords": "No se encontró el sosaje buscado",
+			"emptyTable": "Aún no tienes dosajes registrados",
 			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
 			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
 			"search": "<span class='material-symbols-outlined'>search</span>",
-			"searchPlaceholder": "Buscar DNI/Nombre de técnico o número de comprobante", // Placeholder para el campo de búsqueda
+			"searchPlaceholder": "Buscar dosajes", // Placeholder para el campo de búsqueda
 			"loadingRecords": "Cargando...",
 			"paginate": {
 				"first": "Primero",
