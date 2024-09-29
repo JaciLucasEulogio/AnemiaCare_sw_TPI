@@ -26,7 +26,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo2_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimienñto_Hijo' => '2021-05-12', 
+                'fechaNacimiento_Hijo' => '2021-05-12', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
             ],
