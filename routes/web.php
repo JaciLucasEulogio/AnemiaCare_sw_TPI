@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:apoderados')->group(function () {
     Route::get('apoderados-inicio', [ApoderadoController::class, 'home'])->name('apoderados.home');
     Route::get('apoderados-predicciones', [ApoderadoController::class, 'prediction'])->name('apoderados.prediction');
-    Route::get('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
+    Route::post('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
 });
 
 // Rutas de autenticación

@@ -1,6 +1,6 @@
 #registrarDosajeModal-dialog {
 	max-width: 600px; 
-	max-height: 550px; /* Ajusta la altura máxima del contenido del modal */
+	max-height: 500px; /* Ajusta la altura máxima del contenido del modal */
     overflow-y: auto;  /* Activa la barra de desplazamiento vertical */
     transform: translateY(-10px);
 }
@@ -9,23 +9,14 @@
     transform: translateY(-90px); 
 }
 
-#tecnicoEditInput {
+#doctorRegistrarDosajeInputSelect {
 	width: 20rem;
 }
 
-#idModalBodyEditarTecnico {
-	padding: 0;
+#establecimientoRegistrarDosajeInputSelect {
+	width: 20rem;
 }
 
-#historicoPuntosInputEdit, #puntosActualesInputEdit {
-	max-width: 5rem;
-}
-
-#rangoInputEdit {
-	max-width: 9rem;
-}
-
-#idH5EditTecnicoModalContainer > h5{
-	font-size: 0.9rem;
-	color: #555;
+#hijoRegistrarDosajeInputSelect {
+	width: 20rem;
 }

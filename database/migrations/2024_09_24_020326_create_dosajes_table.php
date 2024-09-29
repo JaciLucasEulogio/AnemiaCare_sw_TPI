@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Dosajes', function (Blueprint $table) {
-            $table->string('idDosaje', 11)->primary(); // DOSAJE-0001
+            $table->string('idDosaje', 11)->primary(); // DOSAJ-0001
 
             $table->string('idHijo', 8);
             $table->foreign('idHijo')->references('idHijo')->on('Hijos')->onDelete('cascade'); 

@@ -25,12 +25,12 @@
             {{ $isDisabled ? 'disabled' : '' }}
         >
         <span class="material-symbols-outlined {{ $spanOwnClassName }}" 
-              onclick="{{ $isDisabled ? '' : "clearInput('{$dynamicIdInput}')" }} {{$spanClickFunction}}"> cancel </span>
+              onclick="{{ $isDisabled ? '' : "clearInput('{$dynamicIdInput}')" }} {{$spanClickFunction}}, updateEstadoRecuperacion()"> cancel </span>
     </div>  
     <ul class="select-items" id="{{ $dynamicIdOptions }}">
         @foreach ($options as $option)
             <li 
-                onclick="{{ $selectFunction }}('{{ $option }}', '{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}')"
+                onclick="{{ $selectFunction }}('{{ $option }}', '{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}'), updateEstadoRecuperacion()"
             >
                 {{ $option }}
             </li>

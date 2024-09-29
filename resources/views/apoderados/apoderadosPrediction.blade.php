@@ -11,8 +11,19 @@
 	<div class="prediccionesContainer">
 		 <!-- Variables globales -->
 		@php
-			$resultadosDB = $resultados;
+			$dosajesCompletosDB = $dosajesCompletos;
 		@endphp
+
+						
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
 
 		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>
@@ -51,22 +62,22 @@
 					@php
 						$contador = 1;
 					@endphp
-					@foreach ($resultadosDB as $resultado)
+					@foreach ($dosajesCompletosDB as $dosajeCompleto)
 					<tr>
 						<td class="celda-centered">{{ $contador++ }}</td> 
-						<td class="celda-centered">{{ $resultado->idDosaje }}</td> 
-						<td class="celda-centered">{{ $resultado->fecha_Dosaje }}</td> 
-						<td class="celda-centered">{{ $resultado->nombre_Doctor }}<br>{{ $resultado->idDoctor }}</td> 
-						<td class="celda-centered">{{ $resultado->idEstablecimiento }}<br>{{ $resultado->nombreEstablecimiento }}</td> 
-						<td class="celda-centered">{{ $resultado->nombre_Hijo }}<br>{{ $resultado->idHijo }}</td> 
-						<td class="celda-centered">{{ $resultado->valorHemoglobina_Dosaje }} g/dL</td> 
-						<td class="celda-centered">{{ $resultado->nivelAnemia_Dosaje }}</td> 
-						<td class="celda-centered">{{ $resultado->peso_Dosaje }}  kg</td> 
-						<td class="celda-centered">{{ $resultado->talla_Dosaje }} cm</td> 
-						<td class="celda-centered">{{ $resultado->edadMeses_Dosaje }}</td> 
-						<td class="celda-centered">{{ $resultado->nivelHierro_Dosaje }} mg</td> 
-						<td class="celda-centered">{{ $resultado->estadoRecuperacion_Dosaje }}</td> 
-						<td class="celda-centered">{{ $resultado->fechaRecuperacionReal }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->idDosaje }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->fecha_Dosaje }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->nombre_Doctor }}<br>{{ $dosajeCompleto->idDoctor }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->idEstablecimiento }}<br>{{ $dosajeCompleto->nombreEstablecimiento }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->nombre_Hijo }}<br>{{ $dosajeCompleto->idHijo }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->valorHemoglobina_Dosaje }} g/dL</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->nivelAnemia_Dosaje }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->peso_Dosaje }}  kg</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->talla_Dosaje }} cm</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->edadMeses_Dosaje }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->nivelHierro_Dosaje }} mg</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->estadoRecuperacion_Dosaje }}</td> 
+						<td class="celda-centered">{{ $dosajeCompleto->fechaRecuperacionReal }}</td> 
 					</tr>
 					@endforeach
                 </tbody>

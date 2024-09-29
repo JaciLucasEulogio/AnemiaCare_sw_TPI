@@ -16,7 +16,7 @@ class Dosaje extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'idDosaje', 'idHijo', 'idDoctor', 'fecha_Dosaje', 'valorHemoglobina_Dosaje',
+        'idDosaje', 'idHijo', 'idDoctor', 'idEstablecimiento', 'fecha_Dosaje', 'valorHemoglobina_Dosaje',
         'nivelAnemia_Dosaje', 'peso_Dosaje', 'talla_Dosaje', 'edadMeses_Dosaje', 'nivelHierro_Dosaje',
         'estadoRecuperacion_Dosaje', 'fechaRecuperacionReal',
     ];

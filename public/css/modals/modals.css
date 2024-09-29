@@ -114,6 +114,7 @@
 .form-group.inline {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -261,7 +262,7 @@
 /*Estilos de los inputs*/
 .input-select, .input-container {
     position: relative;
-    width: fit-content;
+    max-width: auto;
 }
 
 .idInputSelectContainer {
@@ -272,7 +273,7 @@
 }
 
 .input-select-item, .input-item {
-    max-width: 100%;
+    width: auto;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -290,6 +291,10 @@
 
 .input-item.noEditable {
 	border-radius: 3px;
+}
+
+.input-item.dateNoEditable {
+    color: #BBB;
 }
 
 .input-select-item::placeholder, .input-item::placeholder {
@@ -329,6 +334,7 @@
     box-sizing: border-box;
     outline: none;
     background-color: transparent;
+    border: none;
     color: #666;
     cursor: pointer;
 }
@@ -420,6 +426,7 @@
 }
 
 .select-items li {
+    font-size: 0.9rem;
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;

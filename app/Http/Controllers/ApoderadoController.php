@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hijo;
 use App\Models\Doctor;
 use App\Models\Dosaje;
+use App\Models\Establecimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -162,24 +163,92 @@ class ApoderadoController extends Controller
         // Obtener el ID del apoderado autenticado
         $apoderadoId = Auth::id();
         
-        // Iniciar el temporizador
-        $startTime = microtime(true);
-        
         // Consultar la vista 'vw_DosajesCompletos' filtrando por el ID del apoderado
-        $resultados = DB::table('vw_DosajesCompletos')
-            ->where('idApoderado', $apoderadoId)
-            ->get();
-        
-        // Calcular el tiempo de ejecución
-        $executionTime = microtime(true) - $startTime;
-        
-        // Registrar el tiempo de ejecución
-        Log::info("Tiempo de ejecución de la consulta usando la vista de la BD: {$executionTime} segundos");
-
+        $dosajesCompletos = DB::table('vw_DosajesCompletos')->where('idApoderado', $apoderadoId)->get();
         $doctores = Doctor::all();
+        $establecimientos = $this->getEstablecimientos();
+        $hijos = $this->getHijos($apoderadoId);
+        $idNuevoDosaje = $this->generarIdDosaje();
 
-        // Retornar la vista con los resultados obtenidos
-        return view('apoderados.apoderadosPrediction', compact('resultados', 'doctores'));
+        return view('apoderados.apoderadosPrediction', compact('dosajesCompletos', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje'));
+    }
+
+    public function getEstablecimientos() {
+        // Obtener todos los establecimentos con su ubicación detallada
+        $establecimientos = Establecimiento::query()
+            ->join('Distritos', 'Establecimientos.idDistrito', '=', 'Distritos.idDistrito')
+            ->join('MicroRedes', 'Distritos.idMicroRed', '=', 'MicroRedes.idMicroRed')
+            ->join('Provincias_Redes', 'MicroRedes.idProvinciaRed', '=', 'Provincias_Redes.idProvinciaRed')
+            ->join('Redes', 'Provincias_Redes.idRed', '=', 'Redes.idRed')
+            ->join('Provincias', 'Provincias_Redes.idProvincia', '=', 'Provincias.idProvincia')
+            ->select(['Establecimientos.*', 'Distritos.*', 'MicroRedes.*', 'Redes.*',  'Provincias.*'])
+            ->get();
+
+        // Transformar los resultados en un array simple
+        /*$establecimientosDetallado = $establecimientos->map(function ($establecimiento) {
+            return [
+                // Establecimientos
+                'idEstablecimiento' => $establecimiento->idEstablecimiento,
+                'nombreEstablecimiento' => $establecimiento->nombreEstablecimiento,
+                // Distritos
+                'idDistrito' => $establecimiento->idDistrito,
+                'nombreDistrito' => $establecimiento->nombreDistrito,
+                // MicroRedes
+                'idMicroRed' => $establecimiento->idMicroRed,
+                'nombreMicroRed' => $establecimiento->nombreMicroRed,
+                // Redes
+                'idRed' => $establecimiento->idRed,
+                'nombreRed' => $establecimiento->nombreRed,
+                // Provincias
+                'idProvincia' => $establecimiento->idProvincia,
+                'nombreProvincia' => $establecimiento->nombreProvincia,
+            ];
+        })->toArray();*/
+
+        return $establecimientos;
+    }
+
+    public function getHijos($apoderadoId) {
+        // Obtener todos los establecimentos con su ubicación detallada
+        $hijos = Hijo::query()->where('Hijos.idApoderado', $apoderadoId)->select(['Hijos.*'])->get();
+
+        // Transformar los resultados en un array simple
+        /*$hijosApoderado = $hijos->map(function ($hijo) {
+            return [
+                // Establecimientos
+                'idHijo' => $hijo->idHijo,
+                'nombre_Hijo' => $hijo->nombre_Hijo,
+                'apellido_Hijo' => $hijo->apellido_Hijo,
+            ];
+        })->toArray();*/
+
+        return $hijos;
+    }
+
+    public function generarIdDosaje()
+    {
+        // Obtener el último ID de recompensa ordenado de forma descendente
+        //$ultimaRecompensa = DB::table('recompensas')->orderBy('idRecompensa', 'desc')->first();
+        $ultimoDosajeID = Dosaje::max('idDosaje');
+
+        // Si la tabla está vacía, comenzar desde "RECOM-001"
+        if (!$ultimoDosajeID) {
+            return 'DOSAJ-0001';
+        }
+
+        // Extraer el número de la cadena del último ID de recompensa
+        $strNumDosaje = substr($ultimoDosajeID, -4); // Obtiene los últimos 4 caracteres
+
+        // Convertir la parte numérica a entero
+        $intNumeroDosaje = intval($strNumDosaje);
+
+        // Incrementar el número para generar el siguiente idRecompensa
+        $nuevoNumero = $intNumeroDosaje + 1;
+
+        // Formatear el nuevo número con ceros a la izquierda
+        $nuevoIdDosaje = 'DOSAJ-'. str_pad($nuevoNumero, 4, '0', STR_PAD_LEFT);
+        
+        return $nuevoIdDosaje;
     }
     //*/
 }
