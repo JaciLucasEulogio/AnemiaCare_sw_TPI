@@ -63,7 +63,11 @@ h3 {
 .card-content-img {
     height: 10rem;
     width: 100%;
-    
+}
+
+.card-content-img img{
+    height: 10rem;
+    width: 50%;
 }
 
 .card-content-info h4 {
