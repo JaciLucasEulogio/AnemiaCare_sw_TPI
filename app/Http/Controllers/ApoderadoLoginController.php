@@ -41,8 +41,8 @@ class ApoderadoLoginController extends Controller
         if (Auth::guard('apoderados')->attempt(['idApoderado' => $validatedData['idApoderado'],
                                                 'password' => $request['password']])) 
         {
-            // Autenticación exitosa
-            return redirect()->route('apoderados.home'); 
+            // Autenticación exitosa, redirigir a la página principal de apoderados
+            return redirect()->route('apoderados.home');
         }
 
         // Si falla la autenticación, redirigir con un mensaje de error

@@ -9,15 +9,13 @@
 }
 
 .header {
-    grid-column: 2; 
-    grid-row: 1; 
     height: 4rem;
-    margin: 0.5rem 1.5rem 0 0;
-    display: grid;
-    grid-template-columns: 4% 93%;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    flex-direction: row;    
     align-items: center;
+    justify-content: space-between;
     border-bottom: 0.1rem solid #CCC;
-    padding-bottom: 0rem;
     max-width: 100%;
     background-color: white;
 }
@@ -55,8 +53,8 @@
 
 .profile {
     display: flex; 
-    justify-content: right;
     align-items: center;
+    margin-right: 10rem;
 }
 
 .notification_container {
@@ -107,12 +105,20 @@
     color: var(--clr-primary-variant3);
 }
 
+#labelDesplegable span{
+    padding-top: 3px;
+}
+
 #labelDesplegable {
     display: flex;
-    max-width: 100%; /* Ocupa todo el ancho del contenedor padre */
-    height: 2rem;
+    height: 3rem;
+    align-items: center;
     padding: 0.5rem 0 0.5rem 0;
     transition: color 0.5s, border-color 0.5s; /* Animación de cambio de color y borde */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 15rem;
 }
 
 #labelDesplegable:focus {
@@ -126,18 +132,20 @@
 
 .div-input-select {
     cursor: pointer;
+    width: auto;
 }
 
 /* Estilos para las listas desplegables */
 .select-items-userList {
     position: absolute;
+    transform: translateY(-0.5rem);
     color: #666;
     font-size: 1rem;
     background-color: #fff;
     list-style-type: none;
     margin: 0.5rem 0 0 0;
     padding: 0;
-    max-width: 100%;
+    width: 10rem;
     max-height: 10rem;
     z-index: 999;
     display: none; /* Oculta la lista de opciones por defecto */
@@ -148,7 +156,7 @@
 .select-items-userList li {
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Agrega una transición al cambiar el color de fondo */
+    transition: background-color 0.3s   ease; /* Agrega una transición al cambiar el color de fondo */
 }
 
 .select-items-userList li:hover {
@@ -171,7 +179,7 @@ aside {
     grid-row: 1 / span 2; 
     height: 200vh;
     width: 12rem; /* Anchura inicial del aside */
-    background-color: var(--clr-white);
+    background-color: #F7FAFF; /*var(--clr-white);*/
     box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta los valores según tus preferencias */
     transition: width 0.3s ease; /* Transición para cambiar la anchura */
     z-index: 10;
@@ -181,7 +189,7 @@ aside .top {
 	background-color: #F7FAFF;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	margin-top: 1rem;
     height: 2rem; 
     background-color: transparent;

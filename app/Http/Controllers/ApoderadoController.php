@@ -16,6 +16,10 @@ class ApoderadoController extends Controller
     public function home() {
         return view('apoderados.apoderadosHome');
     }
+
+    public function hijos() {
+        return view('apoderados.apoderadosHijos');
+    }
     /*
     //FORMA 1
     public function prediction()

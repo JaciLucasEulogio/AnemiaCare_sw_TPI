@@ -36,7 +36,7 @@
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[2] }}' name='{{ $someHiddenIdInputsArray[2] }}'>
                     <input type="hidden" id='auxEstadoRecuperacionInput' name="estadoRecuperacion_Dosaje">
                     <input type="hidden" id='auxFechaRecuperacionInput' name="fechaRecuperacionReal">
-
+                    
                     <h3> Información del dosaje</h3>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idDosajeLabel">Número de Dosaje:</label>
@@ -106,13 +106,15 @@
                     </div>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idProvinciaLabel">Provincia:</label>
-                        <input class="input-item noEditable center" type="text" id='idProvinciaInput' placeholder="Seleccione establecimiento" disabled>
+                        <input class="input-item noEditable center" type="text" id='idProvinciaInput' name="nombreProvincia" placeholder="Seleccione establecimiento" readonly>
+                    </div>
+                    <div class="form-group inline">
+                        <label class="primary-label noEditable" id="idAlturaProvinciaLabel">Altura:</label>
+                        <input class="input-item noEditable center" type="text" id='idAlturaProvinciaInput' name="alturaProvincia" placeholder="3245.00">
                     </div>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idHijoLabel">Hijo:</label>
-                        <div class="input-select" id="doctorRegistarDosajeSelect">
-                            
-
+                        <div class="input-select" id="hijoRegistarDosajeSelect">
                             <input class="input-select-item" type="text" id='{{ $idHijoInputSelect }}' maxlength="50" placeholder="DNI - Nombre"
                                 oninput="filterOptions('{{ $idHijoInputSelect}}', '{{ $hijoOptions }}'),
                                         validateValueOnRealTime(this, '{{ $hijoOptions }}', '{{ $idHijoMessageError }}', 
@@ -134,6 +136,10 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </div>
+                    <div class="form-group inline">
+                        <label class="primary-label noEditable" id="idSexo">Sexo:</label>
+                        <input class="input-item noEditable center" type="text" id='idSexoInput' name="sexo_Hijo" placeholder="M">
                     </div>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idEdadLabel">Edad (Meses):</label>
@@ -178,7 +184,7 @@
                     <div class="form-group inline">
                     <label class="primary-label noEditable" id="idFechaRecuperacionLabel">Fecha de recuperación:</label>
                     <input class="input-item dateNoEditable center" type="date" id='idFechaRecuperacionInput' 
-                            oninput="updateAuxFechaRecuperacion()" disabled>
+                            oninput="updateAuxFechaRecuperacion()" readonly>
                 </div>
                 </form>
             </div>

@@ -70,10 +70,10 @@ function clasificarAnemia(hemoglobina, edadMeses) {
         { edadMin: 24, edadMax: 36, sinAnemia: 11.5, leve: 10.0, moderado: 8.0 }
     ];
 
-    const SIN_ANEMIA = "SIN ANEMIA";
-    const LEVE = "LEVE";
-    const MODERADO = "MODERADO";
-    const SEVERO = "SEVERO";
+    const SIN_ANEMIA = "Sin anemia";
+    const LEVE = "Leve";
+    const MODERADO = "Moderado";
+    const SEVERO = "Severo";
 
     // Encontrar el rango adecuado de acuerdo a la edad
     const rango = rangos.find(r => edadMeses >= r.edadMin && edadMeses < r.edadMax);

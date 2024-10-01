@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label class="blue_label" for="firstPasswordInput">Contraseña</label>
-                        <input type="text" id="firstPasswordInput" value="12345678"
+                        <input type="password" id="firstPasswordInput" value="12345678"
                         placeholder="Ingresa una nueva contraseña" required />
                     </div>
                     <div class="form-group">
@@ -71,7 +71,7 @@
                         <div class="tooltip-container">
                             <span class="tooltip red" id="idConfirmPasswordTooltip">Este es el mensaje del tooltip</span>
                         </div>  
-                        <input type="text" id="secondPasswordInput" oninput="validatePasswordOnRealTime()" 
+                        <input type="password" id="secondPasswordInput" oninput="validatePasswordOnRealTime()" 
                             value="12345678" placeholder="Ingresa de nuevo la contraseña"
                             name="password" required />
                     </div>

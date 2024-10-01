@@ -13,6 +13,11 @@
 
 @section('content')
     <div class="dashboard-container">
+        @php
+            $apoderadoFullName = Auth::guard('apoderados')->user()->nombre_Apoderado . " " . Auth::guard('apoderados')->user()->apellido_Apoderado;
+        @endphp
+       
+       <!-- aside section-->
         <aside>
             <div class="top">
                 <div class="logo">
@@ -25,6 +30,12 @@
                     class="{{ Request::routeIs('apoderados.home') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">home</span>
                     <h5>Inicio</h5>
+                </a>
+
+                <a href="{{ route('apoderados.hijos') }}" 
+                    class="{{ Request::routeIs('apoderados.hijos') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined">child_care</span>
+                    <h5>Hijos</h5>
                 </a>
 
 				<a href="{{ route('apoderados.prediction') }}" 
@@ -57,14 +68,14 @@
                     <span class="notification_count">14</span>
                 </a>
                 <div class="profile-photo">
-                  <img src="{{ asset('images/profile_picture.png') }} " alt="1_admin_picture">
+                  <img src="{{ asset('img/profile_picture.png') }} " alt="1_admin_picture">
                 </div>
                 <div class="user_options_List" id="user_options_List">
                     <div class="div-input-select" id="idUserDivList">
-                        <label id="labelDesplegable" type="text-autocomplete" placeholder="Admin" onclick="toggleOptionsUser('userList')">
-                            Administador
+                        <button id="labelDesplegable" type="button" onclick="toggleOptionsUser('userList')">
+                            {{ $apoderadoFullName }}
                             <span class="material-symbols-outlined">keyboard_arrow_down</span>
-                        </label>
+                        </button>
                         <ul class="select-items-userList" id="userList">
                             <li onclick="linkOption('perfil')">Perfil</li>
                             <li onclick="linkOption('#')">Opción 2</li>
