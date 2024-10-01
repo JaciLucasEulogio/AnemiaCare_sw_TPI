@@ -6,7 +6,7 @@
 @endpush
 
 @section('sectionContent')
-	BIENVENIDO AL HOME DE APODERADOS
+	AL HOME DE APODERADOS
 @endsection
 
 @push('scripts')
