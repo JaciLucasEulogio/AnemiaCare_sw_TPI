@@ -43,8 +43,8 @@
                         <input class="input-item center" type="text" id='idDosajeInput' value='{{ $IDNuevoDosaje }}' name="idDosaje" reaonly>
                     </div>
                     <div class="form-group inline">
-                        <label class="primary-label noEditable" id="idfechaDosajeLabel">Fecha de dosaje:</label>
-                        <input class="input-item center" type="date" id='idfechaDosajeInput' name="fecha_Dosaje">
+                        <label class="primary-label noEditable" id="idFechaDosajeLabel">Fecha de dosaje:</label>
+                        <input class="input-item center" type="date" id='idFechaDosajeInput' name="fecha_Dosaje">
                     </div>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idDoctorLabel" >Doctor:</label>
@@ -179,6 +179,8 @@
                             :idOptions="'estadoRecuperacionRegistrarDosajeOptions'"
                             :placeholder="'Seleccionar estado'"
                             :options="['Recuperado', 'No recuperado']"
+                            :onSpanClickFunction="'updateEstadoRecuperacion'"
+                            :onClickLi="'updateEstadoRecuperacion'"
                         />
                     </div>
                     <div class="form-group inline">

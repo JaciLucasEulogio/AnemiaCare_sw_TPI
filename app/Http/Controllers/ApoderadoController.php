@@ -18,7 +18,12 @@ class ApoderadoController extends Controller
     }
 
     public function hijos() {
-        return view('apoderados.apoderadosHijos');
+        $apoderadoId = Auth::id();
+        $hijos = Hijo::where('idApoderado', $apoderadoId)
+                    ->orderBy('created_at', 'asc') 
+                    ->get();
+    
+        return view('apoderados.apoderadosHijos', compact('hijos'));
     }
     /*
     //FORMA 1

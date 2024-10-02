@@ -30,14 +30,115 @@ function closeModal(modalId) {
         // Elimina el modal de la lista de modales abiertos
         let openModals = JSON.parse(localStorage.getItem('openModals')) || [];
         openModals = openModals.filter(id => id !== modalId);
+       
         if (openModals.length > 0) {
             localStorage.setItem('openModals', JSON.stringify(openModals));
-        } else {
-            document.body.style.overflow = ''; // Permitir el scroll de fondo luego de cerrar todos los modales
-            localStorage.removeItem('openModals');
-        }
+        } 
+
+        document.body.style.overflow = ''; // Permitir el scroll de fondo luego de cerrar todos los modales
+        localStorage.removeItem('openModals');
     }
 }
+
+// SELECT FILES JS
+// Función para simular clic en el input file al hacer clic en el botón
+function handleFileSelect() {
+    const fileInput = document.getElementById('fileInput');
+    fileInput.value = ''; // Limpia el valor del input antes de seleccionar el archivo
+    fileInput.click();
+}
+
+let fileInput = document.getElementById('fileInput');
+let fileAreaImagen = document.getElementById('fileAreaImagen');
+let imgHijoPreview = document.getElementById('imgHijoPreview');
+let imagePreviewContainer  = document.getElementById('idImagePreviewContainer');
+function analizarImagenHijo(file) {
+    /*
+    HACER PRUEBA UNITARIA PARA ESTA FUNCIÓN 
+    */
+    console.log("ANALIZANDO IMAGEN HIJO", file);
+
+    // Crear un FileReader para leer la imagen
+    const reader = new FileReader();
+
+    // Cuando el archivo haya sido leído correctamente
+    reader.onload = function(event) {
+        // Mostrar la imagen en el <img> previamente oculto
+        imgHijoPreview.src = event.target.result;  // Asignar la imagen al src del <img>
+        imgHijoPreview.style.display = 'block';    // Asegurarse de que la imagen esté visible
+    };
+
+    // Leer el archivo como una URL
+    reader.readAsDataURL(file);
+
+    imagePreviewContainer.classList.remove("hidden");
+    fileAreaImagen.classList.add("hidden");
+}
+
+// Evento cuando se selecciona una imagen desde el input de archivo
+fileInput.addEventListener('change', function(event) {
+    const file = event.target.files[0]; // Obtener el archivo seleccionado
+    if (file) {
+        checkImageFile(file).then((isAccessible) => {
+            if (isAccessible) {
+                analizarImagenHijo(file); // Procesar la imagen seleccionada
+            }
+        }).catch((error) => {
+            console.error('Error al revisar imagen:', error);
+        });
+    }
+});
+
+// Evento cuando se arrastra y suelta una imagen al input de archivo
+if (fileAreaImagen) {
+    // Event listener para soltar sobre el área
+    fileAreaImagen.addEventListener('drop', function(event) {
+        event.preventDefault();
+        var file = event.dataTransfer.files[0]; // Obtener el archivo soltado
+        if (file) {
+            checkImageFile(file).then((isAccessible) => {
+                if (isAccessible) {
+                    analizarImagenHijo(file);
+                }
+            }).catch((error) => {
+                console.error('Error al revisar imagen:', error);
+            });
+        }
+    });
+} else {
+    console.warn('El elemento fileAreaImagen no existe en el DOM actual.');
+}
+
+function allowDrop(event) {
+    event.preventDefault(); 
+    fileAreaImagen.classList.add('drag-over');
+}
+
+function removeDrop(event) {
+    event.preventDefault();
+    fileAreaImagen.classList.remove('drag-over');
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    fileAreaImagen.classList.remove('drag-over');
+}
+
+// Función para verificar el acceso al archivo usando promesas
+function checkImageFile(file) {
+    return new Promise((resolve, reject) => {
+        // Comprobar el tipo de archivo
+        if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== '') {
+            console.error('Tipo de archivo no permitido:', file.type);
+            reject('Tipo de archivo no permitido');
+        } else {
+            resolve(true);
+        }
+    });
+}
+
+
+
 
 // Función para guardar los datos del formulario y cerrar el modal
 function guardarModal(idModal, idForm) {

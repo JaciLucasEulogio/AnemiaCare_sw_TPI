@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Hijo extends Model
 {
     use HasFactory;
-    
+
+    protected $guarded = [];
+
     protected $table = 'Hijos'; 
 
     protected $primaryKey = 'idHijo'; 
@@ -17,7 +19,7 @@ class Hijo extends Model
 
     protected $fillable = [
         'idHijo', 'idApoderado', 'nombre_Hijo', 'apellido_Hijo', 'fechaNacimiento_Hijo',
-        'sexo_Hijo', 'nombreSeguro_Hijo',
+        'sexo_Hijo', 'nombreSeguro_Hijo', 'file_uri',
     ];
 
     public function Apoderado() {

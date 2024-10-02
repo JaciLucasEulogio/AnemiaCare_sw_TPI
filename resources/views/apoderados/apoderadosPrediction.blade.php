@@ -14,16 +14,20 @@
 			$dosajesCompletosDB = $dosajesCompletos;
 		@endphp
 
-						
+								
 		@if ($errors->any())
 		<div class="alert alert-danger">
-			<ul>
+			<div class="alert-header">
+				<strong>¡Error!</strong> Hay algunos problemas.
+			</div>
+			<ul class="alert-list">
 				@foreach ($errors->all() as $error)
 					<li>{{ $error }}</li>
 				@endforeach
 			</ul>
 		</div>
 		@endif
+
 
 		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>

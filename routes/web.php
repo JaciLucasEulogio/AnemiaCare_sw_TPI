@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DosajeController;
+use App\Http\Controllers\HijoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApoderadoController;
 use App\Http\Controllers\ApoderadoLoginController;
@@ -36,11 +37,17 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:apoderados')->group(function () {
     Route::get('apoderados-inicio', [ApoderadoController::class, 'home'])->name('apoderados.home');
     Route::get('apoderados-hijos', [ApoderadoController::class, 'hijos'])->name('apoderados.hijos');
+    Route::post('apoderados-storeHijos', [HijoController::class, 'store'])->name('hijos.store');
     Route::get('apoderados-predicciones', [ApoderadoController::class, 'prediction'])->name('apoderados.prediction');
     Route::post('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
 
+    // File  Routes
+    Route::post('apoderados-storeChildPhoto', [ApoderadoController::class, 'storeChildPhoto'])->name('apoderados.storeChildPhoto');
+    
+    // API Routes
     Route::post('/api/enviar-datos', [ApiController::class, 'enviarDatosAPI']);
     Route::get('/api/obtener-datos', [ApiController::class, 'obtenerDatosAPI']);
+
 });
 
 // Rutas de autenticación

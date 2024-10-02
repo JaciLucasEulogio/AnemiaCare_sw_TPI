@@ -1,0 +1,33 @@
+#registrarHijoModal-dialog {
+	max-width: 700px; 
+	max-height: 500px; /* Ajusta la altura máxima del contenido del modal */
+    overflow-y: auto;  /* Activa la barra de desplazamiento vertical */
+    transform: translateY(-10px);
+}
+
+#registrarHijoModal .modal-dialog.open {
+    transform: translateY(-90px); 
+}
+
+.imagePreview-container {
+    height: 192px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagePreview-container.hidden {
+    display: none;
+}
+
+.imagePreview-container img {
+    height: 100%;
+    width: 192px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra alrededor de la imagen */
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin distorsión */
+}
+
+

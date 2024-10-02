@@ -7,7 +7,10 @@
     $focusBorder = $focusBorder ?? '';
     $selectFunction = $onSelectFunction ?? 'selectOption'; // Asignar la función predeterminada
     $onClick = $onClickFunction ?? 'toggleOptions'; // Asignar la función predeterminada
-    $spanClickFunction = isset($onSpanClickFunction) ? ", " . $onSpanClickFunction . "()" : '';
+    $onSpanClickFunction = $onSpanClickFunction ?? ''; // Asignar un valor por defecto si no está definido
+    $spanClickFunction = $onSpanClickFunction ? ", " . $onSpanClickFunction . "()" : ''; // Cambiar la forma de usar $onSpanClickFunction
+    $onClickLi = $onClickLi ?? ''; 
+    $clickLi = $onClickLi ? ", " . $onClickLi . "()" : ''; 
 @endphp
 
 <div class="input-select">
@@ -25,13 +28,11 @@
             {{ $isDisabled ? 'disabled' : '' }}
         >
         <span class="material-symbols-outlined {{ $spanOwnClassName }}" 
-              onclick="{{ $isDisabled ? '' : "clearInput('{$dynamicIdInput}')" }} {{$spanClickFunction}}, updateEstadoRecuperacion()"> cancel </span>
+              onclick="{{ $isDisabled ? '' : "clearInput('{$dynamicIdInput}')" }} {{$spanClickFunction}}"> cancel </span>
     </div>  
     <ul class="select-items" id="{{ $dynamicIdOptions }}">
         @foreach ($options as $option)
-            <li 
-                onclick="{{ $selectFunction }}('{{ $option }}', '{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}'), updateEstadoRecuperacion()"
-            >
+            <li onclick="{{ $selectFunction }}('{{ $option }}', '{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}') {{ $clickLi }}">
                 {{ $option }}
             </li>
         @endforeach
