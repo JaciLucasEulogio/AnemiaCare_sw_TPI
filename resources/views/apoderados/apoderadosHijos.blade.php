@@ -38,7 +38,11 @@
 			<div class="card">
 				<div class="card-content">
 					<div class="card-content-img">
-						<img src="{{ asset('img/empty_boy_profile.jpg') }} " alt="empty_boy_profile">
+						@if ($hijo->file_uri)
+							<img src="{{ asset('storage/images/' . $hijo->file_uri) }} " alt="{{ $hijo->idHijo }}_profilePhoto.jpg">
+						@else
+							<img src="{{ asset('storage/images/childrenPhotos/Empty_boy_profile.jpg') }} " alt="Empty_boy_profile.jpg">
+						@endif
 					</div>
 					<div class="card-content-info">
 						<h4>DNI: <span>{{ $hijo->idHijo }}</span></h4> 
@@ -46,8 +50,11 @@
 						<h4>Fecha de nacimiento: <span>{{ $hijo->fechaNacimiento_Hijo }}</span></h4> 
 						<h4>Sexo: <span>{{ $hijo->sexo_Hijo }}</span></h4> 
 						<h4>Seguro de salud: <span>{{ $hijo->nombreSeguro_Hijo }}</span></h4> 
-						<h4>Ruta de foto: <span>{{ $hijo->file_uri }}</span></h4> 
 					</div>
+
+					<x-btn-edit-item onclick="openModal('editarHijoModal')"> 
+						Editar
+					</x-btn-edit-item>
 				</div>
 			</div>
 			@endforeach

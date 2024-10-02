@@ -67,7 +67,7 @@
                     <span class="notification_count">14</span>
                 </a>
                 <div class="profile-photo">
-                  <img src="{{ asset('img/profile_picture.png') }} " alt="1_admin_picture">
+                  <img src="{{ asset('img/profile_picture.webp') }} " alt="1_admin_picture">
                 </div>
                 <div class="user_options_List" id="user_options_List">
                     <div class="div-input-select" id="idUserDivList">

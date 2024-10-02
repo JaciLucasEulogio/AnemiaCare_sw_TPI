@@ -624,6 +624,10 @@ input[type="date"].empty{
     'opsz' 24;
 }
 
+.material-symbols-outlined.filledRed:hover {
+    color: rgb(160, 60, 60); /* Color más claro al hacer hover */
+}
+
 @media (max-width: 576px) {
     .modal-body {
         padding: 15px;

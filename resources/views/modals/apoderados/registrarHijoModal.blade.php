@@ -77,7 +77,7 @@
                             <div class="fileArea" id="fileAreaImagen" class="select-files-div" ondragover="allowDrop(event)"
                                 ondragleave="removeDrop(event)" ondrop="handleDrop(event)">
                                 <div class="fileArea_text">
-                                    <input type="file" id="fileInput" class="file-input" name="fotoHijo" accept=".png, .jpg, .jpeg">
+                                    <input type="file" id="fileInput" class="file-input" name="fotoHijo" accept=".png, .jpg, .jpeg, .webp, .svg">
                                     <button type="button" class="btnSelectFile" onclick="handleFileSelect()">Seleccionar archivo .jpg,  .jpeg,  .png</button>
                                     <span>o arrastra y suelta aquí</span>
                                 </div>
@@ -85,8 +85,8 @@
                         </div>
                         <!-- Lugar donde se mostrará la imagen seleccionada -->
                         <div class="imagePreview-container hidden" id="idImagePreviewContainer">
-                            <span class="material-symbols-outlined filledRed" onclick="clearImage('imgHijoPreview') ">cancel</span>
                             <img id="imgHijoPreview" src="#" alt="Imagen del hijo" style="display:none; max-width: 300px;"/>
+                            <span class="material-symbols-outlined filledRed" onclick="clearImage('idImagePreviewContainer') ">cancel</span>
                         </div>
                     </div>
                     

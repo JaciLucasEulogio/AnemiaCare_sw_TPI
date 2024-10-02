@@ -20,6 +20,7 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2020-02-07', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
+                'file_uri' => 'childrenPhotos\hijo1Josue.jpeg',
             ],
             [
                 'idHijo' => '11111112',
@@ -29,6 +30,7 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2021-05-12', 
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
+                'file_uri' => 'childrenPhotos\hijo2Josue.jpg',
             ],
             [
                 'idHijo' => '11111113',
@@ -38,6 +40,7 @@ class HijoSeeder extends Seeder
                 'fechaNacimiento_Hijo' => '2022-09-23', 
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
+                'file_uri' => 'childrenPhotos\hijo3Josue.jpg',
             ],
             [
                 'idHijo' => '11111114',

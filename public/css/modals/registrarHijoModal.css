@@ -9,6 +9,10 @@
     transform: translateY(-90px); 
 }
 
+#idModalBodyRegistrarHijo {
+    padding-bottom: 0;
+}
+
 .imagePreview-container {
     height: 192px;
     width: 100%;
@@ -16,10 +20,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative; /* Posiciona a los hijos en base a este contenedor */
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out; /* Agregamos transición a la opacidad */
 }
 
 .imagePreview-container.hidden {
-    display: none;
+    opacity: 0;
+    visibility: hidden; /* Oculta el contenedor completamente */
+    max-height: 0;
 }
 
 .imagePreview-container img {
@@ -30,4 +39,22 @@
     object-fit: cover; /* Asegura que la imagen llene el contenedor sin distorsión */
 }
 
+.imagePreview-container span {
+    position: relative;
+    right: 3rem;
+    align-self: flex-start;
+    font-size: 3rem;
+    z-index: 0;
+}
+
+.imagePreview-container span::before {
+    content: ''; /* Crear el pseudo-elemento */
+    position: absolute;
+    left: 5px;
+    width: 40px; /* Tamaño de la parte con fondo */
+    height: 40px; /* Tamaño de la parte con fondo */
+    background-color: #fff; /* Color de fondo deseado */
+    z-index: -1; /* Envía el fondo detrás del texto del ícono */
+    border-radius: 50%; /* Si deseas que la parte coloreada sea circular */
+}
 

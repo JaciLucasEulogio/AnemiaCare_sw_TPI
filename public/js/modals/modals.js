@@ -52,6 +52,7 @@ let fileInput = document.getElementById('fileInput');
 let fileAreaImagen = document.getElementById('fileAreaImagen');
 let imgHijoPreview = document.getElementById('imgHijoPreview');
 let imagePreviewContainer  = document.getElementById('idImagePreviewContainer');
+
 function analizarImagenHijo(file) {
     /*
     HACER PRUEBA UNITARIA PARA ESTA FUNCIÓN 
@@ -128,7 +129,8 @@ function handleDrop(event) {
 function checkImageFile(file) {
     return new Promise((resolve, reject) => {
         // Comprobar el tipo de archivo
-        if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== '') {
+        if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && 
+            file.type !== 'image/svg' && file.type !== 'image/webp' && file.type !== '') {
             console.error('Tipo de archivo no permitido:', file.type);
             reject('Tipo de archivo no permitido');
         } else {
@@ -314,6 +316,11 @@ function clearInput(idInput) {
     } else {
         console.error('No se encontró un input siguiente para el contenedor ' + container + '.');
     }
+}
+
+function clearImage(idImageContainer) {
+    document.getElementById(idImageContainer).classList.add('hidden');
+    fileAreaImagen.classList.remove('hidden');
 }
 
 function guardarModal(idModal, idForm) {
