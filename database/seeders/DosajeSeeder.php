@@ -45,5 +45,6 @@ class DosajeSeeder extends Seeder
         }
 
         // Crear los 2964 dosajes restantes para completar el total de 3000
+        //Dosaje::factory(2964)->create();
     }
 }

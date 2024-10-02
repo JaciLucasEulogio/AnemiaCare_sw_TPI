@@ -1,55 +1,55 @@
-<div class="modal first"  id="registrarHijoModal">
-    <div class="modal-dialog" id="registrarHijoModal-dialog">
-        <div class="modal-content" id="registrarHijoModal-content">
+<div class="modal first"  id="editarHijoModal">
+    <div class="modal-dialog" id="editarHijoModal-dialog">
+        <div class="modal-content" id="editarHijoModal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar nuevo hijo</h5>
-                <button class="close" onclick="closeModal('registrarHijoModal')">&times;</button>
+                <h5 class="modal-title">Editar hijo</h5>
+                <button class="close" onclick="closeModal('editarHijoModal')">&times;</button>
             </div>
             
-            <div class="modal-body" id="idModalBodyRegistrarHijo">
-                <form id="formRegistrarHijo" action="{{ route('hijos.store') }}" method="POST" enctype="multipart/form-data">
+            <div class="modal-body" id="idModalBodyEditarHijo">
+                <form id="formEditarHijo" action="{{ route('hijos.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- Variables globales -->
                     @php
                         // Doctor
-                        $idHijoInputSelect = 'hijoRegistrarHijoInputSelect';
-                        $hijoOptions = 'hijoRegistrarHijoOptions';
+                        $idHijoInputSelect = 'hijoEditarHijoInputSelect';
+                        $hijoOptions = 'hijoEditarHijoOptions';
                         $DNI_Apoderado = Auth::guard('apoderados')->user()->idApoderado;
                         $someHiddenIdInputsArray = ['idApoderado'];
-                        $idHijoMessageError = 'hijoRegistrarHijoSelectMessageError';
+                        $idHijoMessageError = 'hijoEditarHijoSelectMessageError';
                         $hijosDB = $hijos; //Se recibe esta variable de la función hijos de ApoderadoController.php
                     @endphp
                     
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" value='{{ $DNI_Apoderado }}' name='{{ $someHiddenIdInputsArray[0] }}'>
                     
 					<div class="form-group inline">
-                        <label class="primary-label noEditable" id="idHijoLabel">Número de DNI:</label>
-                        <input class="input-item" id="idHijoInput" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
-                                placeholder="77665544" maxlength="8">
+                        <label class="primary-label noEditable" id="idHijoEditarLabel">Número de DNI:</label>
+                        <input class="input-item" id="idHijoEditarInput" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
+                                placeholder="77665544" maxlength="8" disabled>
                     </div>
 
 					<div class="form-group inline">
-                        <label class="primary-label noEditable" id="idNombreHijoLabel">Nombre:</label>
-                        <input class="input-item center" type="text" id='idNombreHijoLabel' name="nombre_Hijo" placeholder="Juan">
+                        <label class="primary-label noEditable" id="idNombreHijoEditarLabel">Nombre:</label>
+                        <input class="input-item center" type="text" id='idNombreHijoEditarInput' name="nombre_Hijo" placeholder="Juan">
                     </div>
 
 					<div class="form-group inline">
-                        <label class="primary-label noEditable" id="idApellidoHijoLabel">Apellidos:</label>
-                        <input class="input-item center" type="text" id='idApellidoHijoInput' name="apellido_Hijo" placeholder="Pérez Gonzáles">
+                        <label class="primary-label noEditable" id="idApellidoHijoEditarLabel">Apellidos:</label>
+                        <input class="input-item center" type="text" id='idApellidoHijoEditarInput' name="apellido_Hijo" placeholder="Pérez Gonzáles">
                     </div>
 
                     <div class="form-group inline">
-                        <label class="primary-label noEditable" for="idFechaNacimientoInput" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
-                        <input class="input-item center" type="date" id='idFechaNacimientoInput' name="fechaNacimiento_Hijo">
+                        <label class="primary-label noEditable" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
+                        <input class="input-item center" type="date" id='idFechaNacimientoEditarInput' name="fechaNacimiento_Hijo">
                     </div>
 
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idSexoLabel">Sexo:</label>
 						<x-onlySelect-input 
-							:idSelect="'idSexoRegistrarHijoSelect'"
+							:idSelect="'idSexoEditarHijoSelect'"
 							:inputClassName="'onlySelectInput'"
-							:idInput="'idSexoRegistrarHijoInput'"
-							:idOptions="'sexoRegistrarOptions'"
+							:idInput="'idSexoEditarHijoInput'"
+							:idOptions="'sexoEditarOptions'"
 							:placeholder="'Seleccionar sexo'"
 							:name="'sexo_Hijo'"
 							:options="['Masculino', 'Femenino']"
@@ -59,10 +59,10 @@
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idSeguroLabel">Seguro:</label>
 						<x-onlySelect-input 
-							:idSelect="'idSeguroRegistrarHijoSelect'"
+							:idSelect="'idSeguroEditarHijoSelect'"
 							:inputClassName="'onlySelectInput'"
-							:idInput="'idSeguroRegistrarHijoInput'"
-							:idOptions="'seguroRegistraprOptions'"
+							:idInput="'idSeguroEditarHijoInput'"
+							:idOptions="'seguroEditarOptions'"
 							:placeholder="'Seleccionar seguro'"
 							:name="'nombreSeguro_Hijo'"
 							:options="['Seguro Integral de Salud', 'Seguro Social del Perú', 'Ninguno']"
@@ -93,9 +93,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal('registrarHijoModal')">Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('editarHijoModal')">Cancelar</button>
                 <button type="button" class="btn btn-primary create" 
-                        onclick="guardarModalRegistrarHijo('registrarHijoModal', 'formRegistrarHijo')">Guardar</button>
+                        onclick="guardarModalEditarDosaje('editarHijoModal', 'formEditarHijo')">Guardar</button>
             </div>
         </div>
     </div>

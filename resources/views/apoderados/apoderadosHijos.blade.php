@@ -5,6 +5,7 @@
 @push('styles')
 	<link rel="stylesheet" href="{{ asset('css/apoderado/hijosApoderado.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/modals/registrarHijoModal.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/modals/editarHijoModal.css') }}">
 @endpush
 
 @section('sectionContent')
@@ -46,23 +47,28 @@
 					</div>
 					<div class="card-content-info">
 						<h4>DNI: <span>{{ $hijo->idHijo }}</span></h4> 
-						<h4>Nombre: <span>{{ $hijo->nombre_Hijo }}</span></h4>
+						<h4>Nombre: <span>{{ $hijo->nombre_Hijo }} {{  $hijo->apellido_Hijo }}</span></h4>
 						<h4>Fecha de nacimiento: <span>{{ $hijo->fechaNacimiento_Hijo }}</span></h4> 
 						<h4>Sexo: <span>{{ $hijo->sexo_Hijo }}</span></h4> 
 						<h4>Seguro de salud: <span>{{ $hijo->nombreSeguro_Hijo }}</span></h4> 
 					</div>
 
-					<x-btn-edit-item onclick="openModal('editarHijoModal')"> 
+					<x-btn-edit-item onclick="openModal('editarHijoModal'), 
+											fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', '{{  $hijo->apellido_Hijo }}',
+											'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}')"> 
 						Editar
 					</x-btn-edit-item>
+					
 				</div>
 			</div>
 			@endforeach
+			@include('modals.apoderados.editarHijoModal')
 		</div>
 	</div>
 @endsection
 
 @push('scripts')
 	<script src="{{ asset('js/modals/registrarHijoModal.js') }}"></script>
+	<script src="{{ asset('js/modals/editarHijoModal.js') }}"></script>
 @endpush
 

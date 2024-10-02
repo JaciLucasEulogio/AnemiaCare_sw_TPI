@@ -22,7 +22,16 @@ class ApoderadoController extends Controller
         $hijos = Hijo::where('idApoderado', $apoderadoId)
                     ->orderBy('created_at', 'asc') 
                     ->get();
-    
+        
+        // Recorrer cada hijo para modificar su sexo
+        foreach ($hijos as $hijo) {
+            if ($hijo->sexo_Hijo == "M") {
+                $hijo->sexo_Hijo = "Masculino";
+            } else {
+                $hijo->sexo_Hijo = "Femenino";
+            }
+        }
+
         return view('apoderados.apoderadosHijos', compact('hijos'));
     }
     /*

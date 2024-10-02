@@ -2,7 +2,10 @@
     $uniqueId = uniqid();
     $dynamicIdInput = $idInput ?? 'input-' . $uniqueId;
     $dynamicIdOptions = $idOptions ?? 'options-' . $uniqueId;
-    $isDisabled = $disabled ?? false;
+    $isDisabled = $isDisabled ?? '';
+    $disabled = $isDisabled == "true" ? "disabled" : '';
+    $isReadonly = $isReadonly ?? '';
+    $readonly = $isReadonly == "true" ? "readonly" : '';
     $spanOwnClassName = $spanClassName ?? ''; // Asignar un valor por defecto si $spanClassName no está definido
     $focusBorder = $focusBorder ?? '';
     $selectFunction = $onSelectFunction ?? 'selectOption'; // Asignar la función predeterminada
@@ -23,9 +26,9 @@
             oninput="filterOptions('{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}')" 
             onclick="{{ $onClick }}('{{ $dynamicIdInput }}', '{{ $dynamicIdOptions }}')" 
             autocomplete="off"
-            readonly
             name="{{ $name ?? '' }}"
-            {{ $isDisabled ? 'disabled' : '' }}
+            {{ $disabled }}
+            {{ $readonly }}
         >
         <span class="material-symbols-outlined {{ $spanOwnClassName }}" 
               onclick="{{ $isDisabled ? '' : "clearInput('{$dynamicIdInput}')" }} {{$spanClickFunction}}"> cancel </span>

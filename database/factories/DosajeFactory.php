@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Dosaje;
+use App\Models\Hijo;
+use App\Models\Doctor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
@@ -15,9 +17,9 @@ class DosajeFactory extends Factory
     public function definition()
     {
         return [
-            'idDosaje' => 'DOSAJ-' . str_pad(static::$contador, 4, '0', STR_PAD_LEFT),
-            'idHijo' => \App\Models\Hijo::factory(),
-            'idDoctor' => \App\Models\Doctor::factory(),
+            'idDosaje' => 'DOSAJ-' . str_pad(static::$contador++, 4, '0', STR_PAD_LEFT), // Incrementar contador
+            'idHijo' => Hijo::inRandomOrder()->value('idHijo'), // Seleccionar un ID de hijo aleatoriamente
+            'idDoctor' => Doctor::inRandomOrder()->value('idDoctor'), // Seleccionar un ID de doctor aleatoriamente
             'idEstablecimiento' => $this->faker->randomElement(['ESTAB049', 'ESTAB047', 'ESTAB027']),
             'fecha_Dosaje' => Carbon::now()->subMonths(rand(0, 2)),
             'valorHemoglobina_Dosaje' => $this->faker->randomFloat(2, 10, 18.99),
