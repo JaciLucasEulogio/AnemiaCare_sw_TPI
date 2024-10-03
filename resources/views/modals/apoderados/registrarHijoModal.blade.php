@@ -24,23 +24,23 @@
                     
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idHijoLabel">Número de DNI:</label>
-                        <input class="input-item" id="idHijoInput" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
+                        <input class="input-item" id="idHijoRegistrarInput" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
                                 placeholder="77665544" maxlength="8">
                     </div>
 
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idNombreHijoLabel">Nombre:</label>
-                        <input class="input-item center" type="text" id='idNombreHijoLabel' name="nombre_Hijo" placeholder="Juan">
+                        <input class="input-item center" type="text" id='idNombreHijoRegistrarInput' name="nombre_Hijo" placeholder="Juan">
                     </div>
 
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idApellidoHijoLabel">Apellidos:</label>
-                        <input class="input-item center" type="text" id='idApellidoHijoInput' name="apellido_Hijo" placeholder="Pérez Gonzáles">
+                        <input class="input-item center" type="text" id='idApellidoHijoRegistrarInput' name="apellido_Hijo" placeholder="Pérez Gonzáles">
                     </div>
 
                     <div class="form-group inline">
                         <label class="primary-label noEditable" for="idFechaNacimientoInput" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
-                        <input class="input-item center" type="date" id='idFechaNacimientoInput' name="fechaNacimiento_Hijo">
+                        <input class="input-item center" type="date" id='idFechaNacimientoRegistrarInput' name="fechaNacimiento_Hijo">
                     </div>
 
                     <div class="form-group inline">

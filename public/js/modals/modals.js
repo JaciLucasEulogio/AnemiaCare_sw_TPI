@@ -13,7 +13,25 @@ function openModal(modalId) {
         let openModals = JSON.parse(localStorage.getItem('openModals')) || [];
         if (!openModals.includes(modalId)) {
             openModals.push(modalId);
-            localStorage.setItem('openModals', JSON.stringify(openModals));
+            localStorage.setItem('openModals', JSON.stringify(openModals));            
+        }
+        
+        if (modalId == "editarHijoModal") {
+            document.getElementById('idHijoEditarInput').value = localStorage.getItem('idHijoEDITAR') || '';
+            document.getElementById('idNombreHijoEditarInput').value = localStorage.getItem('nombre_HijoEDITAR') || '';
+            document.getElementById('idApellidoHijoEditarInput').value = localStorage.getItem('apellido_HijoEDITAR') || '';
+            document.getElementById('idFechaNacimientoEditarInput').value = localStorage.getItem('fechaNacimiento_HijoEDITAR') || '';
+            document.getElementById('idSexoEditarHijoInput').value = localStorage.getItem('sexo_HijoEDITAR') || '';
+            document.getElementById('idSeguroEditarHijoInput').value = localStorage.getItem('nombreSeguro_HijoEDITAR') || '';
+        } 
+        
+        if (modalId == "registrarHijoModal") {
+            document.getElementById('idHijoRegistrarInput').value = localStorage.getItem('idHijoREGISTRAR') || '';
+            document.getElementById('idNombreHijoRegistrarInput').value = localStorage.getItem('nombre_HijoREGISTRAR') || '';
+            document.getElementById('idApellidoHijoRegistrarInput').value = localStorage.getItem('apellido_HijoREGISTRAR') || '';
+            document.getElementById('idFechaNacimientoRegistrarInput').value = localStorage.getItem('fechaNacimiento_HijoREGISTRAR') || '';
+            document.getElementById('idSexoRegistrarHijoInput').value = localStorage.getItem('sexo_HijoREGISTRAR') || '';
+            document.getElementById('idSeguroRegistrarHijoInput').value = localStorage.getItem('nombreSeguro_HijoREGISTRAR') || '';
         }
     }
 }
@@ -170,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function setOnlySelectInputFocusColor() {
-    document.   addEventListener('click', function(event) {
+    document.addEventListener('click', function(event) {
         var elements = document.querySelectorAll('.onlySelectInput-container');
         elements.forEach(function(element) {
             var isClickInside = element.contains(event.target);
