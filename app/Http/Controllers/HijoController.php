@@ -110,4 +110,16 @@ class HijoController extends Controller
             return back()->withErrors(['error' => 'Error al actualizar el hijo: ' . $e->getMessage()])->withInput();
         }
     }
+
+    public function delete(Request $request)  {
+       // Encuentra el registro por su id y si no lo encuentra lanza una excepción 404
+        $hijo = Hijo::where('idHijo', $request->idHijo)->firstOrFail();
+        
+        // Elimina el registro
+        $hijo->delete();
+
+        // Redirigir o responder según sea necesario
+        return redirect()->back()->with('success', 'Hijo eliminado exitosamente.');
+        
+    }
 }

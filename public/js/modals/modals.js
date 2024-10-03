@@ -15,24 +15,6 @@ function openModal(modalId) {
             openModals.push(modalId);
             localStorage.setItem('openModals', JSON.stringify(openModals));            
         }
-        
-        if (modalId == "editarHijoModal") {
-            document.getElementById('idHijoEditarInput').value = localStorage.getItem('idHijoEDITAR') || '';
-            document.getElementById('idNombreHijoEditarInput').value = localStorage.getItem('nombre_HijoEDITAR') || '';
-            document.getElementById('idApellidoHijoEditarInput').value = localStorage.getItem('apellido_HijoEDITAR') || '';
-            document.getElementById('idFechaNacimientoEditarInput').value = localStorage.getItem('fechaNacimiento_HijoEDITAR') || '';
-            document.getElementById('idSexoEditarHijoInput').value = localStorage.getItem('sexo_HijoEDITAR') || '';
-            document.getElementById('idSeguroEditarHijoInput').value = localStorage.getItem('nombreSeguro_HijoEDITAR') || '';
-        } 
-        
-        if (modalId == "registrarHijoModal") {
-            document.getElementById('idHijoRegistrarInput').value = localStorage.getItem('idHijoREGISTRAR') || '';
-            document.getElementById('idNombreHijoRegistrarInput').value = localStorage.getItem('nombre_HijoREGISTRAR') || '';
-            document.getElementById('idApellidoHijoRegistrarInput').value = localStorage.getItem('apellido_HijoREGISTRAR') || '';
-            document.getElementById('idFechaNacimientoRegistrarInput').value = localStorage.getItem('fechaNacimiento_HijoREGISTRAR') || '';
-            document.getElementById('idSexoRegistrarHijoInput').value = localStorage.getItem('sexo_HijoREGISTRAR') || '';
-            document.getElementById('idSeguroRegistrarHijoInput').value = localStorage.getItem('nombreSeguro_HijoREGISTRAR') || '';
-        }
     }
 }
 
@@ -166,7 +148,9 @@ function clearImage(spanElement) {
 // Función para guardar los datos del formulario y cerrar el modal
 function guardarModal(idModal, idForm) {
     document.getElementById(idForm).submit();
-    closeModal(idModal);
+    if(idModal) {
+        closeModal(idModal);
+    }
 }
 
 // Función para vaciar el localStorage
@@ -248,11 +232,32 @@ function selectOption(value, idInput, idOptions) {
     var options = document.getElementById(idOptions);
 
     if (input) {
+        // Actualizar el valor del input
         input.value = value;
-        options.classList.remove('show'); // Ocultar las opciones
+
+        // Ocultar las opciones
+        options.classList.remove('show');
+
+        // Verificar si el input tiene un atributo data-key para guardar el valor en localStorage
+        var key = input.dataset.key || idInput; // Si no hay data-key, usa el idInput como clave
+
+        // Guardar el valor en localStorage usando la clave correspondiente
+        localStorage.setItem(key, value);
+
+        console.log('Valor seleccionado: ' + value + ' guardado en localStorage con la clave: ' + key);
     } else {
-        console.error('El elemento con id ' + idOptions + ' no se encontró en el DOM');
+        console.error('El elemento con id ' + idInput + ' no se encontró en el DOM');
     }
+}
+
+function verificarOnlySelectInputVacio(onlySelectInput) {
+	if (onlySelectInput.value.trim() === "") {
+        // Verificar si el input tiene un atributo data-key para guardar el valor en localStorage
+        var key = onlySelectInput.dataset.key || onlySelectInput.id; // Si no hay data-key, usa el idInput como clave
+        // Guardar el valor en localStorage usando la clave correspondiente
+        localStorage.setItem(key, "");
+        //console.log('Valor vacío de ' + onlySelectInput.id + ' guardado en localStorage con la clave: ' + key);
+	}
 }
 
 function closeOptionsOnClickOutside() {
@@ -338,8 +343,6 @@ function clearInput(idInput) {
         console.error('No se encontró el input con el id: ' + idInput);
     }
 }
-
-
 
 
 function guardarModal(idModal, idForm) {

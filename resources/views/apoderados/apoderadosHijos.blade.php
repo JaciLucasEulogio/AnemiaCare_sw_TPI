@@ -34,6 +34,11 @@
 
 			@include('modals.apoderados.registrarHijoModal')
 		</div>
+
+		@if ($hijos->isEmpty())
+			<h4>No hay hijos registrados aún, haga click en <strong>"Nuevo Hijo"</strong> poder registrarlo.</h4>
+		@endif
+
 		<div class="secondHijosRow">
 			@foreach ($hijos as $hijo)
 			<div class="card">
@@ -53,22 +58,34 @@
 						<h4>Seguro de salud: <span>{{ $hijo->nombreSeguro_Hijo }}</span></h4> 
 					</div>
 
-					<x-btn-edit-item onclick="openModal('editarHijoModal'), 
-											fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', '{{  $hijo->apellido_Hijo }}',
-											'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}')"> 
-						Editar
-					</x-btn-edit-item>
-					
+					<div class="btns-container">
+						<x-btn-edit-item onclick="openModal('editarHijoModal'), 
+						fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', '{{  $hijo->apellido_Hijo }}',
+						'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}')"> 
+							Editar
+						</x-btn-edit-item>
+
+						<x-btn-delete-item onclick="deleteHijo('{{ $hijo->idHijo }}', 'formDeleteHijo')">
+							Eliminar
+						</x-btn-delete-item>
+					</div>
 				</div>
 			</div>
 			@endforeach
 			@include('modals.apoderados.editarHijoModal')
 		</div>
+
+		<form id="formDeleteHijo" action="{{ route('hijos.delete') }}" method="POST">
+			@csrf
+			@method('DELETE')
+			<input id="idHijoInputFormDelete" type="hidden" name="idHijo">
+		</form>
 	</div>
 @endsection
 
 @push('scripts')
 	<script src="{{ asset('js/modals/registrarHijoModal.js') }}"></script>
 	<script src="{{ asset('js/modals/editarHijoModal.js') }}"></script>
+	<script src="{{ asset('js/modals/eliminarHijoModal.js') }}"></script>
 @endpush
 

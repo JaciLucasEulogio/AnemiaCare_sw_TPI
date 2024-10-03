@@ -41,7 +41,8 @@ Route::middleware('auth:apoderados')->group(function () {
 
     Route::post('apoderados-storeHijos', [HijoController::class, 'store'])->name('hijos.store');
     Route::put('apoderados-updateHijos', [HijoController::class, 'update'])->name('hijos.update'); 
-
+    Route::delete('apoderados-deleteHijos', [HijoController::class, 'delete'])->name('hijos.delete');
+    
     Route::post('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
 
     // File  Routes

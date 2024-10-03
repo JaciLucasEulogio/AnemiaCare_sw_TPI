@@ -55,6 +55,8 @@
 							:name="'sexo_Hijo'"
 							:options="['Masculino', 'Femenino']"
 							:onSelectFunction="'selectOption'"
+                            :isReadonly="true"
+                            :onSpanClickFunction="['verificarOnlySelectInputVacio', 'idSexoEditarHijoInput']"
 						/>
 					</div>
 					<div class="form-group inline">
@@ -68,6 +70,8 @@
 							:name="'nombreSeguro_Hijo'"
 							:options="['Seguro Integral de Salud', 'Seguro Social del Perú', 'Ninguno']"
 							:onSelectFunction="'selectOption'"
+                            :isReadonly="true"
+                            :onSpanClickFunction="['verificarOnlySelectInputVacio', 'idSeguroEditarHijoInput']"
 						/>
 					</div>
 
