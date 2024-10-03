@@ -37,8 +37,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth:apoderados')->group(function () {
     Route::get('apoderados-inicio', [ApoderadoController::class, 'home'])->name('apoderados.home');
     Route::get('apoderados-hijos', [ApoderadoController::class, 'hijos'])->name('apoderados.hijos');
-    Route::post('apoderados-storeHijos', [HijoController::class, 'store'])->name('hijos.store');
     Route::get('apoderados-predicciones', [ApoderadoController::class, 'prediction'])->name('apoderados.prediction');
+
+    Route::post('apoderados-storeHijos', [HijoController::class, 'store'])->name('hijos.store');
+    Route::put('apoderados-updateHijos', [HijoController::class, 'update'])->name('hijos.update'); 
+
     Route::post('apoderados-storeDosajes', [DosajeController::class, 'store'])->name('dosajes.store');
 
     // File  Routes

@@ -1,12 +1,5 @@
 #editarHijoModal-dialog {
-	max-width: 700px; 
-	max-height: 500px; /* Ajusta la altura máxima del contenido del modal */
-    overflow-y: auto;  /* Activa la barra de desplazamiento vertical */
-    transform: translateY(-10px);
-}
-
-#editarHijoModal .modal-dialog.open {
-    transform: translateY(-90px); 
+	max-height: 830px;
 }
 
 #idModalBodyEditarHijo {

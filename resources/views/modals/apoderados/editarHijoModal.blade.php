@@ -7,7 +7,8 @@
             </div>
             
             <div class="modal-body" id="idModalBodyEditarHijo">
-                <form id="formEditarHijo" action="{{ route('hijos.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="formEditarHijo" action="{{ route('hijos.update') }}" method="POST" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <!-- Variables globales -->
                     @php
@@ -24,8 +25,8 @@
                     
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idHijoEditarLabel">Número de DNI:</label>
-                        <input class="input-item" id="idHijoEditarInput" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
-                                placeholder="77665544" maxlength="8" disabled>
+                        <input class="input-item" id="idHijoEditarInput" value="{{ old('idHijo') }}" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
+                                placeholder="77665544" maxlength="8" readonly>
                     </div>
 
 					<div class="form-group inline">
@@ -70,32 +71,32 @@
 						/>
 					</div>
 
-                    <div class="form-group column gap"> 
+                    <div class="form-group column gap">
                         <label class="primary-label noEditable" for="fileAreaImagen">Foto del hijo (opcional):</label>
                         <!-- Seleccionar archivos -->
-                        <div class="select-files-div" id="idSelectFilesContainer">
-                            <div class="fileArea" id="fileAreaImagen" class="select-files-div" ondragover="allowDrop(event)"
-                                ondragleave="removeDrop(event)" ondrop="handleDrop(event)">
+                        <div class="select-files-div">
+                            <div class="fileArea fileAreaImagen" ondragover="allowDrop(event)"
+                                 ondragleave="removeDrop(event)" ondrop="handleDrop(event, this)">
                                 <div class="fileArea_text">
-                                    <input type="file" id="fileInput" class="file-input" name="fotoHijo" accept=".png, .jpg, .jpeg, .webp, .svg">
-                                    <button type="button" class="btnSelectFile" onclick="handleFileSelect()">Seleccionar archivo .jpg,  .jpeg,  .png</button>
+                                    <input type="file" class="fileInput" name="fotoHijo" accept=".png, .jpg, .jpeg, .webp, .svg" style="display:none;" onchange="previewImage(this)">
+                                    <button type="button" class="btnSelectFile" onclick="handleFileSelect(this)">Seleccionar archivo .jpg, .jpeg, .png</button>
                                     <span>o arrastra y suelta aquí</span>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Lugar donde se mostrará la imagen seleccionada -->
-                        <div class="imagePreview-container hidden" id="idImagePreviewContainer">
-                            <img id="imgHijoPreview" src="#" alt="Imagen del hijo" style="display:none; max-width: 300px;"/>
-                            <span class="material-symbols-outlined filledRed" onclick="clearImage('idImagePreviewContainer') ">cancel</span>
+                        <div class="imagePreview-container hidden">
+                            <img class="imgHijoPreview" src="#" alt="Imagen del hijo" style="display:none; max-width: 300px;"/>
+                            <span class="material-symbols-outlined filledRed" onclick="clearImage(this)">cancel</span>
                         </div>
                     </div>
-                    
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('editarHijoModal')">Cancelar</button>
                 <button type="button" class="btn btn-primary create" 
-                        onclick="guardarModalEditarDosaje('editarHijoModal', 'formEditarHijo')">Guardar</button>
+                        onclick="guardarModalEditarHijo('editarHijoModal', 'formEditarHijo')">Guardar</button>
             </div>
         </div>
     </div>

@@ -213,7 +213,7 @@ aside .sidebar {
 	background-color: #F7FAFF;
 	display: flex;
 	flex-direction: column;
-	height: 90vh; /* Altura máxima */
+	height: 95vh; /* Altura máxima */
 	position: sticky;
 	top: 1rem;
     margin-top: 1rem;

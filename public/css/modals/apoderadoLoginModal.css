@@ -4,12 +4,8 @@
 
 /* Cuanto menor sea el valor del traslado irá más arriba y viceversa*/
 #apoderadoLoginModal .modal-dialog {
-    transform: translateY(-2rem); /* Punto de inicio*/
     width: 35rem;
-}
-
-#apoderadoLoginModal .modal-dialog.open {
-    transform: translateY(-5rem); /* Punto final */
+    max-height: 490px;
 }
 
 #idApoderado {

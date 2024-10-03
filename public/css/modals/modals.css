@@ -19,44 +19,44 @@
 
 /* Modal styles */
 .modal {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--modal-overlay-bg);
-  z-index: 500;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay-bg);
+    z-index: 500;
 }
 
 .modal-dialog {
-  position: relative;
-  margin: 10% auto;
-  width: auto;
-  background-color: var(--background-color);
-  border-radius: 12px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-  transform: translateY(-50px);
-  opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+    position: relative;
+    margin: 10% auto;
+    max-width: 800px; 
+    background-color: var(--background-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .modal-dialog.open {
-  transform: translateY(0);
-  opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .modal-content {
-  padding: 30px 20px;
+    padding: 30px 20px;
 }
 
 .modal-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
 }
 
 .modal-title {
@@ -647,4 +647,209 @@ input[type="date"].empty{
     }
 }
 
+@media screen and (min-width: 300px) {
+    .modal-dialog {
+        width: 400px;
+        height: 130px; /* Altura para pantallas desde 1200px */
+        overflow-y: auto;
+    }
 
+    .modal-dialog.open {
+        transform: translateY(-25px); 
+    }
+}
+
+@media screen and (min-width: 350px) {
+    .modal-dialog {
+        width: 400px;
+        height: 170px; /* Altura para pantallas desde 1200px */
+        overflow-y: auto;
+    }
+
+    .modal-dialog.open {
+        transform: translateY(-30px); 
+    }
+}
+
+@media screen and (min-width: 450px) {
+    .modal-dialog {
+        width: 400px;
+        height: 200px; /* Altura para pantallas desde 1200px */
+        overflow-y: auto;
+    }
+
+    .modal-dialog.open {
+        transform: translateY(-30px); 
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .modal-dialog {
+        width: 400px;
+        height: 200px; /* Altura para pantallas desde 1200px */
+        overflow-y: auto;
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-40px); 
+    }
+}
+
+@media screen and (min-width: 550px) {
+    .modal-dialog {
+        width: 400px;
+        height: 230px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-55px); 
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .modal-dialog {
+        width: 400px;
+        height: 260px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-55px); 
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .modal-dialog {
+        width: 500px;
+        height: 300px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-60px); 
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .modal-dialog {
+        width: 600px;
+        height: 355px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-75px); 
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .modal-dialog {
+        width: 600px;
+        height: 385px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-85px); 
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .modal-dialog {
+        height: 420px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-90px); 
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .modal-dialog {
+        height: 485px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-100px); 
+    }
+}
+
+@media screen and (min-width: 1250px) {
+    .modal-dialog {
+        height: 530px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-110px); 
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .modal-dialog {
+        height: 600px; /* Altura para pantallas desde 1200px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-130px); 
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .modal-dialog {
+        height: 650px; /* Altura para pantallas desde 1500px */
+    }
+
+    .modal-dialog.modal-dialog.open{
+        transform: translateY(-135px); 
+    }
+}
+
+@media screen and (min-width: 1650px) {
+    .modal-dialog {
+        height: 710px; /* Altura para pantallas desde 1650px */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-150px); 
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .modal-dialog {
+        height: 820px; /* Altura para pantallas desde 1800px */
+        overflow-y: none;  /* Desactivar la barra de desplazamiento vertical */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-180px); 
+    }
+}
+
+@media screen and (min-width: 1950px) {
+    .modal-dialog {
+        height: 900px; /* Altura para pantallas desde 1800px */
+        overflow-y: none;  /* Desactivar la barra de desplazamiento vertical */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-230px); 
+    }
+}
+
+@media screen and (min-width: 2500px) {
+    .modal-dialog {
+        height: 1100px; /* Altura para pantallas desde 1800px */
+        overflow-y: none;  /* Desactivar la barra de desplazamiento vertical */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-240px); 
+    }
+}
+
+@media screen and (min-width: 2700px) {
+    .modal-dialog {
+        height: 100%; /* Altura para pantallas desde 1800px */
+        overflow-y: none;  /* Desactivar la barra de desplazamiento vertical */
+    }
+
+    .modal-dialog.modal-dialog.open {
+        transform: translateY(-300px); 
+    }
+}

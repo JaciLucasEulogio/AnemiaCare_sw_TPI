@@ -41,103 +41,136 @@ function closeModal(modalId) {
 }
 
 // SELECT FILES JS
-// Función para simular clic en el input file al hacer clic en el botón
-function handleFileSelect() {
-    const fileInput = document.getElementById('fileInput');
+// Función para manejar la selección del archivo desde el botón
+function handleFileSelect(button) {
+    const fileInput = button.closest('.fileAreaImagen').querySelector('.fileInput');
     fileInput.value = ''; // Limpia el valor del input antes de seleccionar el archivo
-    fileInput.click();
+    fileInput.click(); // Simula el clic en el input
 }
 
-let fileInput = document.getElementById('fileInput');
-let fileAreaImagen = document.getElementById('fileAreaImagen');
-let imgHijoPreview = document.getElementById('imgHijoPreview');
-let imagePreviewContainer  = document.getElementById('idImagePreviewContainer');
-
-function analizarImagenHijo(file) {
-    /*
-    HACER PRUEBA UNITARIA PARA ESTA FUNCIÓN 
-    */
-    console.log("ANALIZANDO IMAGEN HIJO", file);
-
-    // Crear un FileReader para leer la imagen
+// Función para analizar y previsualizar la imagen
+function analizarImagen(file, imgPreview, imagePreviewContainer, fileAreaImagen, fileInput) {
     const reader = new FileReader();
-
-    // Cuando el archivo haya sido leído correctamente
+    
     reader.onload = function(event) {
-        // Mostrar la imagen en el <img> previamente oculto
-        imgHijoPreview.src = event.target.result;  // Asignar la imagen al src del <img>
-        imgHijoPreview.style.display = 'block';    // Asegurarse de que la imagen esté visible
+        imgPreview.src = event.target.result;
+        imgPreview.style.display = 'block';
+        
+        // Almacenar la imagen en Base64 en localStorage
+        localStorage.setItem(`imgPreview-${fileInput.name}`, event.target.result);
     };
 
-    // Leer el archivo como una URL
     reader.readAsDataURL(file);
-
     imagePreviewContainer.classList.remove("hidden");
     fileAreaImagen.classList.add("hidden");
 }
 
-// Evento cuando se selecciona una imagen desde el input de archivo
-fileInput.addEventListener('change', function(event) {
-    const file = event.target.files[0]; // Obtener el archivo seleccionado
-    if (file) {
-        checkImageFile(file).then((isAccessible) => {
-            if (isAccessible) {
-                analizarImagenHijo(file); // Procesar la imagen seleccionada
-            }
-        }).catch((error) => {
-            console.error('Error al revisar imagen:', error);
-        });
-    }
-});
-
-// Evento cuando se arrastra y suelta una imagen al input de archivo
-if (fileAreaImagen) {
-    // Event listener para soltar sobre el área
-    fileAreaImagen.addEventListener('drop', function(event) {
-        event.preventDefault();
-        var file = event.dataTransfer.files[0]; // Obtener el archivo soltado
-        if (file) {
-            checkImageFile(file).then((isAccessible) => {
-                if (isAccessible) {
-                    analizarImagenHijo(file);
-                }
-            }).catch((error) => {
-                console.error('Error al revisar imagen:', error);
-            });
-        }
-    });
-} else {
-    console.warn('El elemento fileAreaImagen no existe en el DOM actual.');
-}
-
-function allowDrop(event) {
-    event.preventDefault(); 
-    fileAreaImagen.classList.add('drag-over');
-}
-
-function removeDrop(event) {
-    event.preventDefault();
-    fileAreaImagen.classList.remove('drag-over');
-}
-
-function handleDrop(event) {
-    event.preventDefault();
-    fileAreaImagen.classList.remove('drag-over');
-}
-
-// Función para verificar el acceso al archivo usando promesas
+// Función para revisar el tipo de archivo de la imagen
 function checkImageFile(file) {
     return new Promise((resolve, reject) => {
-        // Comprobar el tipo de archivo
-        if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && 
-            file.type !== 'image/svg' && file.type !== 'image/webp' && file.type !== '') {
-            console.error('Tipo de archivo no permitido:', file.type);
+        const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+        console.log(file.type); // Verifica el tipo de archivo
+        if (!allowedTypes.includes(file.type)) {
             reject('Tipo de archivo no permitido');
         } else {
             resolve(true);
         }
     });
 }
+
+// Restaurar las imágenes guardadas desde localStorage al cargar la página
+function restaurarImagenes() {
+    document.querySelectorAll('.fileInput').forEach(fileInput => {
+        const container = fileInput.closest('.form-group');
+        const imgPreview = container.querySelector('.imgHijoPreview');
+        const imagePreviewContainer = container.querySelector('.imagePreview-container');
+        const fileAreaImagen = container.querySelector('.fileAreaImagen');
+
+        const savedImage = localStorage.getItem(`imgPreview-${fileInput.name}`);
+
+        if (savedImage) {
+            imgPreview.src = savedImage;
+            imgPreview.style.display = 'block';
+            imagePreviewContainer.classList.remove('hidden');
+            fileAreaImagen.classList.add('hidden');
+        }
+    });
+}
+
+// Maneja el evento de cambio de archivo
+document.querySelectorAll('.fileInput').forEach(fileInput => {
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const container = fileInput.closest('.form-group');
+        const imgPreview = container.querySelector('.imgHijoPreview');
+        const imagePreviewContainer = container.querySelector('.imagePreview-container');
+        const fileAreaImagen = container.querySelector('.fileAreaImagen');
+        
+        if (file) {
+            checkImageFile(file).then((isAccessible) => {
+                if (isAccessible) {
+                    analizarImagen(file, imgPreview, imagePreviewContainer, fileAreaImagen, fileInput);
+                }
+            }).catch((error) => {
+                console.error('Error al revisar imagen:', error);
+            });
+        }
+    });
+});
+
+// Maneja el evento de arrastrar y soltar
+document.querySelectorAll('.fileAreaImagen').forEach(fileArea => {
+    fileArea.addEventListener('dragover', function(event) {
+        event.preventDefault();
+        fileArea.classList.add('drag-over');
+    });
+
+    fileArea.addEventListener('dragleave', function(event) {
+        event.preventDefault();
+        fileArea.classList.remove('drag-over');
+    });
+
+    fileArea.addEventListener('drop', function(event) {
+        event.preventDefault();
+        fileArea.classList.remove('drag-over');
+
+        const file = event.dataTransfer.files[0];
+        const container = fileArea.closest('.form-group');
+        const imgPreview = container.querySelector('.imgHijoPreview');
+        const imagePreviewContainer = container.querySelector('.imagePreview-container');
+
+        if (file) {
+            checkImageFile(file).then((isAccessible) => {
+                if (isAccessible) {
+                    analizarImagen(file, imgPreview, imagePreviewContainer, fileArea, container.querySelector('.fileInput'));
+                }
+            }).catch((error) => {
+                console.error('Error al revisar imagen:', error);
+            });
+        }
+    });
+});
+
+// Función para limpiar la imagen seleccionada y el LocalStorage
+function clearImage(spanElement) {
+    const container = spanElement.closest('.form-group');
+    const imgPreview = container.querySelector('.imgHijoPreview');
+    const imagePreviewContainer = container.querySelector('.imagePreview-container');
+    const fileAreaImagen = container.querySelector('.fileAreaImagen');
+    const fileInput = container.querySelector('.fileInput');
+
+    imgPreview.src = '#';
+    imgPreview.style.display = 'none';
+    imagePreviewContainer.classList.add('hidden');
+    fileAreaImagen.classList.remove('hidden');
+    fileInput.value = ''; // Limpia el input de archivos
+    
+    // Remover la imagen del localStorage
+    localStorage.removeItem(`imgPreview-${fileInput.name}`);
+}
+
+// Restaurar las imágenes cuando la página se carga
+document.addEventListener('DOMContentLoaded', restaurarImagenes);
 
 
 
@@ -314,14 +347,12 @@ function clearInput(idInput) {
     if (input) {
         input.value = ''; // Limpia el valor del input
     } else {
-        console.error('No se encontró un input siguiente para el contenedor ' + container + '.');
+        console.error('No se encontró el input con el id: ' + idInput);
     }
 }
 
-function clearImage(idImageContainer) {
-    document.getElementById(idImageContainer).classList.add('hidden');
-    fileAreaImagen.classList.remove('hidden');
-}
+
+
 
 function guardarModal(idModal, idForm) {
     document.getElementById(idForm).submit();
