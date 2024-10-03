@@ -27,37 +27,3 @@ function guardarModalEditarHijo(idModal, idForm) {
     
     guardarModal(idModal, idForm); // Llama a la función guardarModal genérica
 }
-
-// Funciones para guardar y restaurar los valores de los inputs usando LocalStorage
-
-// Guardar valores de los inputs en LocalStorage
-function guardarValoresInputs() {
-    const inputs = document.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
-        if (input.type !== 'file' && input.type !== 'password') {
-            localStorage.setItem(input.id, input.value);
-        }
-    });
-}
-
-// Restaurar valores de los inputs desde LocalStorage
-function restaurarValoresInputs() {
-    const inputs = document.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
-        if (input.type !== 'file' && input.type !== 'password') {
-            const valor = localStorage.getItem(input.id);
-            if (valor !== null) {
-                input.value = valor;
-            }
-        }
-    });
-}
-
-// Limpiar los valores guardados en LocalStorage
-function limpiarValoresGuardados() {
-    localStorage.clear();
-}
-
-// Agregar event listeners para guardar y restaurar los datos en LocalStorage
-document.addEventListener('DOMContentLoaded', restaurarValoresInputs);
-window.addEventListener('beforeunload', guardarValoresInputs);

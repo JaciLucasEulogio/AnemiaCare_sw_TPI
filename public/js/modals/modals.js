@@ -55,9 +55,6 @@ function analizarImagen(file, imgPreview, imagePreviewContainer, fileAreaImagen,
     reader.onload = function(event) {
         imgPreview.src = event.target.result;
         imgPreview.style.display = 'block';
-        
-        // Almacenar la imagen en Base64 en localStorage
-        localStorage.setItem(`imgPreview-${fileInput.name}`, event.target.result);
     };
 
     reader.readAsDataURL(file);
@@ -74,25 +71,6 @@ function checkImageFile(file) {
             reject('Tipo de archivo no permitido');
         } else {
             resolve(true);
-        }
-    });
-}
-
-// Restaurar las imágenes guardadas desde localStorage al cargar la página
-function restaurarImagenes() {
-    document.querySelectorAll('.fileInput').forEach(fileInput => {
-        const container = fileInput.closest('.form-group');
-        const imgPreview = container.querySelector('.imgHijoPreview');
-        const imagePreviewContainer = container.querySelector('.imagePreview-container');
-        const fileAreaImagen = container.querySelector('.fileAreaImagen');
-
-        const savedImage = localStorage.getItem(`imgPreview-${fileInput.name}`);
-
-        if (savedImage) {
-            imgPreview.src = savedImage;
-            imgPreview.style.display = 'block';
-            imagePreviewContainer.classList.remove('hidden');
-            fileAreaImagen.classList.add('hidden');
         }
     });
 }
@@ -164,15 +142,7 @@ function clearImage(spanElement) {
     imagePreviewContainer.classList.add('hidden');
     fileAreaImagen.classList.remove('hidden');
     fileInput.value = ''; // Limpia el input de archivos
-    
-    // Remover la imagen del localStorage
-    localStorage.removeItem(`imgPreview-${fileInput.name}`);
 }
-
-// Restaurar las imágenes cuando la página se carga
-document.addEventListener('DOMContentLoaded', restaurarImagenes);
-
-
 
 
 // Función para guardar los datos del formulario y cerrar el modal
