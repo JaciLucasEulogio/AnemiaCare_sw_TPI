@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/mainStyle.css') }}">
         <link rel="stylesheet" href="{{ asset('css/datatable/datatables.css') }}">
         <link rel="stylesheet" href="{{ asset('css/modals/modals.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/modals/modalSuccess.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tooltips_others/tooltip.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.googleapis.com">
