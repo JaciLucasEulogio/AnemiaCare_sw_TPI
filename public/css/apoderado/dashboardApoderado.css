@@ -246,7 +246,6 @@ aside .sidebar a:last-child {
 	width: 100%;
 }
 
-
 aside .sidebar a:hover h5 {
     color: var(--clr-primary-variant);
 }
@@ -286,12 +285,12 @@ aside .sidebar a h5.hidden {
 
 /* Estilos adicionales para mejorar la experiencia */
 aside .sidebar a span {
-    transition: color 0.5s, margin-left .4s ease;
+    transition: color 0.5s, margin-left .4s ease, opacity 0.3s ease;
 }
 
 aside .sidebar a:hover span {
     margin-left: 1rem;
-    transition: color 0.7s, margin-left .4s ease;
+    transition: color 0.7s, margin-left .4s ease, opacity 0.3s ease;
 }
 
 aside.hovered {

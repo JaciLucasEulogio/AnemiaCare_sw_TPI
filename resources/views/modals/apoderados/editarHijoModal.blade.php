@@ -79,7 +79,7 @@
                         <label class="primary-label noEditable" for="fileAreaImagen">Foto del hijo (opcional):</label>
                         <!-- Seleccionar archivos -->
                         <div class="select-files-div">
-                            <div class="fileArea fileAreaImagen" ondragover="allowDrop(event)"
+                            <div class="fileArea fileAreaImagen" id="idFileAreaImagenEditHijo" ondragover="allowDrop(event)"
                                  ondragleave="removeDrop(event)" ondrop="handleDrop(event, this)">
                                 <div class="fileArea_text">
                                     <input type="file" class="fileInput" name="fotoHijo" accept=".png, .jpg, .jpeg, .webp, .svg" style="display:none;" onchange="previewImage(this)">
@@ -90,8 +90,8 @@
                         </div>
                         
                         <!-- Lugar donde se mostrará la imagen seleccionada -->
-                        <div class="imagePreview-container hidden">
-                            <img class="imgHijoPreview" src="#" alt="Imagen del hijo" style="display:none; max-width: 300px;"/>
+                        <div class="imagePreview-container hidden" id="idImagePreviewEditHijo"> 
+                            <img class="imgHijoPreview" id=idImgEditHijo  src="#" alt="Imagen del hijo"/>
                             <span class="material-symbols-outlined filledRed" onclick="clearImage(this)">cancel</span>
                         </div>
                     </div>

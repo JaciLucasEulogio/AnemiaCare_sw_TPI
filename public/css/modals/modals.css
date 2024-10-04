@@ -480,14 +480,13 @@
 }
 
 .fileArea {
-    display: flex;
+    display: inline-block;
     align-content: center;
     justify-content: center;
     border: 2px dashed #ccc;
     margin-top: 2rem;
     cursor: pointer;
     position: relative;
-    display: inline-block;
     height: 10rem;
     padding: 0 2rem;
     text-align: center;
@@ -498,6 +497,15 @@
 .fileArea.hidden {
     display: none;
 }
+
+.imagePreview-container {
+    display: inline-block;
+}
+
+.imagePreview-container.hidden {
+    display: none;
+}
+
 
 .fileArea_text {
     display: flex;

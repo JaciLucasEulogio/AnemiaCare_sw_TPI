@@ -119,7 +119,7 @@ class HijoController extends Controller
         $hijo->delete();
 
         // Redirigir o responder según sea necesario
-        return redirect()->back()->with('success', 'Hijo eliminado exitosamente.');
+        return redirect()->back()->with('successHijoEliminado', 'Hijo eliminado exitosamente.');
         
     }
 }

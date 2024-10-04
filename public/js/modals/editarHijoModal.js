@@ -4,6 +4,18 @@ let apellidoHijoEditarInput = document.getElementById('idApellidoHijoEditarInput
 let fechaEditarHijoInput = document.getElementById('idFechaNacimientoEditarInput');
 let sexoEditarHijoInput = document.getElementById('idSexoEditarHijoInput');
 let seguroEditarHijoInput = document.getElementById('idSeguroEditarHijoInput');
+let imagePreviewEditHijo = document.getElementById('idImagePreviewEditHijo');
+let fileAreaImagenEditHijo = document.getElementById('idFileAreaImagenEditHijo');
+let imgInput = document.getElementById("idImgEditHijo");
+
+let textInputs = [
+    idHijoEditarHijoInput,
+    nombreEditarHijoInput,
+    apellidoHijoEditarInput,
+    fechaEditarHijoInput,
+    sexoEditarHijoInput,
+    seguroEditarHijoInput,
+];
 
 // Asignar la clave correspondiente a cada input usando data attributes
 idHijoEditarHijoInput.dataset.key = 'idHijoEDITAR';
@@ -19,14 +31,13 @@ function guardarLOCALSTORAGEInputEditarHijo(event) {
     if (key) {
         // Guardar en localStorage
         localStorage.setItem(key, event.target.value);
-        console.log(`Guardando ${event.target.value} en ${key}`);
+        console.log(`Guardando ${event.target.value} con key: ${key}`);
     }
 }
 
-idHijoEditarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputEditarHijo);
-nombreEditarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputEditarHijo);
-apellidoHijoEditarInput.addEventListener('input', guardarLOCALSTORAGEInputEditarHijo);
-fechaEditarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputEditarHijo);
+[idHijoEditarHijoInput, nombreEditarHijoInput, apellidoHijoEditarInput, fechaEditarHijoInput].forEach(input => {
+    input.addEventListener('input', guardarLOCALSTORAGEInputEditarHijo);
+});
 
 function cargarInputsFormEditarHijoModalDesdeLocalStorage() {
     const inputs = [
@@ -48,15 +59,52 @@ function cargarInputsFormEditarHijoModalDesdeLocalStorage() {
 
 document.addEventListener('DOMContentLoaded', cargarInputsFormEditarHijoModalDesdeLocalStorage);
 
-// Función para llenar los campos del formulario al abrir el modal Editar Hijo
-function fillEditarHijoFields(idHijo, nombreHijo, apellHijo, fecNacHijo, sexoHijo, seguroHijo) {
-    idHijoEditarHijoInput.value = idHijo;
-    nombreEditarHijoInput.value = nombreHijo;
-    apellidoHijoEditarInput.value = apellHijo;
-    fechaEditarHijoInput.value = fecNacHijo;
-    sexoEditarHijoInput.value = sexoHijo;
-    seguroEditarHijoInput.value = seguroHijo;
+function guardarTodosInputsEnLocalStorage() {
+    textInputs.forEach(input => {
+        const key = input.dataset.key;
+        if (key) {
+            localStorage.setItem(key, input.value);
+            console.log(`Guardando ${input.value} con key: ${key}`);
+        }
+    });
 }
+
+function getShowImageWithURI(idImgInput, idImgContainer, idFileAreaImage, imgURI) {
+    const imgInput = document.getElementById(idImgInput);
+    const imgContainer = document.getElementById(idImgContainer);
+    const fileAreaImage = document.getElementById(idFileAreaImage);
+
+    if (imgURI && imgURI !== "") {
+        // Construir la URL de la imagen
+        const url = `storage/images/${imgURI}`;
+        // Mostrar la imagen y ocultar el área de arrastre
+        imgInput.src = url;
+        imgContainer.classList.remove("hidden");
+        fileAreaImage.classList.add("hidden");
+    } else {
+        // Si no hay imagen, usa una imagen por defecto
+        const defaultUrl = "storage/images/childrenPhotos/Empty_boy_profile.jpg";
+        imgInput.src = defaultUrl;
+        imgContainer.classList.remove("hidden");
+        fileAreaImage.classList.add("hidden");
+    }
+
+    //console.log(imgInput.src); 
+}
+
+// Función para llenar los campos del formulario al abrir el modal Editar Hijo
+function fillEditarHijoFields(id, nombre, apellido, fechaNacimiento, sexo, nombreSeguro, fileUri) {
+    idHijoEditarHijoInput.value = id;
+    nombreEditarHijoInput.value = nombre;
+    apellidoHijoEditarInput.value = apellido;
+    fechaEditarHijoInput.value = fechaNacimiento;
+    sexoEditarHijoInput.value = sexo;
+    seguroEditarHijoInput.value = nombreSeguro;
+
+    getShowImageWithURI("idImgEditHijo", "idImagePreviewEditHijo", "idFileAreaImagenEditHijo", fileUri );
+    guardarTodosInputsEnLocalStorage();
+}
+
 
 // Función para guardar los cambios del modal de edición
 function guardarModalEditarHijo(idModal, idForm) {

@@ -3,10 +3,11 @@
 @section('title', 'Inicio Apoderados')
 
 @push('styles')
+    {{-- Aquí podrías agregar estilos personalizados si fuera necesario --}}
 @endpush
 
 @section('sectionContent')
-	AL HOME DE APODERADOS
+	BIENVENIDO AL HOME DE APODERADOS
 @endsection
 
 @push('scripts')

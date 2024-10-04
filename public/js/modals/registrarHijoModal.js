@@ -19,14 +19,13 @@ function guardarLOCALSTORAGEInputRegistrarHijo(event) {
     if (key) {
         // Guardar en localStorage
         localStorage.setItem(key, event.target.value);
-        console.log(`Guardando ${event.target.value} en ${key}`);
+        console.log(`Guardando ${event.target.value} con key: ${key}`);
     }
 }
 
-idHijoRegistrarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputRegistrarHijo);
-nombreRegistrarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputRegistrarHijo);
-apellidoHijoRegistrarInput.addEventListener('input', guardarLOCALSTORAGEInputRegistrarHijo);
-fechaRegistrarHijoInput.addEventListener('input', guardarLOCALSTORAGEInputRegistrarHijo);
+[idHijoRegistrarHijoInput, nombreRegistrarHijoInput, apellidoHijoRegistrarInput, fechaRegistrarHijoInput].forEach(input => {
+        input.addEventListener('input', guardarLOCALSTORAGEInputRegistrarHijo);
+});
 
 function cargarInputsFormRegistrarHijoModalDesdeLocalStorage() {
     const inputs = [

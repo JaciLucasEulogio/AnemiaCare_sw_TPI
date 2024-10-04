@@ -48,7 +48,7 @@
                     @csrf
                 </form>
 
-                <a href="#" class="btnLogout" id="logoutLink">
+                <a href="#" onclick="vaciarLocalStorage()" class="btnLogout" id="logoutLink">
                     <span class="material-symbols-outlined">logout</span>
                     <h5>Cerrar Sesión</h5>
                 </a>

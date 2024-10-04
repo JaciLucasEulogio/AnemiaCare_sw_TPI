@@ -89,7 +89,7 @@
                         </div>
                         <!-- Lugar donde se mostrará la imagen seleccionada -->
                         <div class="imagePreview-container hidden">
-                            <img class="imgHijoPreview" src="#" alt="Imagen del hijo" style="display:none; max-width: 300px;"/>
+                            <img class="imgHijoPreview" src="#" alt="Imagen del hijo"/>
                             <span class="material-symbols-outlined filledRed" onclick="clearImage(this)">cancel</span>
                         </div>
                     </div>

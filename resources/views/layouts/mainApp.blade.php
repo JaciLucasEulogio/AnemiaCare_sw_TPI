@@ -34,6 +34,7 @@
         <script src="{{ asset('js/datatable/datatables.js') }}"> </script>
         <script src="{{ asset('js/datatable/datatableConfig.js') }}"> </script>
         <script src="{{ asset('js/modals/modals.js') }}"></script>
+        <script src="{{ asset('js/modals/fileAreaImage.js') }}"></script>
         <script src="{{ asset('js/tooltips_others/tooltip.js') }}"> </script>
         @stack('scripts')
     </body>

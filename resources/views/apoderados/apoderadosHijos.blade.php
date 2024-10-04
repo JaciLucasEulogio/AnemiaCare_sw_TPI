@@ -41,13 +41,16 @@
 
 		<div class="secondHijosRow">
 			@foreach ($hijos as $hijo)
+			@php
+				$uriFoto = htmlspecialchars($hijo->file_uri, ENT_QUOTES, 'UTF-8');
+			@endphp
 			<div class="card">
 				<div class="card-content">
 					<div class="card-content-img">
 						@if ($hijo->file_uri)
-							<img src="{{ asset('storage/images/' . $hijo->file_uri) }} " alt="{{ $hijo->idHijo }}_profilePhoto.jpg">
+							<img src="{{ asset('storage/images/' . $uriFoto) }}" alt="{{ $hijo->idHijo }}_profilePhoto.jpg">
 						@else
-							<img src="{{ asset('storage/images/childrenPhotos/Empty_boy_profile.jpg') }} " alt="Empty_boy_profile.jpg">
+							<img src="{{ asset('storage/images/childrenPhotos/Empty_boy_profile.jpg') }}" alt="Empty_boy_profile.jpg">
 						@endif
 					</div>
 					<div class="card-content-info">
@@ -61,7 +64,8 @@
 					<div class="btns-container">
 						<x-btn-edit-item onclick="openModal('editarHijoModal'), 
 						fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', '{{  $hijo->apellido_Hijo }}',
-						'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}')"> 
+						'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}', 
+						'{{ $uriFoto }}')"> 
 							Editar
 						</x-btn-edit-item>
 
@@ -80,6 +84,11 @@
 			@method('DELETE')
 			<input id="idHijoInputFormDelete" type="hidden" name="idHijo">
 		</form>
+
+		<x-modalSuccessAction 
+            :idSuccesModal="'successModalHijoEliminado'"
+            :message="'Hijo eliminado correctamente'"
+        />
 	</div>
 @endsection
 
@@ -87,5 +96,12 @@
 	<script src="{{ asset('js/modals/registrarHijoModal.js') }}"></script>
 	<script src="{{ asset('js/modals/editarHijoModal.js') }}"></script>
 	<script src="{{ asset('js/modals/eliminarHijoModal.js') }}"></script>
+	<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('successHijoEliminado'))
+                    openModal('successModalHijoEliminado');
+            @endif
+        });
+    </script>
 @endpush
 
