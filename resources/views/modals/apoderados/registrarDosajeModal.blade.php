@@ -31,11 +31,11 @@
                         $IDNuevoDosaje = $idNuevoDosaje; //Se recibe esta variable de la función prediction de ApoderadoController.php
                    @endphp
                     
-                    <input type="text" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[0] }}'>
-                    <input type="text" id='{{ $someHiddenIdInputsArray[1] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[1] }}'>
-                    <input type="text" id='{{ $someHiddenIdInputsArray[2] }}' name='{{ $someHiddenIdInputsArray[2] }}'>
-                    <input type="text" id='auxEstadoRecuperacionInput' autocomplete="off" name="estadoRecuperacion_Dosaje">
-                    <input type="text" id='auxFechaRecuperacionInput' autocomplete="off" name="fechaRecuperacionReal">
+                    <input type="hidden" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[0] }}'>
+                    <input type="hidden" id='{{ $someHiddenIdInputsArray[1] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[1] }}'>
+                    <input type="hidden" id='{{ $someHiddenIdInputsArray[2] }}' name='{{ $someHiddenIdInputsArray[2] }}'>
+                    <input type="hidden" id='auxEstadoRecuperacionInput' autocomplete="off" name="estadoRecuperacion_Dosaje">
+                    <input type="hidden" id='auxFechaRecuperacionInput' autocomplete="off" name="fechaRecuperacionReal">
                     
                     <h3>Dosaje</h3>
                     <div class="form-group inline">

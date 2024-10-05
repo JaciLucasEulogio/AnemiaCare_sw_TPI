@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use Carbon\Carbon;
 use App\Models\Hijo;
 use App\Models\Doctor;
 use App\Models\Dosaje;
-use App\Models\Establecimiento;
 use Illuminate\Http\Request;
+use App\Models\Establecimiento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth; 
-use DateTime;
 
 class ApoderadoController extends Controller
 {
@@ -183,7 +184,20 @@ class ApoderadoController extends Controller
         $apoderadoId = Auth::id();
         
         // Consultar la vista 'vw_DosajesCompletos' filtrando por el ID del apoderado
-        $dosajesCompletos = DB::table('vw_DosajesCompletos')->where('idApoderado', $apoderadoId)->get();
+        $dosajesCompletos = DB::table('vw_DosajesCompletos')
+                                ->where('idApoderado', $apoderadoId)
+                                ->orderBy('idDosaje', 'asc') // Ordenar de manera ascendente por el campo 'id'
+                                ->get();
+
+        $dosajesCompletosOrderNumber = $dosajesCompletos->map(function($dosaje, $index) {
+            // Añadir un nuevo campo llamado 'order_number' con el valor del índice + 1
+            $dosaje->order_number = $index + 1;
+            // Formatear la fecha del dosaje usando Carbon
+            $dosaje->fecha_Dosaje = Carbon::parse($dosaje->fecha_Dosaje)->format('d/m/Y');
+            
+            return $dosaje;
+        });
+
         $doctores = Doctor::all();
         $establecimientos = $this->getEstablecimientos();
         $hijos = $this->getHijos($apoderadoId);
@@ -202,7 +216,7 @@ class ApoderadoController extends Controller
             $hijo->edadMeses = ($interval->y * 12) + $interval->m; // Calcular la edad en meses
         }
 
-        return view('apoderados.apoderadosPrediction', compact('dosajesCompletos', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje'));
+        return view('apoderados.apoderadosPrediction', compact('dosajesCompletosOrderNumber', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje'));
     }
 
     public function getEstablecimientos() {

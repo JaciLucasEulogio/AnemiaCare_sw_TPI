@@ -11,7 +11,7 @@
 	<div class="prediccionesContainer">
 		 <!-- Variables globales -->
 		@php
-			$dosajesCompletosDB = $dosajesCompletos;
+			$dosajesCompletosDB = $dosajesCompletosOrderNumber;
 			// Mensaje de info sobre el cálculo del nivel de anemia 
 			$messageInfo = "
 							<div> 
@@ -61,9 +61,6 @@
 
 		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>
-		</div>
-
-		<div class="secondDosajesRow">
 			<x-btn-create-item onclick="openModal('registrarDosajeModal')"> 
 				Registrar nuevo dosaje
 			</x-btn-create-item>
@@ -75,7 +72,40 @@
 			/>
 		</div>
 		
-		<!--Tabla de Dosajes-->
+		<div class="thirdDosajesRow">
+			<div class="dose-list">
+				@foreach ($dosajesCompletosDB as $dosaje)
+					<div class="dose-item">
+						<div class="dose-icon"> <!-- Ícono o imagen aquí --> </div>
+						<div class="dose-details">
+							<h3>Dosaje {{ $dosaje->order_number }}</h3>
+							<p>Sin Registro</p>
+						</div>
+						<div class="dose-info">
+							<span class="label">Fecha</span>
+							<span>{{ $dosaje->fecha_Dosaje }}</span>
+						</div>
+						<div class="dose-info">
+							<span class="label">Doctor</span>
+							<span>{{ $dosaje->nombre_Doctor }}</span>
+						</div>
+						<div class="dose-info">
+							<span class="label">Recuperación</span>
+							@if($dosaje->fechaRecuperacionReal) 
+								<span>{{ $dosaje->fechaRecuperacionReal }}</span>
+							@else
+								<span>No recuperado</span>
+							@endif
+						</div>
+						<div class="options">
+							<span class="material-symbols-outlined">more_horiz</span>
+						</div>
+					</div>
+				@endforeach
+			</div>
+		</div>
+		
+		<!--Tabla de Dosajes
         <div class="tableRow">
             <table class="ownTable" id="tblDosajes">
                 <thead>
@@ -121,6 +151,7 @@
                 </tbody>
             </table>
         </div>
+		-->
 		<h3>Resultado de predicción:</h3>
 		@if(session('apiResponse'))
 		@php
