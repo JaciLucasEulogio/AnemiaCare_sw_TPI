@@ -88,7 +88,7 @@
 		<x-modalSuccessAction 
             :idSuccesModal="'successModalHijoEliminado'"
             :message="'Hijo eliminado correctamente'"
-        />
+        />	
 	</div>
 @endsection
 

@@ -53,7 +53,7 @@ class DosajeController extends Controller
             ]);
 
             // Enviar datos a la API
-            $client = new Client(['base_uri' => 'https://0c70-35-190-129-113.ngrok-free.app/']);
+            $client = new Client(['base_uri' => env('API_URL') . '/']);
 
             // Preparar los datos para enviar a la API
             $dataToSend = [
@@ -72,7 +72,7 @@ class DosajeController extends Controller
             $response = $client->request('POST', 'predict', [
                 'json' => $dataToSend,
                 'headers' => [
-                    'Authorization' => 'Bearer 2mlVWYPNGiyeDa5uTWpjsdHhCkf_hCLP7tNbTrsLBsi7cpWZ', // Tu token de autenticación
+                    'Authorization' => env('API_AUTH_TOKEN'), // Tu token de autenticación
                     'ngrok-skip-browser-warning' => 'true',
                 ],
             ]);

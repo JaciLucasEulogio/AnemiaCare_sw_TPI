@@ -111,6 +111,7 @@ function clearImage(spanElement) {
     localStorage.removeItem('imagenHijo');
 }
 
+/*
 window.onload = function() {
     const imgPreview = document.querySelector('.imgHijoPreview');
     const imagePreviewContainer = document.querySelector('.imagePreview-container');
@@ -126,3 +127,4 @@ window.onload = function() {
         fileAreaImagen.classList.add("hidden");
     }
 }
+*/

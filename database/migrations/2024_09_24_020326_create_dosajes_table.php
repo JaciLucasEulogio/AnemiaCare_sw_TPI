@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->date('fecha_Dosaje');
             $table->decimal('valorHemoglobina_Dosaje', 5, 2);
-            $table->string('nivelAnemia_Dosaje', 10);
+            $table->string('nivelAnemia_Dosaje');
             $table->decimal('peso_Dosaje', 5, 2);
             $table->decimal('talla_Dosaje', 5, 2);
             $table->integer('edadMeses_Dosaje');

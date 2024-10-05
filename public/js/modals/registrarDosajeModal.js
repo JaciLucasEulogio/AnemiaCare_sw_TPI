@@ -1,7 +1,9 @@
 let microRedInput = document.getElementById('idMicroRedInput');
 let redInput = document.getElementById('idRedInput');
 let provinciaInput = document.getElementById('idProvinciaInput');
-let edadInput = document.getElementById('idEdadInput');
+let alturaProvinciaInput = document.getElementById('idAlturaProvinciaInput');
+let sexoHijoRegistrarDosajeInput = document.getElementById("idSexoDosajeInput");
+let edadInput = document.getElementById('idEdadDosajeInput');
 let hemoglobinaInput = document.getElementById('idHemoglobinaInput');
 let nivelAnemiaInput = document.getElementById('idNivelAnemiaInput');
 let estadoRecuperacionInput = document.getElementById('estadoRecuperacionRegistarDosajeInput');
@@ -27,7 +29,7 @@ function selectOptionDoctorRegistrarDosajeModal(value, idDoctor, hiddenIdDoctorI
     }
 }
 
-function selectOptionHijoRegistrarDosajeModal(value, idHijo, hiddenIdHijoInput, idInput, idOptions) {
+function selectOptionHijoRegistrarDosajeModal(value, idHijo, sexo, edadMeses, hiddenIdHijoInput, idInput, idOptions) {
     if (idInput && idOptions) {
         selectOption(value, idInput, idOptions); 
     }
@@ -38,9 +40,17 @@ function selectOptionHijoRegistrarDosajeModal(value, idHijo, hiddenIdHijoInput, 
     } else {
         document.getElementById(hiddenIdDoctorInput).value = "";
     }
+
+    if (sexo && edadMeses) {
+        sexoHijoRegistrarDosajeInput.value = sexo;
+        edadInput.value = edadMeses;
+        calcularNivelAnemia();
+    } else {
+        console.log("No se encontró valores de sexo ni edad en meses para el hijo: " + value);
+    }
 }
 
-function selectOptionEstablecimientoRegistrarDosajeModal(value, idEstablecimiento, microRed, red, provincia, hiddenIdEstablecimientoInput, idInput, idOptions) {
+function selectOptionEstablecimientoRegistrarDosajeModal(value, idEstablecimiento, microRed, red, provincia, altura, hiddenIdEstablecimientoInput, idInput, idOptions) {
     // Colocar en el input la opción seleccionada 
     if (idInput && idOptions) {
         selectOption(value, idInput, idOptions); 
@@ -51,6 +61,7 @@ function selectOptionEstablecimientoRegistrarDosajeModal(value, idEstablecimient
         microRedInput.value = microRed;
         redInput.value = red;
         provinciaInput.value = provincia;
+        alturaProvinciaInput.value = altura;
         document.getElementById(hiddenIdEstablecimientoInput).value = idEstablecimiento;
     } else {
         document.getElementById(hiddenIdDoctorInput).value = "";
@@ -59,9 +70,16 @@ function selectOptionEstablecimientoRegistrarDosajeModal(value, idEstablecimient
 
 function calcularNivelAnemia() {
     if (hemoglobinaInput.value && edadInput.value) {
-        nivelAnemiaInput.value = clasificarAnemia(hemoglobinaInput.value, edadInput.value);
+        const resultado = clasificarAnemia(hemoglobinaInput.value, edadInput.value);
+        nivelAnemiaInput.value = resultado.nivel; 
+
+        nivelAnemiaInput.classList.remove("noClasificable", "sinAnemia", "anemiaLeve", "anemiaModerada", "anemiaSevera");
+        nivelAnemiaInput.classList.add(resultado.clase); 
+
+        console.log("Calculando nivel de anemia: " + resultado.nivel);
     }
 }
+
 
 function clasificarAnemia(hemoglobina, edadMeses) {
     const rangos = [
@@ -70,30 +88,31 @@ function clasificarAnemia(hemoglobina, edadMeses) {
         { edadMin: 24, edadMax: 36, sinAnemia: 11.5, leve: 10.0, moderado: 8.0 }
     ];
 
-    const SIN_ANEMIA = "Sin anemia";
+    const SIN_ANEMIA = "Sin Anemia";
     const LEVE = "Leve";
     const MODERADO = "Moderado";
     const SEVERO = "Severo";
 
-    // Encontrar el rango adecuado de acuerdo a la edad
     const rango = rangos.find(r => edadMeses >= r.edadMin && edadMeses < r.edadMax);
+    if (!rango) return { nivel: "No clasificable", clase: "noClasificable" }; // Ejemplo de clase para caso no clasificable
 
-    // Si no se encuentra un rango válido para la edad
-    if (!rango) return "NO CLASIFICABLE";
-
-    // Clasificar según los niveles de hemoglobina
     if (hemoglobina >= rango.sinAnemia) {
-        return SIN_ANEMIA;
+        return { nivel: SIN_ANEMIA, clase: "sinAnemia" };
     } else if (hemoglobina >= rango.leve) {
-        return LEVE;
+        return { nivel: LEVE, clase: "anemiaLeve" };
     } else if (hemoglobina >= rango.moderado) {
-        return MODERADO;
+        return { nivel: MODERADO, clase: "anemiaModerada" };
     } else {
-        return SEVERO;
+        return { nivel: SEVERO, clase: "anemiaSevera" };
     }
 }
 
-function updateEstadoRecuperacion() {
+
+function updateEstadoRecuperacion(input=null) {
+    if(input) {
+        console.log("Haciendo click en span de: " + input.id);
+    }
+    
     // No recuperado
     const auxEstadoRecuperacionInput = document.getElementById("auxEstadoRecuperacionInput");
     const auxFechaRecuperacionInput = document.getElementById("auxFechaRecuperacionInput");
@@ -122,11 +141,45 @@ function updateAuxFechaRecuperacion() {
 }
 
 function validarCamposFormularioRegistrarDosaje() {
-    return true;
+    if (sexoHijoRegistrarDosajeInput.value === "Masculino") {
+        sexoHijoRegistrarDosajeInput.value = "M";
+    } else if (sexoHijoRegistrarDosajeInput.value === "Femenino") {
+        sexoHijoRegistrarDosajeInput.value = "F";
+    }
+    
+    // Array de campos a validar
+    const campos = [
+        microRedInput,
+        redInput,
+        provinciaInput,
+        alturaProvinciaInput,
+        sexoHijoRegistrarDosajeInput,
+        edadInput,
+        hemoglobinaInput,
+        nivelAnemiaInput,
+        estadoRecuperacionInput,
+    ];
+
+    // Verificar si todos los campos están llenos
+    for (let campo of campos) {
+        if (!campo.value) {
+            console.log(`El campo ${campo.id} está vacío.`);
+            return false; // Retorna false si algún campo está vacío
+        }
+    }
+
+    // Validación adicional para el campo de estado de recuperación si es necesario
+    if (estadoRecuperacionInput.value === "Recuperado" && !fechaRecuperacionInput.value) {
+        console.log("El campo de fecha de recuperación es obligatorio si el estado es 'Recuperado'.");
+        return false;
+    }
+
+    return true; // Retorna true si todos los campos están llenos
+
 }
 
 function guardarModalRegistrarDosaje(idModal, idForm) {
-    if (validarCamposFormularioRegistrarDosaje) {
+    if (validarCamposFormularioRegistrarDosaje()) {
         console.log("GUARDANDO NUEVO DOSAJE CORRECTAMENTE");
         guardarModal(idModal, idForm);
     } else {

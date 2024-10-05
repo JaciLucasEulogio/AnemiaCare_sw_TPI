@@ -12,9 +12,40 @@
 		 <!-- Variables globales -->
 		@php
 			$dosajesCompletosDB = $dosajesCompletos;
+			// Mensaje de info sobre el cálculo del nivel de anemia 
+			$messageInfo = "
+							<div> 
+								<p><strong>Para niños de 6 a 12 meses:</strong></p>
+								<ul>
+									<li>Si la hemoglobina es mayor o igual a 10.5, se clasifica como <span class='sinAnemia'>\"Sin Anemia\"</span></li>
+									<li>Si está entre 9.0 y 10.5, se clasifica como <span class='anemiaLeve'>\"Anemia Leve\"</span></li>
+									<li>Si está entre 7.0 y 9.0, se clasifica como <span class='anemiaModerada'>\"Anemia Moderada\"</span></li>
+									<li>Si es menor a 7.0, se clasifica como <span class='anemiaSevera'>\"Anemia Severa\"</span></li>
+								</ul>
+							</div>
+							
+							<div> 
+							<p><strong>Para niños de 12 a 24 meses:</strong></p>
+							<ul>
+								<li>Si la hemoglobina es mayor o igual a 11.0, se clasifica como <span class='sinAnemia'>\"Sin Anemia\"</span></li>
+								<li>Si está entre 9.0 y 11.0, se clasifica como <span class='anemiaLeve'>\"Anemia Leve\"</span></li>
+								<li>Si está entre 7.0 y 9.0, se clasifica como <span class='anemiaModerada'>\"Anemia Moderada\"</span></li>
+								<li>Si es menor a 7.0, se clasifica como <span class='anemiaSevera'>\"Anemia Severa\"</span></li>
+							</ul>
+							</div>
+							
+							<div> 
+							<p><strong>Para niños de 24 a 36 meses:</strong></p>
+							<ul>
+								<li>Si la hemoglobina es mayor o igual a 11.5, se clasifica como <span class='sinAnemia'>\"Sin Anemia\"</span></li>
+								<li>Si está entre 10.0 y 11.5, se clasifica como <span class='anemiaLeve'>\"Anemia Leve\"</span></li>
+								<li>Si está entre 8.0 y 10.0, se clasifica como <span class='anemiaModerada'>\"Anemia Moderada\"</span></li>
+								<li>Si es menor a 8.0, se clasifica como <span class='anemiaSevera'>\"Anemia Severa\"</span></li>
+							</ul>
+							</div>
+						";
 		@endphp
 
-								
 		@if ($errors->any())
 		<div class="alert alert-danger">
 			<div class="alert-header">
@@ -28,7 +59,6 @@
 		</div>
 		@endif
 
-
 		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>
 		</div>
@@ -39,6 +69,10 @@
 			</x-btn-create-item>
 
 			@include('modals.apoderados.registrarDosajeModal')
+			<x-modalInfo 
+				:idInfoModal="'modalInfoRegistrarDosaje'"
+				:message="$messageInfo"
+			/>
 		</div>
 		
 		<!--Tabla de Dosajes-->

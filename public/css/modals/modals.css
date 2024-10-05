@@ -26,13 +26,21 @@
     width: 100%;
     height: 100%;
     background-color: var(--modal-overlay-bg);
-    z-index: 500;
+    z-index: 10;
+}
+
+.modal.first {
+    z-index: 10;
+}
+
+.modal.second {
+    z-index: 20;
 }
 
 .modal-dialog {
     position: relative;
     margin: 10% auto;
-    max-width: 800px; 
+    max-width: 1100px; 
     background-color: var(--background-color);
     border-radius: 12px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
@@ -117,6 +125,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: start;
     gap: 1rem;
 }
 
@@ -443,7 +452,7 @@
 }
 
 .select-items li {
-    font-size: 0.9rem;
+    font-size: 14px;
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -500,6 +509,7 @@
 
 .imagePreview-container {
     display: inline-block;
+    padding-left: 4rem;
 }
 
 .imagePreview-container.hidden {
@@ -633,7 +643,21 @@ input[type="date"].empty{
 }
 
 .material-symbols-outlined.filledRed:hover {
-    color: rgb(160, 60, 60); /* Color más claro al hacer hover */
+    color: rgb(160, 60, 60); 
+}
+
+.material-symbols-outlined.filledBlue {
+    cursor: pointer;
+    color: #5985E1;
+    font-variation-settings: 
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.material-symbols-outlined.filledBlue:hover {
+    color: #7c9bdc; 
 }
 
 @media (max-width: 576px) {
@@ -658,7 +682,7 @@ input[type="date"].empty{
 @media screen and (min-width: 300px) {
     .modal-dialog {
         width: 400px;
-        height: 130px; /* Altura para pantallas desde 1200px */
+        height: 130px; 
         overflow-y: auto;
     }
 
@@ -670,7 +694,7 @@ input[type="date"].empty{
 @media screen and (min-width: 350px) {
     .modal-dialog {
         width: 400px;
-        height: 170px; /* Altura para pantallas desde 1200px */
+        height: 170px; 
         overflow-y: auto;
     }
 
@@ -682,7 +706,7 @@ input[type="date"].empty{
 @media screen and (min-width: 450px) {
     .modal-dialog {
         width: 400px;
-        height: 200px; /* Altura para pantallas desde 1200px */
+        height: 200px; 
         overflow-y: auto;
     }
 
@@ -694,7 +718,7 @@ input[type="date"].empty{
 @media screen and (min-width: 500px) {
     .modal-dialog {
         width: 400px;
-        height: 200px; /* Altura para pantallas desde 1200px */
+        height: 200px; 
         overflow-y: auto;
     }
 
@@ -706,7 +730,7 @@ input[type="date"].empty{
 @media screen and (min-width: 550px) {
     .modal-dialog {
         width: 400px;
-        height: 230px; /* Altura para pantallas desde 1200px */
+        height: 230px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -717,8 +741,9 @@ input[type="date"].empty{
 @media screen and (min-width: 600px) {
     .modal-dialog {
         width: 400px;
-        height: 260px; /* Altura para pantallas desde 1200px */
+        height: 260px; 
     }
+
 
     .modal-dialog.modal-dialog.open {
         transform: translateY(-55px); 
@@ -728,7 +753,7 @@ input[type="date"].empty{
 @media screen and (min-width: 700px) {
     .modal-dialog {
         width: 500px;
-        height: 300px; /* Altura para pantallas desde 1200px */
+        height: 300px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -739,7 +764,7 @@ input[type="date"].empty{
 @media screen and (min-width: 800px) {
     .modal-dialog {
         width: 600px;
-        height: 355px; /* Altura para pantallas desde 1200px */
+        height: 355px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -750,7 +775,7 @@ input[type="date"].empty{
 @media screen and (min-width: 900px) {
     .modal-dialog {
         width: 600px;
-        height: 385px; /* Altura para pantallas desde 1200px */
+        height: 385px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -760,7 +785,7 @@ input[type="date"].empty{
 
 @media screen and (min-width: 1024px) {
     .modal-dialog {
-        height: 420px; /* Altura para pantallas desde 1200px */
+        height: 420px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -770,7 +795,7 @@ input[type="date"].empty{
 
 @media screen and (min-width: 1100px) {
     .modal-dialog {
-        height: 485px; /* Altura para pantallas desde 1200px */
+        height: 485px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -780,7 +805,7 @@ input[type="date"].empty{
 
 @media screen and (min-width: 1250px) {
     .modal-dialog {
-        height: 530px; /* Altura para pantallas desde 1200px */
+        height: 530px; 
     }
 
     .modal-dialog.modal-dialog.open {
@@ -790,7 +815,7 @@ input[type="date"].empty{
 
 @media screen and (min-width: 1300px) {
     .modal-dialog {
-        height: 600px; /* Altura para pantallas desde 1200px */
+        height: 600px; 
     }
 
     .modal-dialog.modal-dialog.open {

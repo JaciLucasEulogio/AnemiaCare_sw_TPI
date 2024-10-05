@@ -17,7 +17,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo1_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimiento_Hijo' => '2020-02-07', 
+                'fechaNacimiento_Hijo' => '2023-04-01', // Corregida
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
                 'file_uri' => 'childrenPhotos/hijo1Josue.jpeg',
@@ -27,7 +27,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo2_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimiento_Hijo' => '2021-05-12', 
+                'fechaNacimiento_Hijo' => '2023-03-01', // Corregida
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
                 'file_uri' => 'childrenPhotos/hijo2Josue.jpg',
@@ -37,7 +37,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo3_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimiento_Hijo' => '2022-09-23', 
+                'fechaNacimiento_Hijo' => '2024-03-05', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
                 'file_uri' => 'childrenPhotos/hijo3Josue.jpg',
@@ -47,7 +47,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77043114',
                 'nombre_Hijo' => 'Hijo4_Josue',
                 'apellido_Hijo' => 'García Betancourt',
-                'fechaNacimiento_Hijo' => '2023-01-07', 
+                'fechaNacimiento_Hijo' => '2024-01-06', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Social del Perú',
             ],
@@ -58,7 +58,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77428439',
                 'nombre_Hijo' => 'Hijo1_Milagros',
                 'apellido_Hijo' => 'LLantoy Balbin',
-                'fechaNacimiento_Hijo' => '2019-09-29', 
+                'fechaNacimiento_Hijo' => '2023-11-06', // Corregida
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
             ],
@@ -67,7 +67,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77428439',
                 'nombre_Hijo' => 'Hijo2_Milagros',
                 'apellido_Hijo' => 'LLantoy Balbin',
-                'fechaNacimiento_Hijo' => '2020-11-15', 
+                'fechaNacimiento_Hijo' => '2023-10-07', // Corregida
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
             ],
@@ -76,7 +76,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77428439',
                 'nombre_Hijo' => 'Hijo3_Milagros',
                 'apellido_Hijo' => 'LLantoy Balbin',
-                'fechaNacimiento_Hijo' => '2021-09-29', 
+                'fechaNacimiento_Hijo' => '2023-09-07', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
             ],
@@ -85,7 +85,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '77428439',
                 'nombre_Hijo' => 'Hijo4_Milagros',
                 'apellido_Hijo' => 'LLantoy Balbin',
-                'fechaNacimiento_Hijo' => '2022-12-05', 
+                'fechaNacimiento_Hijo' => '2023-08-08', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => 'Seguro Integral de Salud',
             ],
@@ -96,7 +96,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '72617519',
                 'nombre_Hijo' => 'Hijo1_Jaci',
                 'apellido_Hijo' => 'Lucas Eulogio',
-                'fechaNacimiento_Hijo' => '2018-08-06', 
+                'fechaNacimiento_Hijo' => '2024-02-07', // Sin cambio
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => NULL,
             ],
@@ -105,7 +105,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '72617519',
                 'nombre_Hijo' => 'Hijo2_Jaci',
                 'apellido_Hijo' => 'Lucas Eulogio',
-                'fechaNacimiento_Hijo' => '2019-05-12', 
+                'fechaNacimiento_Hijo' => '2023-12-08', // Corregida
                 'sexo_Hijo' => 'M',
                 'nombreSeguro_Hijo' => NULL,
             ],
@@ -114,7 +114,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '72617519',
                 'nombre_Hijo' => 'Hijo3_Jaci',
                 'apellido_Hijo' => 'Lucas Eulogio',
-                'fechaNacimiento_Hijo' => '2020-11-23', 
+                'fechaNacimiento_Hijo' => '2023-11-09', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => NULL,
             ],
@@ -123,7 +123,7 @@ class HijoSeeder extends Seeder
                 'idApoderado' => '72617519',
                 'nombre_Hijo' => 'Hijo4_Jaci',
                 'apellido_Hijo' => 'Lucas Eulogio',
-                'fechaNacimiento_Hijo' => '2021-07-19', 
+                'fechaNacimiento_Hijo' => '2023-10-09', // Corregida
                 'sexo_Hijo' => 'F',
                 'nombreSeguro_Hijo' => NULL,
             ],

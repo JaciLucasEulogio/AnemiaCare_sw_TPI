@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth; 
+use DateTime;
 
 class ApoderadoController extends Controller
 {
@@ -187,6 +188,19 @@ class ApoderadoController extends Controller
         $establecimientos = $this->getEstablecimientos();
         $hijos = $this->getHijos($apoderadoId);
         $idNuevoDosaje = $this->generarIdDosaje();
+
+        // Convertir caracteres  de sexo M ó F a "Masculino" ó "Femenino"
+        foreach ($hijos as $hijo) {
+            $hijo->sexo_Hijo = ($hijo->sexo_Hijo == "M") ? "Masculino":"Femenino";
+        }
+
+        // Agregar un nuevo campo de edad (meses) a partir de la fecha de nacimiento
+        foreach ($hijos as $hijo) {
+            $fechaNacimiento = new DateTime($hijo->fechaNacimiento_Hijo);
+            $fechaActual = new DateTime(); // Fecha actual
+            $interval = $fechaNacimiento->diff($fechaActual);
+            $hijo->edadMeses = ($interval->y * 12) + $interval->m; // Calcular la edad en meses
+        }
 
         return view('apoderados.apoderadosPrediction', compact('dosajesCompletos', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje'));
     }

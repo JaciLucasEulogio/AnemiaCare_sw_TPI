@@ -14,10 +14,10 @@ class ApiController extends Controller
     {
         // Inicializar el cliente Guzzle
         $this->client = new Client([
-            'base_uri' => 'https://0c70-35-190-129-113.ngrok-free.app', // URL de la API
+            'base_uri' => env('API_URL'), // URL de la API
         ]);
     }
-
+    
     public function obtenerDatos()
     {
         try {

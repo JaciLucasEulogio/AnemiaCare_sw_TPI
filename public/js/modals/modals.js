@@ -1,42 +1,61 @@
 // Función para abrir modal y guardar su estado en localStorage
 function openModal(modalId) {
-    var modal = document.getElementById(modalId);
+    const modal = document.getElementById(modalId);
     if (modal) {
         modal.style.display = 'block';
-        setTimeout(function() {
-            modal.style.opacity = 1; // Hacer el modal visible de forma gradual
+        setTimeout(() => {
+            modal.style.opacity = '1';
             modal.querySelector('.modal-dialog').classList.add('open');
-        }, 50); // Pequeño retraso para asegurar la transición CSS
-        document.body.style.overflow = 'hidden'; // Evita el scroll de fondo cuando está abierto el modal
+        }, 50);
 
-        // Recuperar el array de modales abiertos y agregar el nuevo
-        let openModals = JSON.parse(localStorage.getItem('openModals')) || [];
+        // Actualizar el overflow del body solo si es el primer modal
+        const openModals = JSON.parse(localStorage.getItem('openModals')) || [];
+        if (openModals.length === 0) {
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Agregar el nuevo modal si no está ya en la lista
         if (!openModals.includes(modalId)) {
             openModals.push(modalId);
-            localStorage.setItem('openModals', JSON.stringify(openModals));            
+            localStorage.setItem('openModals', JSON.stringify(openModals));
         }
     }
 }
 
-// Función para cerrar modal y eliminar su estado en localStorage
+// Función para cerrar modal y actualizar su estado en localStorage
 function closeModal(modalId) {
-    var modal = document.getElementById(modalId);
+    const modal = document.getElementById(modalId);
     if (modal) {
         modal.querySelector('.modal-dialog').classList.remove('open');
-        setTimeout(function() {
+        setTimeout(() => {
             modal.style.display = 'none';
-        }, 300); // Espera 0.3 segundos (igual a la duración de la transición CSS)
-        
-        // Elimina el modal de la lista de modales abiertos
+        }, 300);
+
         let openModals = JSON.parse(localStorage.getItem('openModals')) || [];
         openModals = openModals.filter(id => id !== modalId);
-       
+        
         if (openModals.length > 0) {
             localStorage.setItem('openModals', JSON.stringify(openModals));
-        } 
+        } else {
+            localStorage.removeItem('openModals');
+            document.body.style.overflow = ''; // Restaurar el scroll solo si no hay más modales abiertos
+        }
+    }
+}
 
-        document.body.style.overflow = ''; // Permitir el scroll de fondo luego de cerrar todos los modales
-        localStorage.removeItem('openModals');
+// Función para restaurar el estado de los modales al cargar la página
+function restoreModals() {
+    const openModals = JSON.parse(localStorage.getItem('openModals')) || [];
+    if (openModals.length > 0) {
+        document.body.style.overflow = 'hidden';
+        openModals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                modal.style.opacity = '1';
+                modal.querySelector('.modal-dialog').classList.add('open');
+            }
+        });
     }
 }
 
@@ -59,11 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     closeOptionsOnClickOutside();
     setOnlySelectInputFocusColor();
 
-    // Verificar si hay modales abiertos al cargar la página
-    let openModals = JSON.parse(localStorage.getItem('openModals')) || [];
-    openModals.forEach(function(modalId) {
-        openModal(modalId); // Abrir cada modal que estaba abierto
-    });
+    restoreModals()
 });
 
 function setOnlySelectInputFocusColor() {
@@ -185,14 +200,6 @@ function validateNumberRealTime(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
 }
 
-function validateNumberWithMaxLimitRealTime(input, maxLimit) {
-    // Elimina todos los caracteres que no sean dígitos como "e" ó "-"
-    input.value = input.value.replace(/[^0-9]/g, '');
-    if (input.value > maxLimit) {
-        input.value = 0;
-    } 
-}
-
 function validatePositiveFloat(input) {
     // Obtener el valor del input
     let value = input.value;
@@ -228,6 +235,20 @@ function validatePositiveFloat(input) {
         // Mover el cursor al final del input
         input.setSelectionRange(newValue.length, newValue.length);
     }
+}
+
+function validateNumberWithMaxLimitRealTime(input, maxLimit) {
+    validateNumberRealTime(input);
+    if (input.value > maxLimit) {
+        input.value = 0;
+    } 
+}
+
+function validatePositiveFloatWithMaxLimitRealTime(input, maxLimit) {
+    validatePositiveFloat(input);
+    if (input.value > maxLimit) {
+        input.value = 0;
+    } 
 }
 
 function clearInput(idInput) {

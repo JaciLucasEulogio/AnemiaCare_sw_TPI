@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Hijo;
 use App\Models\Apoderado;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HijoFactory extends Factory
@@ -26,7 +27,8 @@ class HijoFactory extends Factory
             'idApoderado' => $idApoderado, // Apoderado excluyendo los tres específicos
             'nombre_Hijo' => $this->faker->firstName(),
             'apellido_Hijo' => $this->faker->lastName(),
-            'fechaNacimiento_Hijo' => $this->faker->date('Y-m-d', '2023-12-31'), // Fecha aleatoria hasta 2023
+            // Fecha de nacimiento entre 0 y 36 meses atrás desde hoy
+            'fechaNacimiento_Hijo' => Carbon::now()->subMonths(rand(6, 36))->format('Y-m-d'),
             'sexo_Hijo' => $this->faker->randomElement(['M', 'F']),
             'nombreSeguro_Hijo' => $this->faker->randomElement(['Seguro Integral de Salud', 'Seguro Social del Perú', NULL]),
         ];

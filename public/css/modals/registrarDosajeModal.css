@@ -1,15 +1,74 @@
+.modal-body h3 {
+	margin-bottom: 0.5rem;
+}
+
 #registrarDosajeModal-dialog {
 	max-height: 1390px;
+	width: 100%;
+}
+
+#idDosajeInput {
+	width: 7rem;
 }
 
 #doctorRegistrarDosajeInputSelect {
-	width: 20rem;
+	width: 18rem;
 }
 
 #establecimientoRegistrarDosajeInputSelect {
-	width: 20rem;
+	width: 33rem;
+}
+
+#idProvinciaInput {
+	width: 12rem;
 }
 
 #hijoRegistrarDosajeInputSelect {
 	width: 20rem;
+}
+
+#idSexoInput {
+	width: 7rem;
+	text-align: center;
+	padding-right: 12px;
+}
+
+#idEdadInput {
+	width: 5rem;
+	text-align: center;
+	padding-right: 12px;
+}
+
+.form-group.inline.shortWidth input{
+	width: 5rem;
+	text-align: center;
+}
+
+.explicacionFormulaNivelAnemia {
+	font-size: 12px;
+}
+
+#idNivelAnemiaInput{
+	font-weight: bold;
+	color: none;
+}
+
+#idNivelAnemiaInput.noClasificable {
+    color: #dc3545; 
+}
+
+#idNivelAnemiaInput.sinAnemia{
+    color: #28a745; 
+}
+
+#idNivelAnemiaInput.anemiaLeve {
+	color: #ffc107; 
+}
+
+#idNivelAnemiaInput.anemiaModerada {
+    color: #fd7e14;
+}
+
+#idNivelAnemiaInput.anemiaSevera {
+    color: #dc3545; 
 }
