@@ -61,10 +61,10 @@
 
 		<div class="firstDosajesRow">
 			<h3>Dosajes</h3>
-			<x-btn-create-item onclick="openModal('registrarDosajeModal')"> 
-				Registrar nuevo dosaje
-			</x-btn-create-item>
-
+				<x-btn-create-item onclick="openModal('registrarDosajeModal')"> 
+					Registrar nuevo dosaje
+				</x-btn-create-item>
+		
 			@include('modals.apoderados.registrarDosajeModal')
 			<x-modalInfo 
 				:idInfoModal="'modalInfoRegistrarDosaje'"
@@ -75,19 +75,18 @@
 		<div class="thirdDosajesRow">
 			<div class="dose-list">
 				@foreach ($dosajesCompletosDB as $dosaje)
-					<div class="dose-item">
+					<div class="dose-item" onclick="toggleDosajeItem(this)">
 						<div class="dose-icon"> <!-- Ícono o imagen aquí --> </div>
 						<div class="dose-details">
 							<h3>Dosaje {{ $dosaje->order_number }}</h3>
-							<p>Sin Registro</p>
 						</div>
 						<div class="dose-info">
 							<span class="label">Fecha</span>
 							<span>{{ $dosaje->fecha_Dosaje }}</span>
 						</div>
-						<div class="dose-info">
+						<div class="dose-info doctor">
 							<span class="label">Doctor</span>
-							<span>{{ $dosaje->nombre_Doctor }}</span>
+							<span>{{ $dosaje->nombre_Doctor }} {{ $dosaje->apellido_Doctor }}</span>
 						</div>
 						<div class="dose-info">
 							<span class="label">Recuperación</span>
@@ -98,8 +97,28 @@
 							@endif
 						</div>
 						<div class="options">
-							<span class="material-symbols-outlined">more_horiz</span>
+							<span class="material-symbols-outlined toggle-more-info">keyboard_arrow_down</span>
 						</div>
+					</div>
+
+					<div class="dose-moreInformation">
+							<div class="details-section">
+								<h4>Detalles de dosaje</h4>
+								<p><strong>Establecimiento:</strong> {{ $dosaje->nombreEstablecimiento }}</p>
+								<p><strong>Hijo:</strong> {{ $dosaje->nombre_Hijo }}</p>
+								<p><strong>Hemoglobina:</strong> {{ $dosaje->valorHemoglobina_Dosaje }} g/dL</p>
+								<p><strong>Nivel de anemia:</strong> {{ $dosaje->nivelAnemia_Dosaje }}</p>
+								<p><strong>Peso:</strong> {{ $dosaje->peso_Dosaje }} kg</p>
+								<p><strong>Talla:</strong> {{ $dosaje->talla_Dosaje }} cm</p>
+								<p><strong>Edad:</strong> {{ $dosaje->edadMeses_Dosaje }} meses</p>
+								<p><strong>Hierro:</strong> {{ $dosaje->nivelHierro_Dosaje }} mg</p>
+							</div>
+							<div class="prediction-section">
+								<h4>Detalles de la predicción:</h4>
+								<p><strong>Valor hemoglobina 1er mes:</strong> 1 g/dL</p>
+								<p><strong>Valor hemoglobina 3er mes:</strong> 2 g/dL</p>
+								<p><strong>Valor hemoglobina 6to mes:</strong> 3 g/dL</p>
+							</div>
 					</div>
 				@endforeach
 			</div>
@@ -149,9 +168,9 @@
 					</tr>
 					@endforeach
                 </tbody>
-            </table>
+            </table>-->
         </div>
-		-->
+		
 		<h3>Resultado de predicción:</h3>
 		@if(session('apiResponse'))
 		@php
@@ -178,4 +197,5 @@
 
 @push('scripts')
 	<script src="{{ asset('js/modals/registrarDosajeModal.js') }}"></script>
+	<script src="{{ asset('js/apoderado/dosajesPredicciones.js') }}"></script>
 @endpush

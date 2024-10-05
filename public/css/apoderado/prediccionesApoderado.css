@@ -74,60 +74,60 @@ h3 {
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-	cursor: pointer;
+    justify-content: space-between;  /* Distribuye el espacio de manera uniforme */
+    cursor: pointer;
+    width: 100%;  
 }
 
 .dose-icon {
-    width: 50px;
+    width: 50px;  /* Fija el ancho del ícono */
     height: 50px;
     background-color: #4A4A7D; /* Color del ícono */
     border-radius: 10px;
+    flex-shrink: 0; /* Evita que se reduzca su tamaño */
 }
 
 .dose-details {
-    flex: 1;
+    flex: 1;  /* Permite que esta sección tome el espacio restante */
+    max-width: 300px;  /* Define un ancho máximo para evitar que crezca demasiado */
     margin-left: 15px;
 }
 
-.dose-details h3 {
-    font-size: 18px;
-    color: #333;
-}
-
-.dose-details p {
-    font-size: 14px;
-    color: #999;
-}
-
 .dose-info {
+    width: 150px; /* Establece un ancho fijo para las secciones de información */
     text-align: center;
-    margin-left: 20px;
+    flex-shrink: 0;  /* Evita que se reduzca su tamaño */
 }
 
-.dose-info .label {
-    display: block;
-    font-size: 12px;
-    color: #999;
+.dose-info.doctor {
+    width: 200px; /* Establece un ancho fijo para las secciones de información */
 }
 
 .dose-info span {
+    display: block;  /* Asegura que el texto dentro del span esté en bloque */
     font-size: 14px;
     color: #333;
 }
 
+.dose-info span.label {
+    color: #B7C1D1;
+	font-weight: bold;
+}
+
 .options {
+    width: 50px;  /* Define un ancho fijo para la columna de opciones */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: #999;
     cursor: pointer;
-	margin-left: 2rem;
-    display: flex;
-    justify-content: center;  /* Centra horizontalmente */
-    align-items: center;      /* Centra verticalmente */
-    text-align: center;       /* Centra el texto en línea */
+    flex-shrink: 0;  /* Evita que se reduzca su tamaño */
 }
 
 .options span {
-    font-size: 2rem;
+    font-size: 2.2rem;
+	font-weight: 500;
 }
 
 .options:hover {
@@ -283,4 +283,89 @@ h3 {
 
 #descripcionCanjes {
     width: 15rem;
+}
+
+/* DETALLE DE DOSAJE */
+.dose-moreInformation {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 0 1rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.dose-moreInformation.active {
+    max-height: 1000px; /* Aumentado para acomodar más contenido */
+    opacity: 1;
+    padding: 2rem 1rem;
+}
+
+.details-section,
+.prediction-section {
+    width: 100%;
+}
+
+.details-section h4,
+.prediction-section h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+
+.details-section p,
+.prediction-section p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+.details-section strong {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.prediction-section strong {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* Estilos adicionales para mejorar la presentación */
+.dose-moreInformation .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dose-moreInformation .info-row:last-child {
+    border-bottom: none;
+}
+
+.dose-moreInformation .info-label {
+    font-weight: 500;
+    color: #7f8c8d;
+}
+
+.dose-moreInformation .info-value {
+    font-weight: 600;
+    color: #34495e;
+}
+
+/* Estilo para valores destacados */
+.dose-moreInformation .highlighted-value {
+    background-color: #f1c40f;
+    color: #2c3e50;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
 }
