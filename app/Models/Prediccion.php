@@ -17,8 +17,16 @@ class Prediccion extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'idPrediccion', 'idDosaje', 'fecha_Prediccion', 
-        'valorHemoglobinaEstimado_Prediccion', 'fechaRecuperacionEstimada_Prediccion',
+        'idPrediccion', 
+        'idDosaje', 
+        'fechaHora_Prediccion', 
+        'valorHemoglobinaEstimado1_Prediccion', 
+        'valorHemoglobinaEstimado3_Prediccion',
+        'valorHemoglobinaEstimado6_Prediccion',
+        'precisionHemoglobina1',
+        'precisionHemoglobina3',
+        'precisionHemoglobina6',
+        'fechaRecuperacionEstimada_Prediccion',
         'intervencionAdicional_Prediccion'];
     
     public function Dosaje() {

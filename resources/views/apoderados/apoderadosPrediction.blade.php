@@ -74,53 +74,59 @@
 		
 		<div class="thirdDosajesRow">
 			<div class="dose-list">
-				@foreach ($dosajesCompletosDB as $dosaje)
-					<div class="dose-item" onclick="toggleDosajeItem(this)">
-						<div class="dose-icon"> <!-- Ícono o imagen aquí --> </div>
-						<div class="dose-details">
-							<h3>Dosaje {{ $dosaje->order_number }}</h3>
+				@if ($dosajesCompletosDB->isNotEmpty())
+					@foreach ($dosajesCompletosDB as $dosaje)
+						<div class="dose-item" onclick="toggleDosajeItem(this)">
+							<div class="dose-icon"> <!-- Ícono o imagen aquí --> </div>
+							<div class="dose-details">
+								<h3>Dosaje {{ $dosaje->order_number }}</h3>
+							</div>
+							<div class="dose-info">
+								<span class="label">Fecha</span>
+								<span>{{ $dosaje->fecha_Dosaje }}</span>
+							</div>
+							<div class="dose-info doctor">
+								<span class="label">Doctor</span>
+								<span>{{ $dosaje->nombre_Doctor }} {{ $dosaje->apellido_Doctor }}</span>
+							</div>
+							<div class="dose-info">
+								<span class="label">Recuperación</span>
+								@if($dosaje->fechaRecuperacionReal) 
+									<span>{{ $dosaje->fechaRecuperacionReal }}</span>
+								@else
+									<span>No recuperado</span>
+								@endif
+							</div>
+							<div class="options">
+								<span class="material-symbols-outlined toggle-more-info">keyboard_arrow_down</span>
+							</div>
 						</div>
-						<div class="dose-info">
-							<span class="label">Fecha</span>
-							<span>{{ $dosaje->fecha_Dosaje }}</span>
-						</div>
-						<div class="dose-info doctor">
-							<span class="label">Doctor</span>
-							<span>{{ $dosaje->nombre_Doctor }} {{ $dosaje->apellido_Doctor }}</span>
-						</div>
-						<div class="dose-info">
-							<span class="label">Recuperación</span>
-							@if($dosaje->fechaRecuperacionReal) 
-								<span>{{ $dosaje->fechaRecuperacionReal }}</span>
-							@else
-								<span>No recuperado</span>
-							@endif
-						</div>
-						<div class="options">
-							<span class="material-symbols-outlined toggle-more-info">keyboard_arrow_down</span>
-						</div>
-					</div>
 
-					<div class="dose-moreInformation">
-							<div class="details-section">
-								<h4>Detalles de dosaje</h4>
-								<p><strong>Establecimiento:</strong> {{ $dosaje->nombreEstablecimiento }}</p>
-								<p><strong>Hijo:</strong> {{ $dosaje->nombre_Hijo }}</p>
-								<p><strong>Hemoglobina:</strong> {{ $dosaje->valorHemoglobina_Dosaje }} g/dL</p>
-								<p><strong>Nivel de anemia:</strong> {{ $dosaje->nivelAnemia_Dosaje }}</p>
-								<p><strong>Peso:</strong> {{ $dosaje->peso_Dosaje }} kg</p>
-								<p><strong>Talla:</strong> {{ $dosaje->talla_Dosaje }} cm</p>
-								<p><strong>Edad:</strong> {{ $dosaje->edadMeses_Dosaje }} meses</p>
-								<p><strong>Hierro:</strong> {{ $dosaje->nivelHierro_Dosaje }} mg</p>
-							</div>
-							<div class="prediction-section">
-								<h4>Detalles de la predicción:</h4>
-								<p><strong>Valor hemoglobina 1er mes:</strong> 1 g/dL</p>
-								<p><strong>Valor hemoglobina 3er mes:</strong> 2 g/dL</p>
-								<p><strong>Valor hemoglobina 6to mes:</strong> 3 g/dL</p>
-							</div>
-					</div>
-				@endforeach
+						<div class="dose-moreInformation">
+								<div class="details-section">
+									<h4>Detalles de dosaje</h4>
+									<p><strong>Establecimiento:</strong> 
+										{{ $dosaje->nombreEstablecimiento }} | Dist.: {{ $dosaje->nombreDistrito }} | Prov.: {{ $dosaje->nombreProvincia }}
+									</p>
+									<p><strong>Hijo:</strong> {{ $dosaje->nombre_Hijo }}</p>
+									<p><strong>Hemoglobina:</strong> {{ $dosaje->valorHemoglobina_Dosaje }} g/dL</p>
+									<p><strong>Nivel de anemia:</strong> {{ $dosaje->nivelAnemia_Dosaje }}</p>
+									<p><strong>Peso:</strong> {{ $dosaje->peso_Dosaje }} kg</p>
+									<p><strong>Talla:</strong> {{ $dosaje->talla_Dosaje }} cm</p>
+									<p><strong>Edad:</strong> {{ $dosaje->edadMeses_Dosaje }} meses</p>
+									<p><strong>Hierro:</strong> {{ $dosaje->nivelHierro_Dosaje }} mg</p>
+								</div>
+								<div class="prediction-section">
+									<h4>Detalles de la predicción:</h4>
+									<p><strong>Valor hemoglobina 1er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado1_Prediccion }} g/dL</p>
+									<p><strong>Valor hemoglobina 3er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado3_Prediccion }} g/dL</p>
+									<p><strong>Valor hemoglobina 6to mes:</strong> {{ $dosaje->valorHemoglobinaEstimado6_Prediccion }} g/dL</p>
+								</div>
+						</div>
+					@endforeach
+				@else
+					<h4>Aún no hay dosajes registrados.</h4>
+				@endif
 			</div>
 		</div>
 		
@@ -171,6 +177,7 @@
             </table>-->
         </div>
 		
+		<!--
 		<h3>Resultado de predicción:</h3>
 		@if(session('apiResponse'))
 		@php
@@ -192,6 +199,7 @@
 		@else
 			<h4>Aún no hay resultados.</h4>
 		@endif
+		-->
 	</div>
 @endsection
 

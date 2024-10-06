@@ -5,3 +5,8 @@
 #idModalBodyEditarHijo {
     padding-bottom: 0;
 }
+
+.form-group.inline p{
+	font-size: 0.85rem;
+	color: #666;
+}

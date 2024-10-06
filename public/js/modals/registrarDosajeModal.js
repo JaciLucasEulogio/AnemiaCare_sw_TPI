@@ -175,7 +175,6 @@ function validarCamposFormularioRegistrarDosaje() {
     }
 
     return true; // Retorna true si todos los campos están llenos
-
 }
 
 function guardarModalRegistrarDosaje(idModal, idForm) {

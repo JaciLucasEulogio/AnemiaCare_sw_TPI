@@ -4,6 +4,19 @@ let apellidoHijoRegistrarInput = document.getElementById('idApellidoHijoRegistra
 let fechaRegistrarHijoInput = document.getElementById('idFechaNacimientoRegistrarInput');
 let sexoRegistrarHijoInput = document.getElementById('idSexoRegistrarHijoInput');
 let seguroRegistrarHijoInput = document.getElementById('idSeguroRegistrarHijoInput');
+let generalMessageError = document.getElementById('generalMessageError');
+let generalMessageErrorContainer = document.getElementById('generalMessageError-container');
+let dateMessageError = document.getElementById('fechaNacimientoRegistrarHijoMessageError');
+let containerDateMessageError = document.getElementById("fechaNacimientoRegistrarHijoMessageError-container");
+let bornDateInput = document.getElementById('idFechaNacimientoRegistrarInput');
+
+let today = new Date();
+let minDate = '2021-01-01';
+let maxDate = today.toISOString().split('T')[0];
+let objMaxDate = new Date(maxDate); // Convierte maxDate a un objeto Date
+let mayor6Meses = false;
+let menor36Meses = false;
+
 
 // Asignar la clave correspondiente a cada input usando data attributes
 idHijoRegistrarHijoInput.dataset.key = 'idHijoREGISTRAR';
@@ -43,21 +56,130 @@ function cargarInputsFormRegistrarHijoModalDesdeLocalStorage() {
             input.value = value;
         }
     });
+
+    validateRealTimeBornDate();
 }
 
 document.addEventListener('DOMContentLoaded', cargarInputsFormRegistrarHijoModalDesdeLocalStorage);
 
-function guardarModalRegistrarHijo(idModal, idForm) {
-    //if (validarCamposFormularioRegistrarHijo) {
-		if (sexoRegistrarHijoInput.value == "Masculino") {
-			sexoRegistrarHijoInput.value = "M";
-		} else {
-			sexoRegistrarHijoInput.value = "F";
-		}
-		console.log(idForm);
-		guardarModal(idModal, idForm);
-    /*} else {
-        console.log("Verifica que todos los campos estén correctamente rellenados");
-    }*/
-}  
+function validateRealTimeBornDate() {
+    const selectedDate = bornDateInput.value;
+    const objSelectedDate = new Date(selectedDate);
 
+    // Verificar si el campo de fecha está vacío
+    if (!selectedDate) {
+        dateMessageError.classList.remove('shown'); 
+        containerDateMessageError.classList.remove('shown'); 
+        return false; 
+    }
+    
+    if (selectedDate <= minDate) {
+        dateMessageError.textContent = 'La fecha debe ser posterior al 1 de enero de 2021.'; 
+        dateMessageError.classList.add('shown'); // Mostrar mensaje de error
+        containerDateMessageError.classList.add('shown'); 
+        return false; 
+    } else if (selectedDate >= maxDate) {
+        dateMessageError.textContent = 'La fecha debe ser anterior a la fecha actual'; 
+        dateMessageError.classList.add('shown'); // Mostrar mensaje de error
+        containerDateMessageError.classList.add('shown'); 
+        return false; 
+    } 
+
+    // Obtener la diferencia en años y meses
+    const years = objMaxDate.getFullYear() - objSelectedDate.getFullYear();
+    const months = objMaxDate.getMonth() - objSelectedDate.getMonth();
+    const days = objMaxDate.getDate() - objSelectedDate.getDate();
+
+    // Ajustar los meses si es necesario (si los días son negativos)
+    if (days < 0) {
+        months--;
+    }
+
+    // Ajustar los años si los meses son negativos
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    // Edad total en meses
+    const edadEnMeses = (years * 12) + months;
+
+    console.log(`Edad en meses: ${edadEnMeses}`);
+
+    if (edadEnMeses == 1) {
+        console.log("Edad: " + edadEnMeses + " mes, el hijo debe tener una edad mayor o igual a 6 meses.");
+        dateMessageError.textContent = 'Edad: ' + edadEnMeses + ' mes, el hijo debe tener una edad mayor o igual a 6 meses.'; 
+        dateMessageError.classList.add('shown'); 
+        containerDateMessageError.classList.add('shown'); 
+        mayor6Meses = false;
+        menor36Meses = true;
+        return false; 
+    } else if (edadEnMeses <= 6) {
+        console.log("Edad: " + edadEnMeses + " meses, el hijo debe tener una edad mayor o igual a 6 meses.");
+        dateMessageError.textContent = 'Edad: ' + edadEnMeses + ' meses, el hijo debe tener una edad mayor o igual a 6 meses.'; 
+        dateMessageError.classList.add('shown'); 
+        containerDateMessageError.classList.add('shown'); 
+        mayor6Meses = false;
+        menor36Meses = true;
+        return false; 
+    } else if (edadEnMeses <= 36) {
+        mayor6Meses = true;
+        menor36Meses = true;
+        console.log("Es una edad (meses) correcta (mayor a 6 y menor 36): " + edadEnMeses);
+        dateMessageError.classList.remove('shown'); 
+        containerDateMessageError.classList.remove('shown'); 
+        return true; 
+    } else {
+        console.log("Edad: " + edadEnMeses + " meses, el hijo debe tener una edad menor o igual a 36 meses.");
+        dateMessageError.textContent = 'Edad: ' + edadEnMeses + ' meses, el hijo debe tener una edad menor o igual a 36 meses.'; 
+        dateMessageError.classList.add('shown'); 
+        containerDateMessageError.classList.add('shown'); 
+        mayor6Meses = true;
+        menor36Meses = false;
+        return false;
+    }
+}
+
+function validarCamposFormularioRegistrarHijo() {
+    // Array de campos a validar
+    const campos = [
+        idHijoRegistrarHijoInput,
+        nombreRegistrarHijoInput,
+        apellidoHijoRegistrarInput,
+        fechaRegistrarHijoInput,
+        sexoRegistrarHijoInput,
+        seguroRegistrarHijoInput,
+    ];
+
+    // Verificar si todos los campos están llenos
+    for (let campo of campos) {
+        if (!campo.value) {
+            console.log(`El campo ${campo.id} está vacío.`);
+            return false; // Retorna false si algún campo está vacío
+        }
+    }
+
+    if (validateRealTimeBornDate()) {
+        if (sexoRegistrarHijoInput.value === "Masculino") {
+            sexoRegistrarHijoInput.value = "M";
+        } else if (sexoRegistrarHijoInput.value === "Femenino") {
+            sexoRegistrarHijoInput.value = "F";
+        }
+        return true; 
+    }
+
+    return false
+}
+
+function guardarModalRegistrarHijo(idModal, idForm) {
+    if (validarCamposFormularioRegistrarHijo()) {
+        generalMessageError.classList.remove("shown")
+        generalMessageErrorContainer.classList.remove("shown")
+		guardarModal(idModal, idForm);
+    } else {
+        console.log("Todos los campos del formulario deben estar rellenados correctamente.");
+        generalMessageError.textContent = "Todos los campos del formulario deben estar rellenados correctamente.";
+        generalMessageError.classList.add("shown")
+        generalMessageErrorContainer.classList.add("shown")
+    }
+}  

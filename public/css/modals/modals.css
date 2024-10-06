@@ -121,6 +121,14 @@
     transition: border-color 0.3s;
 }
 
+.form-group.messageError {
+    display: none;
+}
+
+.form-group.messageError.shown {
+    display: inline-block;
+}
+
 .form-group.inline {
     display: flex;
     flex-direction: row;

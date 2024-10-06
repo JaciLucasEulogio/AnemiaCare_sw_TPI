@@ -17,12 +17,17 @@
                         $hijoOptions = 'hijoEditarHijoOptions';
                         $DNI_Apoderado = Auth::guard('apoderados')->user()->idApoderado;
                         $someHiddenIdInputsArray = ['idApoderado'];
-                        $idHijoMessageError = 'hijoEditarHijoSelectMessageError';
+                        $idGeneralEditarHijoMessageError = 'generalEditarHijoMessageError';
+                        $idFechaNacimientoEditarHijoMessageError = 'fechaNacimientoEditarHijoMessageError';
                         $hijosDB = $hijos; //Se recibe esta variable de la función hijos de ApoderadoController.php
                     @endphp
                     
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" value='{{ $DNI_Apoderado }}' name='{{ $someHiddenIdInputsArray[0] }}'>
                     
+                    <div class="form-group inline">
+                        <p>*No se permite editar el número de DNI, si desea ingresar otro número de DNI tendrá que eliminar el hijo.</p>
+                    </div>
+
 					<div class="form-group inline">
                         <label class="primary-label noEditable" id="idHijoEditarLabel">Número de DNI:</label>
                         <input class="input-item" id="idHijoEditarInput" value="{{ old('idHijo') }}" type="text" oninput="validateNumberRealTime(this)" name="idHijo"
@@ -41,7 +46,12 @@
 
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
-                        <input class="input-item center" type="date" id='idFechaNacimientoEditarInput' name="fechaNacimiento_Hijo">
+                        <input class="input-item center" type="date" oninput="validateRealTimeEditarHijoBornDate()"
+                                id='idFechaNacimientoEditarInput' name="fechaNacimiento_Hijo">
+                    </div>
+
+                    <div class="form-group messageError" id="{{ $idFechaNacimientoEditarHijoMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idFechaNacimientoEditarHijoMessageError }}'> dateMessageError </span>      
                     </div>
 
                     <div class="form-group inline">
@@ -94,6 +104,10 @@
                             <img class="imgHijoPreview" id=idImgEditHijo  src="#" alt="Imagen del hijo"/>
                             <span class="material-symbols-outlined filledRed" onclick="clearImage(this)">cancel</span>
                         </div>
+                    </div>
+
+                    <div class="form-group messageError" id="{{ $idGeneralEditarHijoMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idGeneralEditarHijoMessageError }}'> dateMessageError </span>      
                     </div>
                 </form>
             </div>

@@ -63,9 +63,9 @@
 
 					<div class="btns-container">
 						<x-btn-edit-item onclick="openModal('editarHijoModal'), 
-						fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', '{{  $hijo->apellido_Hijo }}',
-						'{{ $hijo->fechaNacimiento_Hijo }}', '{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}', 
-						'{{ $uriFoto }}')"> 
+													fillEditarHijoFields('{{ $hijo->idHijo }}', '{{ $hijo->nombre_Hijo }}', 
+													'{{ $hijo->apellido_Hijo }}', '{{ $hijo->fechaNacimiento_Hijo }}', 
+													'{{ $hijo->sexo_Hijo }}', '{{ $hijo->nombreSeguro_Hijo }}', '{{ $uriFoto }}')"> 
 							Editar
 						</x-btn-edit-item>
 

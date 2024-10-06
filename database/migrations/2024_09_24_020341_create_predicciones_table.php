@@ -9,15 +9,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Predicciones', function (Blueprint $table) {
-            $table->string('idPrediccion', 10)->primary(); // PREDIC-001
+            $table->string('idPrediccion', 11)->primary(); // PREDIC-0001
            
             $table->string('idDosaje')->unique(); // Añadir unique para garantizar la relación uno a uno
             $table->foreign('idDosaje')->references('idDosaje')->on('Dosajes')->onDelete('cascade'); 
             
-            $table->date('fecha_Prediccion');
-            $table->decimal('valorHemoglobinaEstimado_Prediccion', 5, 2); // Cambiado a decimal ya que es un valor numérico
-            $table->date('fechaRecuperacionEstimada_Prediccion');
-            $table->boolean('intervencionAdicional_Prediccion');
+            $table->date('fechaHora_Prediccion')->default(now());
+            $table->decimal('valorHemoglobinaEstimado1_Prediccion', 5, 2); // Número con 3 enteros y 2 decimales como máximo
+            $table->decimal('valorHemoglobinaEstimado3_Prediccion', 5, 2); 
+            $table->decimal('valorHemoglobinaEstimado6_Prediccion', 5, 2); 
+            $table->decimal('precisionHemoglobina1', 5, 2); 
+            $table->decimal('precisionHemoglobina3', 5, 2); 
+            $table->decimal('precisionHemoglobina6', 5, 2); 
+            $table->date('fechaRecuperacionEstimada_Prediccion')->nullable();
+            $table->boolean('intervencionAdicional_Prediccion')->nullable();
 
             $table->timestamps();
         });

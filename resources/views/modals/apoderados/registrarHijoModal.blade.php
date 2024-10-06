@@ -16,7 +16,8 @@
                         $hijoOptions = 'hijoRegistrarHijoOptions';
                         $DNI_Apoderado = Auth::guard('apoderados')->user()->idApoderado;
                         $someHiddenIdInputsArray = ['idApoderado'];
-                        $idHijoMessageError = 'hijoRegistrarHijoSelectMessageError';
+                        $idGeneralMessageError = 'generalMessageError';
+                        $idFechaNacimientoRegistrarHijoMessageError = 'fechaNacimientoRegistrarHijoMessageError';
                         $hijosDB = $hijos; //Se recibe esta variable de la función hijos de ApoderadoController.php
                     @endphp
                     
@@ -40,7 +41,13 @@
 
                     <div class="form-group inline">
                         <label class="primary-label noEditable" for="idFechaNacimientoInput" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
-                        <input class="input-item center" type="date" id='idFechaNacimientoRegistrarInput' name="fechaNacimiento_Hijo">
+                        <input class="input-item center" type="date" id='idFechaNacimientoRegistrarInput' 
+                                oninput="validateRealTimeBornDate()"
+                                 name="fechaNacimiento_Hijo">
+                    </div>
+
+                    <div class="form-group messageError" id="{{ $idFechaNacimientoRegistrarHijoMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idFechaNacimientoRegistrarHijoMessageError }}'> dateMessageError </span>      
                     </div>
 
                     <div class="form-group inline">
@@ -92,6 +99,10 @@
                             <img class="imgHijoPreview" src="#" alt="Imagen del hijo"/>
                             <span class="material-symbols-outlined filledRed" onclick="clearImage(this)">cancel</span>
                         </div>
+                    </div>
+
+                    <div class="form-group messageError" id="{{ $idGeneralMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idGeneralMessageError }}'> dateMessageError </span>      
                     </div>
                 </form>
             </div>

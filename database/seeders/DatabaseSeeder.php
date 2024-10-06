@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HijoSeeder::class);
         $this->call(PeriodoTratamientoSeeder::class);
         $this->call(DosajeSeeder::class);
-        /*
-        $this->call(PrediccionSeeder::class);*/
+        //$this->call(PrediccionSeeder::class);
     }
 }
