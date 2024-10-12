@@ -29,8 +29,12 @@
                         $hijosDB = $hijos; //Se recibe esta variable de la función prediction de ApoderadoController.php
                         // Dosaje
                         $IDNuevoDosaje = $idNuevoDosaje; //Se recibe esta variable de la función prediction de ApoderadoController.php
+                        $nuevoNumOrden = $nuevoNumeroOrden;
+                        // Mensajes de error
+                        $idGeneralRegistrarDosajeMessageError = 'generalRegistrarDosajeMessageError';
                    @endphp
                     
+                    <input type="hidden" value='{{ $IDNuevoDosaje }}' name='idDosaje'>
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[0] }}'>
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[1] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[1] }}'>
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[2] }}' name='{{ $someHiddenIdInputsArray[2] }}'>
@@ -40,7 +44,8 @@
                     <h3>Dosaje</h3>
                     <div class="form-group inline">
                         <label class="primary-label noEditable" id="idDosajeLabel">Número de Dosaje:</label>
-                        <input class="input-item center" type="text" id='idDosajeInput' value='{{ $IDNuevoDosaje }}' name="idDosaje" readonly>
+                        
+                        <input class="input-item center" type="text" id='idDosajeInput' value='DOSAJE-{{ $nuevoNumOrden }}' readonly>
 
                         <label class="primary-label noEditable" id="idFechaDosajeLabel">Fecha de dosaje:</label>
                         <input class="input-item center" type="date" id='idFechaDosajeInput' name="fecha_Dosaje">
@@ -186,10 +191,13 @@
                         />
                     </div>
                     <div class="form-group inline">
-                    <label class="primary-label noEditable" id="idFechaRecuperacionLabel">Fecha de recuperación:</label>
-                    <input class="input-item dateNoEditable center" type="date" id='idFechaRecuperacionInput' 
-                            oninput="updateAuxFechaRecuperacion()">
-                </div>
+                        <label class="primary-label noEditable" id="idFechaRecuperacionLabel">Fecha de recuperación:</label>
+                        <input class="input-item dateNoEditable center" type="date" id='idFechaRecuperacionInput' 
+                                oninput="updateAuxFechaRecuperacion()">
+                    </div>
+                    <div class="form-group messageError" id="{{ $idGeneralRegistrarDosajeMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idGeneralRegistrarDosajeMessageError }}'> dateMessageError </span>      
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

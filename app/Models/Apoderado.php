@@ -23,6 +23,13 @@ class Apoderado extends Authenticatable
         'password',
     ];
 
+    protected $casts = [
+        'idApoderado' => 'string',
+        'nombre_Apoderado' => 'string',
+        'apellido_Apoderado' => 'string',
+        'celular_Apoderado' => 'string',
+    ];
+    
     public function getAuthPassword()
     {
         return $this->password; // Devuelve el campo correcto de contraseña

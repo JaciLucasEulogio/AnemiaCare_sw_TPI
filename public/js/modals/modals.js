@@ -60,9 +60,9 @@ function restoreModals() {
 }
 
 // Función para guardar los datos del formulario y cerrar el modal
-function guardarModal(idModal, idForm) {
+function guardarModal(idModal = null, idForm) {
     document.getElementById(idForm).submit();
-    if(idModal) {
+    if (idModal) {
         closeModal(idModal);
     }
 }
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     closeOptionsOnClickOutside();
     setOnlySelectInputFocusColor();
 
-    restoreModals()
+    restoreModals();
 });
 
 function setOnlySelectInputFocusColor() {
@@ -264,4 +264,18 @@ function clearInput(idInput) {
 function guardarModal(idModal, idForm) {
     document.getElementById(idForm).submit();
     closeModal(idModal);
+}
+
+function returnItemDBValueWithRequestedID(searchField, searchValue, itemsDB) {
+    // Buscar el objeto en itemsDB que tenga el searchField con el valor searchValue
+    console.log("Buscando: " + searchValue + "en el campo " + 
+                searchField + " del itemsDB: " + itemsDB)
+   
+    for (const key in itemsDB) {
+        if (itemsDB[key][searchField] == searchValue) {
+            return itemsDB[key]; // Devolver el objeto encontrado
+        }
+    }   
+
+    return null; // Retornar null si no se encuentra el objeto
 }

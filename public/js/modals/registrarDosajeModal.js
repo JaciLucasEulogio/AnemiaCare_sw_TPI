@@ -10,6 +10,8 @@ let estadoRecuperacionInput = document.getElementById('estadoRecuperacionRegista
 let fechaRecuperacionInput = document.getElementById('idFechaRecuperacionInput');
 var auxEstadoRecuperacionInput = document.getElementById('auxEstadoRecuperacionInput');
 var auxFechaRecuperacionInput = document.getElementById('auxFechaRecuperacionInput');
+let generalRegistrarDosajeMessageError = document.getElementById('generalRegistrarDosajeMessageError');
+let generalRegistrarDosajeMessageErrorContainer = document.getElementById('generalRegistrarDosajeMessageError-container');
 
 if (!estadoRecuperacionInput.value || estadoRecuperacionInput.value == "No recuperado") {
     auxEstadoRecuperacionInput = 0;
@@ -180,8 +182,13 @@ function validarCamposFormularioRegistrarDosaje() {
 function guardarModalRegistrarDosaje(idModal, idForm) {
     if (validarCamposFormularioRegistrarDosaje()) {
         console.log("GUARDANDO NUEVO DOSAJE CORRECTAMENTE");
+        generalRegistrarDosajeMessageError.classList.remove("shown");
+        generalRegistrarDosajeMessageErrorContainer.classList.remove("shown");
         guardarModal(idModal, idForm);
     } else {
         console.log("Verifica que todos los campos estén correctamente rellenados");
+        generalRegistrarDosajeMessageError.textContent = "Verifica que todos los campos estén correctamente rellenados";
+        generalRegistrarDosajeMessageError.classList.add("shown");
+        generalRegistrarDosajeMessageErrorContainer.classList.add("shown");
     }
-}
+}p

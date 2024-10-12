@@ -19,7 +19,7 @@ let objMaxDateEditarHijo = new Date(maxDateEditarHijo); // Convierte maxDate a u
 let mayor6MesesEditarHijo = false;
 let menor36MesesEditarHijo = false;
 
-let textInputs = [
+let textEditarHijoInputs = [
     idHijoEditarHijoInput,
     nombreEditarHijoInput,
     apellidoHijoEditarInput,
@@ -196,11 +196,11 @@ function validateRealTimeEditarHijoBornDate() {
     }
 }
 
-function validarCamposFormularioRegistrarHijo() {
+function validarCamposFormularioEditarHijo() {
     // Verificar si todos los campos están llenos
-    for (let campo of textInputs) {
-        if (!campo.value) {
-            console.log(`El campo ${campo.id} está vacío.`);
+    for (let inputEditarhijo of textEditarHijoInputs) {
+        if (!inputEditarhijo.value) {
+            console.log(`El campo ${inputEditarhijo.id} está vacío.`);
             return false; // Retorna false si algún campo está vacío
         }
     }
@@ -219,7 +219,7 @@ function validarCamposFormularioRegistrarHijo() {
 
 // Función para guardar los cambios del modal de edición
 function guardarModalEditarHijo(idModal, idForm) {
-    if (validarCamposFormularioRegistrarHijo()) {
+    if (validarCamposFormularioEditarHijo()) {
         generalEditarHijoMessageError.classList.remove("shown")
         generalEditarHijoMessageErrorContainer.classList.remove("shown")
 		guardarModal(idModal, idForm);

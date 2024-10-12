@@ -202,6 +202,9 @@ class ApoderadoController extends Controller
         $establecimientos = $this->getEstablecimientos();
         $hijos = $this->getHijos($apoderadoId);
         $idNuevoDosaje = $this->generarIdDosaje();
+        $nuevoNumeroOrden =  $dosajesCompletosOrderNumber->max('order_number') + 1;
+
+        // dd($nuevoNumeroOrden);
 
         // Convertir caracteres  de sexo M ó F a "Masculino" ó "Femenino"
         foreach ($hijos as $hijo) {
@@ -216,7 +219,8 @@ class ApoderadoController extends Controller
             $hijo->edadMeses = ($interval->y * 12) + $interval->m; // Calcular la edad en meses
         }
 
-        return view('apoderados.apoderadosPrediction', compact('dosajesCompletosOrderNumber', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje'));
+        return view('apoderados.apoderadosPrediction',
+                 compact('dosajesCompletosOrderNumber', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje', 'nuevoNumeroOrden'));
     }
 
     public function getEstablecimientos() {

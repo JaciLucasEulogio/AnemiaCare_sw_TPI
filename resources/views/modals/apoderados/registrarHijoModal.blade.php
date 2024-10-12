@@ -42,8 +42,8 @@
                     <div class="form-group inline">
                         <label class="primary-label noEditable" for="idFechaNacimientoInput" id="idFechaNamientoLabel">Fecha de nacimiento:</label>
                         <input class="input-item center" type="date" id='idFechaNacimientoRegistrarInput' 
-                                oninput="validateRealTimeBornDate()"
-                                 name="fechaNacimiento_Hijo">
+                                oninput="validateRealTimeBornDateRegistrarHijo()"
+                                name="fechaNacimiento_Hijo">
                     </div>
 
                     <div class="form-group messageError" id="{{ $idFechaNacimientoRegistrarHijoMessageError }}-container"> 
@@ -109,7 +109,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('registrarHijoModal')">Cancelar</button>
                 <button type="button" class="btn btn-primary create" 
-                        onclick="guardarModalRegistrarHijo('registrarHijoModal', 'formRegistrarHijo')">Guardar</button>
+                        onclick="guardarModalRegistrarHijo('registrarHijoModal', 'formRegistrarHijo', {{ json_encode($hijosDB) }})">Guardar</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,6 @@ let generalMessageError = document.getElementById('generalMessageError');
 let generalMessageErrorContainer = document.getElementById('generalMessageError-container');
 let dateMessageError = document.getElementById('fechaNacimientoRegistrarHijoMessageError');
 let containerDateMessageError = document.getElementById("fechaNacimientoRegistrarHijoMessageError-container");
-let bornDateInput = document.getElementById('idFechaNacimientoRegistrarInput');
 
 let today = new Date();
 let minDate = '2021-01-01';
@@ -57,14 +56,14 @@ function cargarInputsFormRegistrarHijoModalDesdeLocalStorage() {
         }
     });
 
-    validateRealTimeBornDate();
+    validateRealTimeBornDateRegistrarHijo();
 }
 
 document.addEventListener('DOMContentLoaded', cargarInputsFormRegistrarHijoModalDesdeLocalStorage);
 
-function validateRealTimeBornDate() {
-    const selectedDate = bornDateInput.value;
-    const objSelectedDate = new Date(selectedDate);
+function validateRealTimeBornDateRegistrarHijo() {
+    var selectedDate = fechaRegistrarHijoInput.value;
+    var objSelectedDate = new Date(selectedDate);
 
     // Verificar si el campo de fecha está vacío
     if (!selectedDate) {
@@ -86,9 +85,9 @@ function validateRealTimeBornDate() {
     } 
 
     // Obtener la diferencia en años y meses
-    const years = objMaxDate.getFullYear() - objSelectedDate.getFullYear();
-    const months = objMaxDate.getMonth() - objSelectedDate.getMonth();
-    const days = objMaxDate.getDate() - objSelectedDate.getDate();
+    var years = objMaxDate.getFullYear() - objSelectedDate.getFullYear();
+    var months = objMaxDate.getMonth() - objSelectedDate.getMonth();
+    var days = objMaxDate.getDate() - objSelectedDate.getDate();
 
     // Ajustar los meses si es necesario (si los días son negativos)
     if (days < 0) {
@@ -102,7 +101,7 @@ function validateRealTimeBornDate() {
     }
 
     // Edad total en meses
-    const edadEnMeses = (years * 12) + months;
+    var edadEnMeses = (years * 12) + months;
 
     console.log(`Edad en meses: ${edadEnMeses}`);
 
@@ -140,6 +139,19 @@ function validateRealTimeBornDate() {
     }
 }
 
+function validarDNIHijoRegistradoPreviamente(hijosDB) {
+    // La función "returnItemDBValueWithRequestedID" se encuentra en modals.js
+	var itemArraySearched = returnItemDBValueWithRequestedID("idHijo", idHijoRegistrarHijoInput.value, hijosDB);
+	console.log(itemArraySearched);
+
+	if (itemArraySearched) {
+		return false;
+	} 
+
+	return true;
+}
+
+
 function validarCamposFormularioRegistrarHijo() {
     // Array de campos a validar
     const campos = [
@@ -152,14 +164,14 @@ function validarCamposFormularioRegistrarHijo() {
     ];
 
     // Verificar si todos los campos están llenos
-    for (let campo of campos) {
-        if (!campo.value) {
-            console.log(`El campo ${campo.id} está vacío.`);
+    for (let registrarHijoInput of campos) {
+        if (!registrarHijoInput.value) {
+            console.log(`El campo ${registrarHijoInput.id} está vacío.`);
             return false; // Retorna false si algún campo está vacío
         }
     }
 
-    if (validateRealTimeBornDate()) {
+    if (validateRealTimeBornDateRegistrarHijo()) {
         if (sexoRegistrarHijoInput.value === "Masculino") {
             sexoRegistrarHijoInput.value = "M";
         } else if (sexoRegistrarHijoInput.value === "Femenino") {
@@ -171,15 +183,23 @@ function validarCamposFormularioRegistrarHijo() {
     return false
 }
 
-function guardarModalRegistrarHijo(idModal, idForm) {
-    if (validarCamposFormularioRegistrarHijo()) {
-        generalMessageError.classList.remove("shown")
-        generalMessageErrorContainer.classList.remove("shown")
-		guardarModal(idModal, idForm);
-    } else {
-        console.log("Todos los campos del formulario deben estar rellenados correctamente.");
-        generalMessageError.textContent = "Todos los campos del formulario deben estar rellenados correctamente.";
-        generalMessageError.classList.add("shown")
-        generalMessageErrorContainer.classList.add("shown")
-    }
+function guardarModalRegistrarHijo(idModal, idForm, hijosDB) {
+    
+        if (validarDNIHijoRegistradoPreviamente(hijosDB)) {
+            if (validarCamposFormularioRegistrarHijo()) {
+                generalMessageError.classList.remove("shown")
+                generalMessageErrorContainer.classList.remove("shown")
+                guardarModal(idModal, idForm);
+            } else {
+                console.log("Todos los campos del formulario deben estar rellenados correctamente.");
+                generalMessageError.textContent = "Todos los campos del formulario deben estar rellenados correctamente.";
+                generalMessageError.classList.add("shown")
+                generalMessageErrorContainer.classList.add("shown")
+            }
+		} else {
+			generalMessageError.textContent = "El hijo con DNI: " + idHijoRegistrarHijoInput.value + " ya ha sido registrado anteriormente.";
+			generalMessageError.classList.add("shown");
+			generalMessageErrorContainer.classList.add("shown");
+		}
+    
 }  

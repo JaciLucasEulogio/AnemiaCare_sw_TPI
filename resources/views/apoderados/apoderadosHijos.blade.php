@@ -23,6 +23,10 @@
 			</div>
 		@endif
 
+		@php
+			$hijosDB = $hijos;
+		@endphp
+
 		<div class="firstHijosRow">
 			<h3>Hijos registrados</h3>
 
@@ -35,12 +39,12 @@
 			@include('modals.apoderados.registrarHijoModal')
 		</div>
 
-		@if ($hijos->isEmpty())
+		@if ($hijosDB->isEmpty())
 			<h4>No hay hijos registrados aún, haga click en <strong>"Nuevo Hijo"</strong> poder registrarlo.</h4>
 		@endif
 
 		<div class="secondHijosRow">
-			@foreach ($hijos as $hijo)
+			@foreach ($hijosDB as $hijo)
 			@php
 				$uriFoto = htmlspecialchars($hijo->file_uri, ENT_QUOTES, 'UTF-8');
 			@endphp

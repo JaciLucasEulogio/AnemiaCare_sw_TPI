@@ -29,7 +29,7 @@ class ApoderadoLoginController extends Controller
         // Crear el nuevo apoderado
         Apoderado::create([
             'idApoderado' => $validatedData['idApoderado'],
-            'password' => bcrypt($validatedData['password']),
+            'password' => bcrypt($validatedData['password']), // ENCRIPTAR LA CONTRASEÑA RECIBIDA DEL FORMULARIO
             'nombre_Apoderado' => $validatedData['nombre_Apoderado'],
             'apellido_Apoderado' => $validatedData['apellido_Apoderado'],
             'sexo_Apoderado' => $validatedData['sexo_Apoderado'],

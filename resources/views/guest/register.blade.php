@@ -7,6 +7,12 @@
 @endpush
 
 @section('sectionContent')
+
+    @php
+        $apoderadosDB = $apoderados;
+        $idGeneralRegistrarApoderadoMessageError = 'registrarApoderadoMessageError';
+    @endphp
+
     <div class="container">
         <div class="main-content">
             <div class="image-container">
@@ -81,7 +87,13 @@
                             Recuérdame
                         </label>
                     </div>
-                    <button type="button" onclick="registrarApoderado('formRegisterApoderado')" class="btn-register">Registrarse</button>
+
+                    <div class="form-group messageError" id="{{ $idGeneralRegistrarApoderadoMessageError }}-container"> 
+                        <span class="inline-alert-message" id='{{ $idGeneralRegistrarApoderadoMessageError }}'> dateMessageError </span>      
+                    </div>
+
+                    <button type="button" onclick="registrarApoderado('formRegisterApoderado', {{ json_encode($apoderadosDB) }})" 
+                            class="btn-register">Registrarse</button>
                 </form>
             </div>
         </div>

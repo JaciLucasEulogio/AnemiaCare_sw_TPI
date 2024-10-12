@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apoderado;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -23,6 +24,8 @@ class GuestController extends Controller
     }
 
     public function register() {
-        return view('guest.register');
+        $apoderados = Apoderado::all();
+        // dd($apoderados);
+        return view('guest.register', compact('apoderados'));
     }
 }
