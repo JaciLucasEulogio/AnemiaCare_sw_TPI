@@ -54,62 +54,66 @@ class DosajeController extends Controller
                 'fechaRecuperacionReal' => $validatedData['fechaRecuperacionReal'],
             ]);
 
-            // Enviar datos a la API
-            $client = new Client(['base_uri' => env('API_URL') . '/']);
-            $dataToSend = [
-                'hemoglobina' => $validatedData['valorHemoglobina_Dosaje'],
-                'nivel_anemia' => $validatedData['nivelAnemia_Dosaje'],
-                'peso' => $validatedData['peso_Dosaje'],
-                'talla' => $validatedData['talla_Dosaje'],
-                'sexo' => $validatedData['sexo_Hijo'],
-                'edad' => $validatedData['edadMeses_Dosaje'],
-                'nivel_hierro' => $validatedData['nivelHierro_Dosaje'],
-                'provincia' => $validatedData['nombreProvincia'],
-                'altura' => $validatedData['alturaProvincia'],
-            ];
+            // Solo si es NO RECUPERADO entonces realizar la predicción
+            if ($validatedData['estadoRecuperacion_Dosaje'] == 0) {
+                // Enviar datos a la API
+                $client = new Client(['base_uri' => env('API_URL') . '/']);
+                $dataToSend = [
+                    'hemoglobina' => $validatedData['valorHemoglobina_Dosaje'],
+                    'nivel_anemia' => $validatedData['nivelAnemia_Dosaje'],
+                    'peso' => $validatedData['peso_Dosaje'],
+                    'talla' => $validatedData['talla_Dosaje'],
+                    'sexo' => $validatedData['sexo_Hijo'],
+                    'edad' => $validatedData['edadMeses_Dosaje'],
+                    'nivel_hierro' => $validatedData['nivelHierro_Dosaje'],
+                    'provincia' => $validatedData['nombreProvincia'],
+                    'altura' => $validatedData['alturaProvincia'],
+                ];
+                
+                // Realizar la petición POST a la API
+                $response = $client->request('POST', 'predict', [
+                    'json' => $dataToSend,
+                    'headers' => [
+                        'Authorization' => env('API_AUTH_TOKEN'),
+                        'ngrok-skip-browser-warning' => 'true',
+                    ],
+                ]);
 
-            // Realizar la petición POST a la API
-            $response = $client->request('POST', 'predict', [
-                'json' => $dataToSend,
-                'headers' => [
-                    'Authorization' => env('API_AUTH_TOKEN'),
-                    'ngrok-skip-browser-warning' => 'true',
-                ],
-            ]);
+                if ($response->getStatusCode() !== 200) {
+                    throw new \Exception('Error al enviar datos a la API');
+                }
 
-            if ($response->getStatusCode() !== 200) {
-                throw new \Exception('Error al enviar datos a la API');
-            }
+                // Procesar la respuesta de la API
+                $apiResponse = json_decode($response->getBody(), true);
 
-            // Procesar la respuesta de la API
-            $apiResponse = json_decode($response->getBody(), true);
+                // Crear predicción
+                $idNuevaPrediccion = $this->generarIdPrediccion();
 
-            // Crear predicción
-            $idNuevaPrediccion = $this->generarIdPrediccion();
+                $prediccion = Prediccion::create([
+                    'idPrediccion' => $idNuevaPrediccion,
+                    'idDosaje' => $validatedData['idDosaje'],
+                    'valorHemoglobinaEstimado1_Prediccion' => $apiResponse['prediccion_1mes'],
+                    'valorHemoglobinaEstimado3_Prediccion' => $apiResponse['prediccion_3mes'],
+                    'valorHemoglobinaEstimado6_Prediccion' => $apiResponse['prediccion_6mes'],
+                    'precisionHemoglobina1' => $apiResponse['porcPrecision1'],
+                    'precisionHemoglobina3' => $apiResponse['porcPrecision3'],
+                    'precisionHemoglobina6' => $apiResponse['porcPrecision6'],
+                ]);
+                
+                // dd($prediccion);
+            } 
 
-            $prediccion = Prediccion::create([
-                'idPrediccion' => $idNuevaPrediccion,
-                'idDosaje' => $validatedData['idDosaje'],
-                'valorHemoglobinaEstimado1_Prediccion' => $apiResponse['prediccion_1mes'],
-                'valorHemoglobinaEstimado3_Prediccion' => $apiResponse['prediccion_3mes'],
-                'valorHemoglobinaEstimado6_Prediccion' => $apiResponse['prediccion_6mes'],
-                'precisionHemoglobina1' => $apiResponse['porcPrecision1'],
-                'precisionHemoglobina3' => $apiResponse['porcPrecision3'],
-                'precisionHemoglobina6' => $apiResponse['porcPrecision6'],
-            ]);
-            
-            // dd($prediccion);
-
-            $predicciones = Prediccion::all();
+            //$predicciones = Prediccion::all();
 
             // dd($predicciones);
+
+            //dd($dosaje);
 
             // Si todo sale bien, confirmar la transacción
             DB::commit();
 
             // Redirigir con éxito
             return redirect()->route('apoderados.prediction')
-                             ->with('apiResponse', $apiResponse)
                              ->with('successDosajeStore', 'Dosaje guardado correctamente y predicción creada.');
 
         } catch (ValidationException $e) {

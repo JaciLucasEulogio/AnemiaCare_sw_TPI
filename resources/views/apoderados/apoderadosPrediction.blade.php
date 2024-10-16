@@ -175,31 +175,6 @@
 					@endforeach
                 </tbody>
             </table>-->
-        </div>
-		
-		<!--
-		<h3>Resultado de predicción:</h3>
-		@if(session('apiResponse'))
-		@php
-			$apiResponse = session('apiResponse');
-		@endphp
-			<h4>
-				MES 1
-				Valor de hemoglobina: {{ number_format($apiResponse['prediccion_1mes'], 2) }}
-				Porcentaje de Precisión: {{ number_format($apiResponse['porcPrecision1'], 2) }}<br>
-				
-				MES 3 
-				Valor de hemoglobina: {{ number_format($apiResponse['prediccion_3mes'], 2) }}
-				Porcentaje de Precisión: {{ number_format($apiResponse['porcPrecision3'], 2) }}<br>
-
-				MES 6
-				Valor de hemoglobina: {{ number_format($apiResponse['prediccion_6mes'], 2) }}
-				Porcentaje de Precisión: {{ number_format($apiResponse['porcPrecision6'], 2) }}<br>
-			</h4>
-		@else
-			<h4>Aún no hay resultados.</h4>
-		@endif
-		-->
 	</div>
 @endsection
 
