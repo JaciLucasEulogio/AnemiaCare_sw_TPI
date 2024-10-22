@@ -6,21 +6,19 @@
 @endpush
 
 @section('header')
-	<header>
-		<div class="logoContainer">
-			<img src="img/logoAnemiaCare.png" alt="Logo AnemiaCare">
-			<h1 class="slogan">Anemia<span>Care</span></h1>
-		</div>
-		<nav>
-			<a href="{{ route('guest.home') }}" class="{{ Request::routeIs('guest.home') ? 'active' : '' }}">Inicio</a>
-			<a href="{{ route('guest.aboutUs') }}" class="{{ Request::routeIs('guest.aboutUs') ? 'active' : '' }}">Sobre Nosotros</a>
-			<a href="{{ route('guest.howToUse') }}" class="{{ Request::routeIs('guest.howToUse') ? 'active' : '' }}">Cómo usar</a>
-			<a href="{{ route('guest.loginDoctor') }}" class="{{ Request::routeIs('guest.loginDoctor') ? 'active' : '' }}">Soy doctor</a>
-			<button class="ingresar-btn" onclick="openModal('apoderadoLoginModal')">Ingresar</button>
-		</nav>
-		<!--Modal para login-->
-        @include('modals.apoderados.apoderadoLoginModal')
-	</header>
+	<div class="logoContainer">
+		<img src="img/logoAnemiaCare.png" alt="Logo AnemiaCare">
+		<h1 class="slogan">Anemia<span>Care</span></h1>
+	</div>
+	<nav>
+		<a href="{{ route('guest.home') }}" class="{{ Request::routeIs('guest.home') ? 'active' : '' }}">Inicio</a>
+		<a href="{{ route('guest.aboutUs') }}" class="{{ Request::routeIs('guest.aboutUs') ? 'active' : '' }}">Sobre Nosotros</a>
+		<a href="{{ route('guest.howToUse') }}" class="{{ Request::routeIs('guest.howToUse') ? 'active' : '' }}">Cómo usar</a>
+		<a href="{{ route('guest.loginDoctor') }}" class="{{ Request::routeIs('guest.loginDoctor') ? 'active' : '' }}">Soy doctor</a>
+		<button class="ingresar-btn" onclick="openModal('apoderadoLoginModal')">Ingresar</button>
+	</nav>
+	<!--Modal para login-->
+	@include('modals.apoderados.apoderadoLoginModal')
 @endsection
 
 @section('content')
@@ -30,7 +28,7 @@
 @endsection
 
 @section('footer')
-	<footer>
+	ESTO ES EL FOOTER
 		<div class="footer-columns">
 			<div class="footer-column">
 				<h3>Productos</h3>
@@ -65,7 +63,6 @@
 				</ul>
 			</div>
 		</div>
-	</footer>
 @endsection
 
 @push('scripts')

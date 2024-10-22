@@ -26,13 +26,17 @@
     </head>
 
     <body>
-        @yield('header')
+        <header>
+            @yield('header')
+        </header>
 
         <main>
             @yield('content')
         </main>
 
-        @yield('footer')
+        <footer>
+            @yield('footer')
+        </footer>
         
         <script src="{{ asset('js/datatable/jquery.min.js') }}"> </script>
         <script src="{{ asset('js/datatable/datatables.js') }}"> </script>

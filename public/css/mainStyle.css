@@ -9,6 +9,9 @@
 }
 
 body {
+    display: grid;
+    min-width: 100dvh;
+    grid-template-rows: auto 1fr auto;
     font-family: 'Arial', sans-serif;
     background-color: #f0f4ff;
     color: #333;
