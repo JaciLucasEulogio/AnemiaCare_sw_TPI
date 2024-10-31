@@ -194,7 +194,9 @@ class ApoderadoController extends Controller
             $dosaje->order_number = $index + 1;
             // Formatear la fecha del dosaje usando Carbon
             $dosaje->fecha_Dosaje = Carbon::parse($dosaje->fecha_Dosaje)->format('d/m/Y');
-            
+            if($dosaje->fechaRecuperacionEstimada_Prediccion) {
+                $dosaje->fechaRecuperacionEstimada_Prediccion = Carbon::parse($dosaje->fechaRecuperacionEstimada_Prediccion)->format('d/m/Y');
+            }
             return $dosaje;
         });
 
@@ -218,6 +220,8 @@ class ApoderadoController extends Controller
             $interval = $fechaNacimiento->diff($fechaActual);
             $hijo->edadMeses = ($interval->y * 12) + $interval->m; // Calcular la edad en meses
         }
+
+        //dd($dosajesCompletosOrderNumber);
 
         return view('apoderados.apoderadosPrediction',
                  compact('dosajesCompletosOrderNumber', 'doctores', 'establecimientos', 'hijos', 'idNuevoDosaje', 'nuevoNumeroOrden'));

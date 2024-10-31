@@ -43,7 +43,7 @@ class ApiController extends Controller
     {
         // Validar los datos aquí si es necesario
         try {
-            $response = $this->client->request('POST', 'predict', [ // Cambia 'endpoint' al endpoint correcto
+            $response = $this->client->request('POST', 'predictHemoglobina', [ // Cambia 'endpoint' al endpoint correcto
                 'json' => $request->all(),
                 'headers' => [
                     'Authorization' => 'Bearer 2mlVWYPNGiyeDa5uTWpjsdHhCkf_hCLP7tNbTrsLBsi7cpWZ', // Tu token de autenticación

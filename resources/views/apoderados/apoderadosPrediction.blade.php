@@ -105,10 +105,12 @@
 						<div class="dose-moreInformation">
 								<div class="details-section">
 									<h4>Detalles de dosaje</h4>
-									<p><strong>Establecimiento:</strong> 
-										{{ $dosaje->nombreEstablecimiento }} | Dist.: {{ $dosaje->nombreDistrito }} | Prov.: {{ $dosaje->nombreProvincia }}
-									</p>
+									<p><strong>Establecimiento:</strong> {{ $dosaje->nombreEstablecimiento }} </p>
+									<p><strong>Distrito:</strong> {{ $dosaje->nombreDistrito }}</p>
+									<p><strong>Provincia:</strong> {{ $dosaje->nombreProvincia }} ({{ $dosaje->alturaProvincia }} msnm)</p>
 									<p><strong>Hijo:</strong> {{ $dosaje->nombre_Hijo }}</p>
+									<p><strong>Sexo:</strong> {{ $dosaje->sexo_Hijo }}</p>
+									<p><strong>Nivel de hierro:</strong> {{ $dosaje->nivelHierro_Dosaje }}</p>
 									<p><strong>Hemoglobina:</strong> {{ $dosaje->valorHemoglobina_Dosaje }} g/dL</p>
 									<p><strong>Nivel de anemia:</strong> {{ $dosaje->nivelAnemia_Dosaje }}</p>
 									<p><strong>Peso:</strong> {{ $dosaje->peso_Dosaje }} kg</p>
@@ -118,9 +120,16 @@
 								</div>
 								<div class="prediction-section">
 									<h4>Detalles de la predicción:</h4>
-									<p><strong>Valor hemoglobina 1er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado1_Prediccion }} g/dL</p>
-									<p><strong>Valor hemoglobina 3er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado3_Prediccion }} g/dL</p>
-									<p><strong>Valor hemoglobina 6to mes:</strong> {{ $dosaje->valorHemoglobinaEstimado6_Prediccion }} g/dL</p>
+									@if($dosaje->estadoRecuperacion_Dosaje == 0) 
+										<p><strong>Valor hemoglobina 1er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado1_Prediccion }} g/dL</p>
+										<p><strong>Valor hemoglobina 3er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado3_Prediccion }} g/dL</p>
+										<p><strong>Valor hemoglobina 6to mes:</strong> {{ $dosaje->valorHemoglobinaEstimado6_Prediccion }} g/dL</p>
+										<p><strong>Fecha de recuperación:</strong> {{ $dosaje->fechaRecuperacionEstimada_Prediccion }} </p>
+									@else
+										Los hijos sin anemia no tienen predicciones.
+									@endif
+
+									
 								</div>
 						</div>
 					@endforeach

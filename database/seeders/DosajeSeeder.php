@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dosaje;
+use Carbon\Carbon;
 use App\Models\Hijo;
 use App\Models\Doctor;
+use App\Models\Dosaje;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Carbon\Carbon;
 
 class DosajeSeeder extends Seeder
 {
@@ -15,36 +16,47 @@ class DosajeSeeder extends Seeder
     {
         // Obtener todos los hijos
         $hijos = Hijo::all();
-        // Obtener doctores (aquí puedes modificar si necesitas especificar un conjunto de doctores)
+        // Obtener doctores
         $doctores = Doctor::pluck('idDoctor')->toArray();
-        // Obtener establecimientos (aquí puedes modificar si necesitas especificar un conjunto de establecimientos)
-        $establecimientos = ['ESTAB049', 'ESTAB047', 'ESTAB027']; // Asegúrate de que estos IDs existan en tu base de datos
+        // Obtener establecimientos
+        $establecimientos = ['ESTAB049', 'ESTAB047', 'ESTAB027'];
+        $nivelesAnemia = ['Leve', 'Moderado', 'Severo']; // Niveles de anemia excepto 'Sin Anemia'
 
         $contadorDosajes = 1; // Contador para generar IDs únicos
 
         foreach ($hijos as $hijo) {
             for ($i = 0; $i < 3; $i++) {
+                // Generar estado de recuperación aleatorio
+                $estadoRecuperacion = (bool)rand(0, 1);
+
                 $dosaje = [
-                    'idDosaje' => 'DOSAJ-' . str_pad($contadorDosajes++, 4, '0', STR_PAD_LEFT), // Generar ID en formato DOSAJ-0001
+                    'idDosaje' => 'DOSAJ-' . str_pad($contadorDosajes++, 4, '0', STR_PAD_LEFT),
                     'idHijo' => $hijo->idHijo,
-                    'idDoctor' => $doctores[array_rand($doctores)], // Seleccionar un doctor aleatorio
-                    'idEstablecimiento' => $establecimientos[array_rand($establecimientos)], // Seleccionar un establecimiento aleatorio
-                    'fecha_Dosaje' => Carbon::now()->subMonths(3 - $i), // Fechas en los últimos 3 meses
-                    'valorHemoglobina_Dosaje' => rand(10, 18) + rand(0, 99) / 100, // Valores entre 10.00 y 18.99
-                    'nivelAnemia_Dosaje' => ['Normal', 'Leve', 'Moderado', 'Severo'][array_rand(['Normal', 'Leve', 'Moderado', 'Severo'])],
-                    'peso_Dosaje' => rand(5, 30) + rand(0, 99) / 100, // Peso entre 5.00 y 30.99
-                    'talla_Dosaje' => rand(50, 150) + rand(0, 99) / 100, // Talla entre 50.00 y 150.99
-                    'edadMeses_Dosaje' => rand(1, 60), // Edad entre 1 y 60 meses
-                    'nivelHierro_Dosaje' => rand(10, 200) + rand(0, 99) / 100, // Nivel de hierro entre 10.00 y 200.99
-                    'estadoRecuperacion_Dosaje' => (bool)rand(0, 1), // Estado de recuperación aleatorio
-                    'fechaRecuperacionReal' => (rand(0, 1) ? Carbon::now()->subMonths(3 - $i) : null), // Fecha de recuperación, puede ser nula
+                    'idDoctor' => $doctores[array_rand($doctores)],
+                    'idEstablecimiento' => $establecimientos[array_rand($establecimientos)],
+                    'fecha_Dosaje' => Carbon::now()->subMonths(3 - $i),
+                    'valorHemoglobina_Dosaje' => rand(10, 18) + rand(0, 99) / 100,
+                    'nivelAnemia_Dosaje' => $estadoRecuperacion ? 'Sin Anemia' : $nivelesAnemia[array_rand($nivelesAnemia)],
+                    'peso_Dosaje' => rand(5, 30) + rand(0, 99) / 100,
+                    'talla_Dosaje' => rand(50, 150) + rand(0, 99) / 100,
+                    'edadMeses_Dosaje' => rand(1, 60),
+                    'nivelHierro_Dosaje' => rand(10, 200) + rand(0, 99) / 100,
+                    'estadoRecuperacion_Dosaje' => $estadoRecuperacion,
+                    'fechaRecuperacionReal' => $estadoRecuperacion ? Carbon::now()->subMonths(3 - $i) : null,
                 ];
 
                 Dosaje::create($dosaje);
+
+                // Ajuste del log para registrar los detalles del dosaje
+                /*Log::info("Dosaje creado con éxito", [
+                    'ID Dosaje' => $dosaje['idDosaje'],
+                    'Nivel de Anemia' => $dosaje['nivelAnemia_Dosaje'],
+                    'Estado de Recuperación' => $dosaje['estadoRecuperacion_Dosaje']
+                ]);*/
             }
         }
 
         // Crear los 2964 dosajes restantes para completar el total de 3000
-        //Dosaje::factory(2964)->create();
+        // Dosaje::factory(2964)->create();
     }
 }
