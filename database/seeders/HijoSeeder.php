@@ -134,6 +134,6 @@ class HijoSeeder extends Seeder
         }
 
         // Genera 988 hijos usando el factory para llegar al total de 1000
-        Hijo::factory(988)->create();
+        Hijo::factory(98)->create();
     }
 }

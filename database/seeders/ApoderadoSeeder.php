@@ -45,6 +45,6 @@ class ApoderadoSeeder extends Seeder
         }
 
         // Genera 247 apoderados usando el factory
-        Apoderado::factory(247)->create();
+        Apoderado::factory(47)->create();
     }
 }

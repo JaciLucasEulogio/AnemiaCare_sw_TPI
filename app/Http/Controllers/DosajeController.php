@@ -193,7 +193,6 @@ class DosajeController extends Controller
                                                                             $validatedData['alturaProvincia']);
 
                 $diasRecuperacion = intval(round($apiResponseDiasRecuperacion['diasRecuperacion']));
-                // Fecha de recuperacion
                 $fechaRecuperacion = $this->returnFechaRecuperacionByDiasRecuperacionIdHijo($diasRecuperacion, $validatedData['idHijo']);
 
                 // Crear predicción
