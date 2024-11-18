@@ -125,11 +125,11 @@
 										<p><strong>Valor hemoglobina 3er mes:</strong> {{ $dosaje->valorHemoglobinaEstimado3_Prediccion }} g/dL</p>
 										<p><strong>Valor hemoglobina 6to mes:</strong> {{ $dosaje->valorHemoglobinaEstimado6_Prediccion }} g/dL</p>
 										<p><strong>Fecha de recuperación estimada:</strong> {{ $dosaje->fechaRecuperacionEstimada_Prediccion }} </p>
+										<p><strong>Porcentaje de intervención adicional:</strong> {{ $dosaje->intervencionAdicionalPorcentaje_Prediccion }}% </p>
+										<p><strong>Mensaje:</strong> {{ $dosaje->intervencionAdicionalMensaje_Prediccion }} </p>
 									@else
 										Los hijos sin anemia no tienen predicciones.
 									@endif
-
-									
 								</div>
 						</div>
 					@endforeach

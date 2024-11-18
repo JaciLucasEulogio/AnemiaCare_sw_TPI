@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ApoderadoSeeder::class);
         $this->call(HijoSeeder::class);
         $this->call(PeriodoTratamientoSeeder::class);
-        $this->call(DosajeSeeder::class);
-        $this->call(PrediccionSeeder::class);
+        //$this->call(DosajeSeeder::class);
+        //$this->call(PrediccionSeeder::class);
         $endTime = microtime(true); // Marca el fin del tiempo
         $totalTime = $endTime - $startTime; // Calcula el tiempo total
         echo "Tiempo total seeders: " . round($totalTime, 2) . " seg\n"; // Muestra el tiempo total en ms

@@ -51,7 +51,7 @@ class PrediccionSeeder extends Seeder
 
     private function obtenerRespuestaApi($dosaje, DosajeController $controller): array
     {
-        return $controller->returnApiResponse(
+        return $controller->returnApiResponseHemoglobina(
             $dosaje->valorHemoglobina_Dosaje,
             $dosaje->nivelAnemia_Dosaje,
             $dosaje->peso_Dosaje,

@@ -27,7 +27,10 @@ class Prediccion extends Model
         'precisionHemoglobina3',
         'precisionHemoglobina6',
         'fechaRecuperacionEstimada_Prediccion',
-        'intervencionAdicional_Prediccion'];
+        'diasRecuperacion_Prediccion',
+        'intervencionAdicionalPorcentaje_Prediccion',
+        'intervencionAdicionalMensaje_Prediccion',
+    ];
     
     public function Dosaje() {
         return $this->hasOne(Dosaje::class, 'idDosaje', 'idDosaje');

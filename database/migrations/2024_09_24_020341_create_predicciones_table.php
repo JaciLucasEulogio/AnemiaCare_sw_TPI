@@ -23,8 +23,8 @@ return new class extends Migration
             $table->decimal('precisionHemoglobina6', 5, 2); 
             $table->date('fechaRecuperacionEstimada_Prediccion')->nullable();
             $table->integer('diasRecuperacion_Prediccion')->nullable();
-            $table->boolean('intervencionAdicional_Prediccion')->nullable();
-
+            $table->double('intervencionAdicionalPorcentaje_Prediccion')->nullable();
+            $table->text('intervencionAdicionalMensaje_Prediccion')->nullable();
             $table->timestamps();
         });
     }

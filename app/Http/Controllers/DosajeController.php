@@ -43,22 +43,22 @@ class DosajeController extends Controller
         return $fechaRecuperacion->format('Y-m-d'); // Puedes cambiar el formato si es necesario
     }
 
-    public function returnApiResponse($hemoglobina, $nivelAnemia, $peso, $talla, $sexo, $edadMeses,
+    public function returnApiResponseHemoglobina($hemoglobina, $nivelAnemia, $peso, $talla, $sexo, $edadMeses,
                                       $nivelHierro, $nombreProvincia, $alturaProvincia) {
         // Enviar datos a la API
         $client = new Client(['base_uri' => env('API_URL') . '/']);
         $dataToSend = [
             'hemoglobina' => $hemoglobina,
-            'nivel_anemia' => $nivelAnemia,
-            'peso' => $peso,
-            'talla' => $talla,
-            'sexo' => $sexo,
-            'edad' => $edadMeses,
-            'nivel_hierro' => $nivelHierro,
-            'provincia' => $nombreProvincia,
-            'altura' => $alturaProvincia,
+            'nivelAnemia_Dosaje' => $nivelAnemia,
+            'peso_Dosaje' => $peso,
+            'talla_Dosaje' => $talla,
+            'sexo_Hijo' => $sexo,
+            'edadMeses_Dosaje' => $edadMeses,
+            'nivelHierro_Dosaje' => $nivelHierro,
+            'nombreProvincia' => $nombreProvincia,
+            'alturaProvincia' => $alturaProvincia,
         ];
-        
+
         // Realizar la petición POST a la API
         $response = $client->request('POST', 'predictHemoglobina', [
             'json' => $dataToSend,
@@ -119,6 +119,47 @@ class DosajeController extends Controller
         return $diasRecuperacion;
     }
 
+    public function returnApiResponseIntervencionAdicional($hemoglobina, $prediccion_1mes, $prediccion_3mes, $prediccion_6mes, $nivelAnemia_Dosaje, 
+                                                      $peso_Dosaje, $talla_Dosaje, $sexo_Hijo, $edadMeses_Dosaje, $nivelHierro_Dosaje, 
+                                                      $estadoRecuperacion_Dosaje, $nombreProvincia, $nombreDistrito, $alturaProvincia) {
+        // Enviar datos a la API
+        $client = new Client(['base_uri' => env('API_URL') . '/']);
+        $dataToSend = [
+            'hemoglobina' => $hemoglobina,
+            'prediccion_1mes' => $prediccion_1mes,
+            'prediccion_3mes' => $prediccion_3mes,
+            'prediccion_6mes' => $prediccion_6mes,
+            'nivelAnemia_Dosaje' => $nivelAnemia_Dosaje,
+            'peso_Dosaje' => $peso_Dosaje,
+            'talla_Dosaje' => $talla_Dosaje,
+            'sexo_Hijo' => $sexo_Hijo,
+            'edadMeses_Dosaje' => $edadMeses_Dosaje,
+            'nivelHierro_Dosaje' => $nivelHierro_Dosaje,
+            'estadoRecuperacion_Dosaje' => $estadoRecuperacion_Dosaje,
+            'nombreProvincia' => $nombreProvincia,
+            'nombreDistrito' => $nombreDistrito,
+            'alturaProvincia' => $alturaProvincia,
+        ];
+        
+        // Realizar la petición POST a la API
+        $response = $client->request('POST', 'predictIntervencionAdicional', [
+            'json' => $dataToSend,
+            'headers' => [
+                'Authorization' => env('API_AUTH_TOKEN'),
+                'ngrok-skip-browser-warning' => 'true',
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new \Exception('Error al enviar datos a la API');
+        }
+
+        // Procesar la respuesta de la API
+        $intervencionAdicionalApiResponse = json_decode($response->getBody(), true);
+
+        return $intervencionAdicionalApiResponse;
+    }
+
     public function store(Request $request) 
     {   
         try {
@@ -167,7 +208,7 @@ class DosajeController extends Controller
             // Solo si es NO RECUPERADO entonces realizar la predicción
             if ($validatedData['estadoRecuperacion_Dosaje'] == 0) {
                 // Hemoglobina
-                $apiResponse = $this->returnApiResponse($validatedData['valorHemoglobina_Dosaje'],
+                $apiResponse = $this->returnApiResponseHemoglobina($validatedData['valorHemoglobina_Dosaje'],
                                                        $validatedData['nivelAnemia_Dosaje'],
                                                        $validatedData['peso_Dosaje'],
                                                        $validatedData['talla_Dosaje'],
@@ -178,23 +219,41 @@ class DosajeController extends Controller
                                                        $validatedData['alturaProvincia']);
                 $nombreDistrito = $this->returnNombreDistritoByIdDosaje($validatedData['idDosaje']);
                 $apiResponseDiasRecuperacion = $this->returnApiResponseDiasRecuperacion($validatedData['valorHemoglobina_Dosaje'],
-                                                                            $apiResponse['prediccion_1mes'],
-                                                                            $apiResponse['prediccion_3mes'],
-                                                                            $apiResponse['prediccion_6mes'],
-                                                                            $validatedData['nivelAnemia_Dosaje'],
-                                                                            $validatedData['peso_Dosaje'],
-                                                                            $validatedData['talla_Dosaje'],
-                                                                            $validatedData['sexo_Hijo'],
-                                                                            $validatedData['edadMeses_Dosaje'],
-                                                                            $validatedData['nivelHierro_Dosaje'],
-                                                                            $validatedData['estadoRecuperacion_Dosaje'],
-                                                                            $validatedData['nombreProvincia'],
-                                                                            $nombreDistrito,
-                                                                            $validatedData['alturaProvincia']);
+                                                                                        $apiResponse['prediccion_1mes'],
+                                                                                        $apiResponse['prediccion_3mes'],
+                                                                                        $apiResponse['prediccion_6mes'],
+                                                                                        $validatedData['nivelAnemia_Dosaje'],
+                                                                                        $validatedData['peso_Dosaje'],
+                                                                                        $validatedData['talla_Dosaje'],
+                                                                                        $validatedData['sexo_Hijo'],
+                                                                                        $validatedData['edadMeses_Dosaje'],
+                                                                                        $validatedData['nivelHierro_Dosaje'],
+                                                                                        $validatedData['estadoRecuperacion_Dosaje'],
+                                                                                        $validatedData['nombreProvincia'],
+                                                                                        $nombreDistrito,
+                                                                                        $validatedData['alturaProvincia']);
 
                 $diasRecuperacion = intval(round($apiResponseDiasRecuperacion['diasRecuperacion']));
                 $fechaRecuperacion = $this->returnFechaRecuperacionByDiasRecuperacionIdHijo($diasRecuperacion, $validatedData['idHijo']);
-
+                
+                $apiResponseIntervencionAdicional = $this->returnApiResponseIntervencionAdicional($validatedData['valorHemoglobina_Dosaje'],
+                                                                                            $apiResponse['prediccion_1mes'],
+                                                                                            $apiResponse['prediccion_3mes'],
+                                                                                            $apiResponse['prediccion_6mes'],
+                                                                                            $validatedData['nivelAnemia_Dosaje'],
+                                                                                            $validatedData['peso_Dosaje'],
+                                                                                            $validatedData['talla_Dosaje'],
+                                                                                            $validatedData['sexo_Hijo'],
+                                                                                            $validatedData['edadMeses_Dosaje'],
+                                                                                            $validatedData['nivelHierro_Dosaje'],
+                                                                                            $validatedData['estadoRecuperacion_Dosaje'],
+                                                                                            $validatedData['nombreProvincia'],
+                                                                                            $nombreDistrito,
+                                                                                            $validatedData['alturaProvincia']);
+            
+                $porcIntervencionAdicional = round($apiResponseIntervencionAdicional['intervencionAdicional'], 2);
+                $mensajeIntervencionAdicional = $apiResponseIntervencionAdicional['mensaje'];
+                
                 // Crear predicción
                 $idNuevaPrediccion = $this->generarIdPrediccion();
 
@@ -209,6 +268,8 @@ class DosajeController extends Controller
                     'precisionHemoglobina6' => $apiResponse['porcPrecision6'],
                     'fechaRecuperacionEstimada_Prediccion' => $fechaRecuperacion,
                     'diasRecuperacion_Prediccion' => $diasRecuperacion,
+                    'intervencionAdicionalPorcentaje_Prediccion' => $porcIntervencionAdicional,
+                    'intervencionAdicionalMensaje_Prediccion' => $mensajeIntervencionAdicional,
                 ]);
             } 
 
