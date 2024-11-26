@@ -47,6 +47,7 @@ function selectOptionHijoRegistrarDosajeModal(value, idHijo, sexo, edadMeses, hi
         sexoHijoRegistrarDosajeInput.value = sexo;
         edadInput.value = edadMeses;
         calcularNivelAnemia();
+        
     } else {
         console.log("No se encontró valores de sexo ni edad en meses para el hijo: " + value);
     }
@@ -78,6 +79,18 @@ function calcularNivelAnemia() {
         nivelAnemiaInput.classList.remove("noClasificable", "sinAnemia", "anemiaLeve", "anemiaModerada", "anemiaSevera");
         nivelAnemiaInput.classList.add(resultado.clase); 
 
+        if (resultado.nivel == "Sin Anemia") {
+            const auxEstadoRecuperacionInput = document.getElementById("auxEstadoRecuperacionInput");
+            auxEstadoRecuperacionInput.value = 1;
+            estadoRecuperacionInput.value = "Recuperado"
+            estadoRecuperacionInput.disabled = true;
+            fechaRecuperacionInput.classList.remove("dateNoEditable");
+            fechaRecuperacionInput.disabled = false; // Habilitar el input
+        } else {
+            estadoRecuperacionInput.disabled = false;
+            estadoRecuperacionInput.readOnly = true;
+        }
+        
         console.log("Calculando nivel de anemia: " + resultado.nivel);
     }
 }
@@ -191,4 +204,4 @@ function guardarModalRegistrarDosaje(idModal, idForm) {
         generalRegistrarDosajeMessageError.classList.add("shown");
         generalRegistrarDosajeMessageErrorContainer.classList.add("shown");
     }
-}p
+}
