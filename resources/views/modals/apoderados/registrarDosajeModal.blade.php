@@ -38,7 +38,7 @@
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[0] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[0] }}'>
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[1] }}' maxlength="8" name='{{ $someHiddenIdInputsArray[1] }}'>
                     <input type="hidden" id='{{ $someHiddenIdInputsArray[2] }}' name='{{ $someHiddenIdInputsArray[2] }}'>
-                    <input type="text" id='auxEstadoRecuperacionInput' autocomplete="off" name="estadoRecuperacion_Dosaje">
+                    <input type="hidden" id='auxEstadoRecuperacionInput' autocomplete="off" name="estadoRecuperacion_Dosaje">
                     <input type="hidden" id='auxFechaRecuperacionInput' autocomplete="off" name="fechaRecuperacionReal">
                     
                     <h3>Dosaje</h3>

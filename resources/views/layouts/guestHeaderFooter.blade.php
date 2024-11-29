@@ -28,7 +28,6 @@
 @endsection
 
 @section('footer')
-	ESTO ES EL FOOTER
 		<div class="footer-columns">
 			<div class="footer-column">
 				<h3>Productos</h3>
